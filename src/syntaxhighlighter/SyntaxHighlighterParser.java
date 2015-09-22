@@ -144,14 +144,7 @@ public class SyntaxHighlighterParser implements Parser {
     Map<Integer, List<MatchResult>> parsedResult = syntaxHighlighter.parse(brush, htmlScript, content.toCharArray(), 0, content.length());
     for (List<MatchResult> resultList : parsedResult.values()) {
       for (MatchResult result : resultList) {
-        List<String> styleKeyList = null;
-        if (result.isBold() == Boolean.TRUE) {
-          styleKeyList = new ArrayList<String>(2);
-          styleKeyList.add(result.getStyleKey());
-          styleKeyList.add("bold");
-        } else {
-          styleKeyList = Arrays.asList(new String[]{result.getStyleKey()});
-        }
+        List<String> styleKeyList = Arrays.asList(new String[]{result.getStyleKey()});
         returnList.add(new ParseResult(result.getOffset(), result.getLength(), styleKeyList));
       }
     }
