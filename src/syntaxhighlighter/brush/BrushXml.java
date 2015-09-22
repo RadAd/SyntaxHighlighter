@@ -43,29 +43,23 @@ public class BrushXml extends Brush {
 
     // regular expression for highlighting the tag
     RegExpRule tagRegExpRule = new RegExpRule("(?:&lt;|<)[\\s\\/\\?]*([:\\w-\\.]+)", Pattern.COMMENTS, "");
-    Map<Integer, Object> tagMatchesToStyleKey = new HashMap<Integer, Object>();
     // highlight the tag only, not including the symbols at the start, 1 means the group 1 of the matched results
-    tagMatchesToStyleKey.put(1, "keyword");
-    tagRegExpRule.setGroupOperations(tagMatchesToStyleKey);
+    tagRegExpRule.setGroupOperation(1, "keyword");
 
     // regular expression for highlighting the variable assignment
     RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)"
             + "\\s*=\\s*"
             + "(\".*?\"|'.*?'|\\w+)", Pattern.COMMENTS, "");
-    Map<Integer, Object> valueMatchesToStyleKey = new HashMap<Integer, Object>();
     // highlight the variable name, 1 means the group 1 of the matched results
-    valueMatchesToStyleKey.put(1, "color1");
+    valueRegExpRule.setGroupOperation(1, "color1");
     // highlight the value, 2 means the group 2 of the matched results
-    valueMatchesToStyleKey.put(2, "string");
-    valueRegExpRule.setGroupOperations(valueMatchesToStyleKey);
+    valueRegExpRule.setGroupOperation(2, "string");
 
     RegExpRule _regExpRule = new RegExpRule("((?:&lt;|<)[\\s\\/\\?]*(?:\\w+))(.*?)[\\s\\/\\?]*(?:&gt;|>)", Pattern.DOTALL, "");
-    Map<Integer, Object> matchesToRegExp = new HashMap<Integer, Object>();
     // perform futher operation on the group 1 of the matched results
-    matchesToRegExp.put(1, tagRegExpRule);
+    _regExpRule.setGroupOperation(1, tagRegExpRule);
     // perform futher operation on the group 2 of the matched results
-    matchesToRegExp.put(2, valueRegExpRule);
-    _regExpRule.setGroupOperations(matchesToRegExp);
+    _regExpRule.setGroupOperation(2, valueRegExpRule);
     _regExpRuleList.add(_regExpRule);
 
     setRegExpRuleList(_regExpRuleList);
