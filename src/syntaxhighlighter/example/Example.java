@@ -117,6 +117,7 @@ public class Example {
 
         // initiate a frame and display
         JFrame frame = new JFrame();
+        frame.setTitle("Syntax Highlighter");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         // SyntaxHighlighter is actually a JScrollPane
         frame.setContentPane(highlighter);
