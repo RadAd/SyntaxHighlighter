@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushJava extends Brush {
 
-  public BrushJava() {
-    super();
+    public final static String[] exts = { "java" };
 
+  public BrushJava() {
     String keywords = "abstract assert boolean break byte case catch char class const "
             + "continue default do double else enum extends "
             + "false final finally float for goto if implements import "
@@ -42,20 +39,16 @@ public class BrushJava extends Brush {
             + "short static strictfp super switch synchronized this throw throws true "
             + "transient try void volatile while";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule("\\/\\*([^\\*][\\s\\S]*?)?\\*\\/", Pattern.MULTILINE, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule("\\/\\*(?!\\*\\/)\\*[\\s\\S]*?\\*\\/", Pattern.MULTILINE, "preprocessor")); // documentation comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    _regExpRuleList.add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", "color1")); // annotation @anno
-    _regExpRuleList.add(new RegExpRule("\\@interface\\b", "color2")); // @interface keyword
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // java keyword
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule("\\/\\*([^\\*][\\s\\S]*?)?\\*\\/", Pattern.MULTILINE, "comments")); // multiline comments
+    add(new RegExpRule("\\/\\*(?!\\*\\/)\\*[\\s\\S]*?\\*\\/", Pattern.MULTILINE, "preprocessor")); // documentation comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
+    add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", "color1")); // annotation @anno
+    add(new RegExpRule("\\@interface\\b", "color2")); // @interface keyword
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // java keyword
 
     setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)%[@!=]?", "%(?:&gt;|>)"));
-
-    setCommonFileExtensionList(Arrays.asList("java"));
   }
 }

@@ -42,15 +42,15 @@ public final class RegExpRule {
   private final Pattern pattern;
   private final Map<Integer, Object> groupOperations;
 
-  public RegExpRule(String regExp, String styleKey) {
+  RegExpRule(String regExp, String styleKey) {
     this(regExp, 0, styleKey);
   }
 
-  public RegExpRule(String regExp, int regFlags, String styleKey) {
+  RegExpRule(String regExp, int regFlags, String styleKey) {
     this(Pattern.compile(regExp, regFlags), styleKey);
   }
 
-  public RegExpRule(Pattern pattern, String styleKey) {
+  RegExpRule(Pattern pattern, String styleKey) {
     if (pattern == null) throw new NullPointerException("argument 'pattern' cannot be null");
     if (styleKey == null) throw new NullPointerException("argument 'styleKey' cannot be null");
 
@@ -63,22 +63,14 @@ public final class RegExpRule {
     return pattern;
   }
 
-  public String getRegExp() {
-    return pattern.pattern();
-  }
-
-  public int getRegExpFlags() {
-    return pattern.flags();
-  }
-
   public Map<Integer, Object> getGroupOperations() {
     return java.util.Collections.unmodifiableMap(groupOperations);
   }
 
-  public void setGroupOperation(int i, String styleKey) {
+  void setGroupOperation(int i, String styleKey) {
     this.groupOperations.put(i, styleKey);
   }
-  public void setGroupOperation(int i, RegExpRule subRule) {
+  void setGroupOperation(int i, RegExpRule subRule) {
     this.groupOperations.put(i, subRule);
   }
 
@@ -89,10 +81,10 @@ public final class RegExpRule {
     sb.append(getClass().getName());
     sb.append(": ");
     sb.append("regExp: ");
-    sb.append(getRegExp());
+    sb.append(pattern.pattern());
     sb.append(", ");
     sb.append("regFlags: ");
-    sb.append(getRegExpFlags());
+    sb.append(pattern.flags());
     sb.append(", ");
     sb.append("getGroupOperations: ");
     sb.append(getGroupOperations());

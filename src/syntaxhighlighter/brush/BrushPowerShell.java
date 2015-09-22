@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushPowerShell extends Brush {
 
-  public BrushPowerShell() {
-    super();
+    public final static String[] exts = { "ps1" };
 
+  public BrushPowerShell() {
     // Contributes by B.v.Zanten, Getronics
     // http://confluence.atlassian.com/display/CONFEXT/New+Code+Macro
 
@@ -66,16 +63,12 @@ public class BrushPowerShell extends Brush {
             + "mount mv popd ps pushd pwd r rm rmdir echo cls chdir del dir "
             + "erase rd ren type % \\?";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("#.*$", Pattern.MULTILINE, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", "value")); // variables $Computer1
-    _regExpRuleList.add(new RegExpRule("\\-[a-zA-Z]+\\b", "keyword")); // Operators    -not  -and  -eq
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(alias), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("ps1"));
+    add(new RegExpRule("#.*$", Pattern.MULTILINE, "comments")); // one line comments
+    add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", "value")); // variables $Computer1
+    add(new RegExpRule("\\-[a-zA-Z]+\\b", "keyword")); // Operators    -not  -and  -eq
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));
+    add(new RegExpRule(getKeywords(alias), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));
   }
 }

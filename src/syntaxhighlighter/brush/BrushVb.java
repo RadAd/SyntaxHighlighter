@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushVb extends Brush {
 
-  public BrushVb() {
-    super();
+    public final static String[] exts = { "vb", "vbs" };
 
+  public BrushVb() {
     String keywords = "AddHandler AddressOf AndAlso Alias And Ansi As Assembly Auto "
             + "Boolean ByRef Byte ByVal Call Case Catch CBool CByte CChar CDate "
             + "CDec CDbl Char CInt Class CLng CObj Const CShort CSng CStr CType "
@@ -49,15 +46,11 @@ public class BrushVb extends Brush {
             + "Structure Sub SyncLock Then Throw To True Try TypeOf Unicode Until "
             + "Variant When While With WithEvents WriteOnly Xor";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("'.*$", Pattern.MULTILINE, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule("^\\s*#.*$", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // vb keyword
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule("'.*$", Pattern.MULTILINE, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
+    add(new RegExpRule("^\\s*#.*$", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // vb keyword
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("vb", "vbs"));
   }
 }

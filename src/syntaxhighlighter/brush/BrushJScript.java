@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,27 +28,23 @@ import java.util.regex.Pattern;
  */
 public class BrushJScript extends Brush {
 
-  public BrushJScript() {
-    super();
+    public final static String[] exts = { "js", "es" };
 
+  public BrushJScript() {
     String keywords = "break case catch continue "
             + "default delete do else false  "
             + "for function if in instanceof "
             + "new null return super switch "
             + "this throw true try typeof var while with";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
     // it's a standard not to use multi-line string
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule("\\s*#.*", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule("\\s*#.*", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
 
     setHTMLScriptRegExp(HTMLScriptRegExp.scriptScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("js", "es"));
   }
 }

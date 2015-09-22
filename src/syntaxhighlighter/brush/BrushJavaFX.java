@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushJavaFX extends Brush {
 
-  public BrushJavaFX() {
-    super();
+    public final static String[] exts = { "fx" };
 
+  public BrushJavaFX() {
     // Contributed by Patrick Webster
     // http://patrickwebster.blogspot.com/2009/04/javafx-brush-for-syntaxhighlighter.html
 
@@ -47,18 +44,14 @@ public class BrushJavaFX extends Brush {
             + "step super then this throw true try tween typeof var where while with "
             + "attribute let private readonly static trigger";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
-    _regExpRuleList.add(new RegExpRule("(-?\\.?)(\\b(\\d*\\.?\\d+|\\d+\\.?\\d*)(e[+-]?\\d+)?|0x[a-f\\d]+)\\b\\.?", Pattern.CASE_INSENSITIVE, "color2")); // numbers
-    _regExpRuleList.add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, "variable")); // datatypes
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments"));
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments"));
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
+    add(new RegExpRule("(-?\\.?)(\\b(\\d*\\.?\\d+|\\d+\\.?\\d*)(e[+-]?\\d+)?|0x[a-f\\d]+)\\b\\.?", Pattern.CASE_INSENSITIVE, "color2")); // numbers
+    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, "variable")); // datatypes
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("fx"));
   }
 }

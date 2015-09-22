@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushColdFusion extends Brush {
 
-  public BrushColdFusion() {
-    super();
+    public final static String[] exts = { "cfm", "cfml" };
 
+  public BrushColdFusion() {
     // Contributed by Jen
     // http://www.jensbits.com/2009/05/14/coldfusion-brush-for-syntaxhighlighter-plus
 
@@ -90,16 +87,12 @@ public class BrushColdFusion extends Brush {
             + "cfwindow cfxml cfzip cfzipparam";
     String operators = "all and any between cross in join like not null or outer some";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("--(.*)$", Pattern.MULTILINE, "comments")); // one line and multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.xmlComments, "comments")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule(getKeywords(funcs), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, "functions")); // functions
-    _regExpRuleList.add(new RegExpRule(getKeywords(operators), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, "color1")); // operators and such
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, "keyword")); // keyword
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("cfm", "cfml"));
+    add(new RegExpRule("--(.*)$", Pattern.MULTILINE, "comments")); // one line and multiline comments
+    add(new RegExpRule(RegExpRule.xmlComments, "comments")); // single quoted strings
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule(getKeywords(funcs), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, "functions")); // functions
+    add(new RegExpRule(getKeywords(operators), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, "color1")); // operators and such
+    add(new RegExpRule(getKeywords(keywords), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, "keyword")); // keyword
   }
 }

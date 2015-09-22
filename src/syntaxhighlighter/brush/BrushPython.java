@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushPython extends Brush {
 
-  public BrushPython() {
-    super();
+    public final static String[] exts = { "py" };
 
+  public BrushPython() {
     // Contributed by Gheorghe Milas and Ahmad Sherif
 
     String keywords = "and assert break class continue def del elif else "
@@ -49,21 +46,17 @@ public class BrushPython extends Brush {
             + "str sum super tuple type type unichr unicode vars xrange zip";
     String special = "None True False self cls class_";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments"));
-    _regExpRuleList.add(new RegExpRule("^\\s*@\\w+", Pattern.MULTILINE, "color2"));
-    _regExpRuleList.add(new RegExpRule("(['\\\"]{3})([^['\\\"]{3}])*?['\\\"]{3}", Pattern.MULTILINE, "comments"));
-    _regExpRuleList.add(new RegExpRule("\"(?!\")(?:\\.|\\\\\\\"|[^\\\"\"\\n])*\"", Pattern.MULTILINE, "string"));
-    _regExpRuleList.add(new RegExpRule("'(?!')(?:\\.|(\\\\\\')|[^\\''\\n])*'", Pattern.MULTILINE, "string"));
-    _regExpRuleList.add(new RegExpRule("\\+|\\-|\\*|\\/|\\%|=|==", Pattern.MULTILINE, "keyword"));
-    _regExpRuleList.add(new RegExpRule("\\b\\d+\\.?\\w*", "value"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(special), Pattern.MULTILINE, "color1"));
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments"));
+    add(new RegExpRule("^\\s*@\\w+", Pattern.MULTILINE, "color2"));
+    add(new RegExpRule("(['\\\"]{3})([^['\\\"]{3}])*?['\\\"]{3}", Pattern.MULTILINE, "comments"));
+    add(new RegExpRule("\"(?!\")(?:\\.|\\\\\\\"|[^\\\"\"\\n])*\"", Pattern.MULTILINE, "string"));
+    add(new RegExpRule("'(?!')(?:\\.|(\\\\\\')|[^\\''\\n])*'", Pattern.MULTILINE, "string"));
+    add(new RegExpRule("\\+|\\-|\\*|\\/|\\%|=|==", Pattern.MULTILINE, "keyword"));
+    add(new RegExpRule("\\b\\d+\\.?\\w*", "value"));
+    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions"));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
+    add(new RegExpRule(getKeywords(special), Pattern.MULTILINE, "color1"));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("py"));
   }
 }

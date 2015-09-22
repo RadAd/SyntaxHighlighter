@@ -20,8 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,8 +29,6 @@ import java.util.regex.Pattern;
 public class BrushErlang extends Brush {
 
   public BrushErlang() {
-    super();
-
     // Contributed by Jean-Lou Dupont
     // http://jldupont.blogspot.com/2009/06/erlang-syntax-highlighter.html
 
@@ -43,14 +39,12 @@ public class BrushErlang extends Brush {
             + // additional
             " module export import define";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("[A-Z][A-Za-z0-9_]+", "constants"));
-    _regExpRuleList.add(new RegExpRule("\\%.+", Pattern.MULTILINE, "comments"));
-    _regExpRuleList.add(new RegExpRule("\\?[A-Za-z0-9_]+", "preprocessor"));
-    _regExpRuleList.add(new RegExpRule("[a-z0-9_]+:[a-z0-9_]+", "functions"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule("[A-Z][A-Za-z0-9_]+", "constants"));
+    add(new RegExpRule("\\%.+", Pattern.MULTILINE, "comments"));
+    add(new RegExpRule("\\?[A-Za-z0-9_]+", "preprocessor"));
+    add(new RegExpRule("[a-z0-9_]+:[a-z0-9_]+", "functions"));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
   }
 }

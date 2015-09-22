@@ -20,11 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -33,13 +28,11 @@ import java.util.regex.Pattern;
  */
 public class BrushXml extends Brush {
 
+    public final static String[] exts = { "xml", "htm", "html", "xhtml", "xslt" };
+
   public BrushXml() {
-    super();
-
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-
-    _regExpRuleList.add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)", Pattern.MULTILINE, "color2")); // <![ ... [ ... ]]>
-    _regExpRuleList.add(new RegExpRule(RegExpRule.xmlComments, "comments")); // <!-- ... -->
+    add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)", Pattern.MULTILINE, "color2")); // <![ ... [ ... ]]>
+    add(new RegExpRule(RegExpRule.xmlComments, "comments")); // <!-- ... -->
 
     // regular expression for highlighting the tag
     RegExpRule tagRegExpRule = new RegExpRule("(?:&lt;|<)[\\s\\/\\?]*([:\\w-\\.]+)", Pattern.COMMENTS, "");
@@ -60,10 +53,6 @@ public class BrushXml extends Brush {
     _regExpRule.setGroupOperation(1, tagRegExpRule);
     // perform futher operation on the group 2 of the matched results
     _regExpRule.setGroupOperation(2, valueRegExpRule);
-    _regExpRuleList.add(_regExpRule);
-
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("xml", "html", "xhtml", "xslt"));
+    add(_regExpRule);
   }
 }

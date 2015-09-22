@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushPhp extends Brush {
 
-  public BrushPhp() {
-    super();
+    public final static String[] exts = { "php", "php3", "php4", "php5", "phps", "phtml" };
 
+  public BrushPhp() {
     String funcs = "abs acos acosh addcslashes addslashes "
             + "array_change_key_case array_chunk array_combine array_count_values array_diff "
             + "array_diff_assoc array_diff_key array_diff_uassoc array_diff_ukey array_fill "
@@ -75,19 +72,15 @@ public class BrushPhp extends Brush {
             + "throw try use var while xor";
     String constants = "__FILE__ __LINE__ __METHOD__ __FUNCTION__ __CLASS__";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule("\\$\\w+", "variable")); // variables
-    _regExpRuleList.add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions")); // common functions
-    _regExpRuleList.add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "constants")); // constants
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keyword
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule("\\$\\w+", "variable")); // variables
+    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions")); // common functions
+    add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "constants")); // constants
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keyword
 
     setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("php", "php3", "php4", "php5", "phps", "phtml"));
   }
 }

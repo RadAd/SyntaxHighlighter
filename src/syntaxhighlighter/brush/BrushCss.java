@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushCss extends Brush {
 
-  public BrushCss() {
-    super();
+    public final static String[] exts = { "css" };
 
+  public BrushCss() {
     String keywords = "ascent azimuth background-attachment background-color background-image background-position "
             + "background-repeat background baseline bbox border-collapse border-color border-spacing border-style border-top "
             + "border-right border-bottom border-left border-top-color border-right-color border-bottom-color border-left-color "
@@ -64,21 +61,17 @@ public class BrushCss extends Brush {
             + "upper-roman url visible wait white wider w-resize x-fast x-high x-large x-loud x-low x-slow x-small x-soft xx-large xx-small yellow";
     String fonts = "[mM]onospace [tT]ahoma [vV]erdana [aA]rial [hH]elvetica [sS]ans-serif [sS]erif [cC]ourier mono sans serif";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule("\\#[a-fA-F0-9]{3,6}", "value")); // html colors
-    _regExpRuleList.add(new RegExpRule("(-?\\d+)(\\.\\d+)?(px|em|pt|\\:|\\%|)", "value")); // sizes
-    _regExpRuleList.add(new RegExpRule("!important", "color3")); // !important
-    _regExpRuleList.add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    _regExpRuleList.add(new RegExpRule(getValuesCSS(values), "value")); // values
-    _regExpRuleList.add(new RegExpRule(getKeywords(fonts), "color1")); // fonts
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule("\\#[a-fA-F0-9]{3,6}", "value")); // html colors
+    add(new RegExpRule("(-?\\d+)(\\.\\d+)?(px|em|pt|\\:|\\%|)", "value")); // sizes
+    add(new RegExpRule("!important", "color3")); // !important
+    add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, "keyword")); // keywords
+    add(new RegExpRule(getValuesCSS(values), "value")); // values
+    add(new RegExpRule(getKeywords(fonts), "color1")); // fonts
 
     setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)\\s*style.*?(?:&gt;|>)", "(?:&lt;|<)\\/\\s*style\\s*(?:&gt;|>)"));
-
-    setCommonFileExtensionList(Arrays.asList("css"));
   }
 
   protected static String getKeywordsCSS(String str) {

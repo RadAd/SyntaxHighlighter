@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushAS3 extends Brush {
 
-  public BrushAS3() {
-    super();
+    public final static String[] exts = { "as" };
 
+  public BrushAS3() {
     // Created by Peter Atoria @ http://iAtoria.com
 
     String inits = "class interface function package";
@@ -45,20 +42,16 @@ public class BrushAS3 extends Brush {
             + "return set static String super switch this throw true try typeof uint undefined unescape "
             + "use void while with";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    _regExpRuleList.add(new RegExpRule(getKeywords(inits), Pattern.MULTILINE, "color3")); // initializations
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    _regExpRuleList.add(new RegExpRule("var", Pattern.MULTILINE, "variable")); // variable
-    _regExpRuleList.add(new RegExpRule("trace", Pattern.MULTILINE, "color1")); // trace
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
+    add(new RegExpRule(getKeywords(inits), Pattern.MULTILINE, "color3")); // initializations
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
+    add(new RegExpRule("var", Pattern.MULTILINE, "variable")); // variable
+    add(new RegExpRule("trace", Pattern.MULTILINE, "color1")); // trace
 
     setHTMLScriptRegExp(HTMLScriptRegExp.scriptScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("as"));
   }
 }

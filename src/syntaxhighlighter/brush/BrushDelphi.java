@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushDelphi extends Brush {
 
-  public BrushDelphi() {
-    super();
+    public final static String[] exts = { "pas" };
 
+  public BrushDelphi() {
     String keywords = "abs addr and ansichar ansistring array as asm begin boolean byte cardinal "
             + "case char class comp const constructor currency destructor div do double "
             + "downto else end except exports extended false file finalization finally "
@@ -46,17 +43,13 @@ public class BrushDelphi extends Brush {
             + "threadvar to true try type unit until uses val var varirnt while widechar "
             + "widestring with word write writeln xor";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("\\(\\*[\\s\\S]*?\\*\\)", Pattern.MULTILINE, "comments")); // multiline comments (* *)
-    _regExpRuleList.add(new RegExpRule("\\{(?!\\$)[\\s\\S]*?\\}", Pattern.MULTILINE, "comments")); // multiline comments { }
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule("\\{\\$[a-zA-Z]+ .+\\}", "color1")); // compiler Directives and Region tags
-    _regExpRuleList.add(new RegExpRule("\\b[\\d\\.]+\\b", "value")); // numbers 12345
-    _regExpRuleList.add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", "value")); // numbers $F5D3
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword")); // keyword
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("pas"));
+    add(new RegExpRule("\\(\\*[\\s\\S]*?\\*\\)", Pattern.MULTILINE, "comments")); // multiline comments (* *)
+    add(new RegExpRule("\\{(?!\\$)[\\s\\S]*?\\}", Pattern.MULTILINE, "comments")); // multiline comments { }
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
+    add(new RegExpRule("\\{\\$[a-zA-Z]+ .+\\}", "color1")); // compiler Directives and Region tags
+    add(new RegExpRule("\\b[\\d\\.]+\\b", "value")); // numbers 12345
+    add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", "value")); // numbers $F5D3
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword")); // keyword
   }
 }

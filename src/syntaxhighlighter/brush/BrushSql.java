@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushSql extends Brush {
 
-  public BrushSql() {
-    super();
+    public final static String[] exts = { "sql" };
 
+  public BrushSql() {
     String funcs = "abs avg case cast coalesce convert count current_timestamp "
             + "current_user day isnull left lower month nullif replace right "
             + "session_user space substring sum system_user upper user year";
@@ -56,15 +53,11 @@ public class BrushSql extends Brush {
             + "varchar varying view when where with work";
     String operators = "all and any between cross in join like not null or outer some";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("--(.*)$", Pattern.MULTILINE, "comments")); // one line and multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "color2")); // functions
-    _regExpRuleList.add(new RegExpRule(getKeywords(operators), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "color1")); // operators and such
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));// keyword
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("sql"));
+    add(new RegExpRule("--(.*)$", Pattern.MULTILINE, "comments")); // one line and multiline comments
+    add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "color2")); // functions
+    add(new RegExpRule(getKeywords(operators), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "color1")); // operators and such
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));// keyword
   }
 }

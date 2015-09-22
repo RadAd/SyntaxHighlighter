@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushCpp extends Brush {
 
-  public BrushCpp() {
-    super();
+    public final static String[] exts = { "c", "h", "cc", "cpp" };
 
+  public BrushCpp() {
     // Copyright 2006 Shin, YoungJin
 
     String datatypes = "ATOM BOOL BOOLEAN BYTE CHAR COLORREF DWORD DWORDLONG DWORD_PTR "
@@ -86,17 +83,13 @@ public class BrushCpp extends Brush {
             + "strncpy strpbrk strrchr strspn strstr strtok strxfrm asctime "
             + "clock ctime difftime gmtime localtime mktime strftime time";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule("^ *#.*", Pattern.MULTILINE, "preprocessor"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, "color1"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE, "functions"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("c", "cpp"));
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
+    add(new RegExpRule("^ *#.*", Pattern.MULTILINE, "preprocessor"));
+    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, "color1"));
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE, "functions"));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
   }
 }

@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushPerl extends Brush {
 
-  public BrushPerl() {
-    super();
+    public final static String[] exts = { "pl", "pm", "t" };
 
+  public BrushPerl() {
     // Contributed by David Simmons-Duffin and Marty Kube
 
     String funcs = "abs accept alarm atan2 bind binmode chdir chmod chomp chop chown chr "
@@ -59,18 +56,14 @@ public class BrushPerl extends Brush {
             + "for foreach goto if import last local my next no our package redo ref "
             + "require return sub tie tied unless untie until use wantarray while";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("#[^!].*$", Pattern.MULTILINE, "comments"));
-    _regExpRuleList.add(new RegExpRule("^\\s*#!.*$", Pattern.MULTILINE, "preprocessor")); // shebang
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
-    _regExpRuleList.add(new RegExpRule("(\\$|@|%)\\w+", "variable"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions"));
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule("#[^!].*$", Pattern.MULTILINE, "comments"));
+    add(new RegExpRule("^\\s*#!.*$", Pattern.MULTILINE, "preprocessor")); // shebang
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
+    add(new RegExpRule("(\\$|@|%)\\w+", "variable"));
+    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions"));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("pl", "pm", "t"));
   }
 }

@@ -20,7 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,88 +31,41 @@ import java.util.List;
  * different group of component.
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
+ * @author Adam Gates <Adam.Gates84+github@gmail.com>
  */
 public class Brush {
 
   /**
    * Regular expression rules list. It will be executed in sequence.
    */
-  protected List<RegExpRule> regExpRuleList;
-  /**
-   * The list of common file extension for this language. It is no use so far, 
-   * just for reference.
-   */
-  protected List<String> commonFileExtensionList;
+  private List<RegExpRule> regExpRuleList;
+
   /**
    * HTML script RegExp, null means no HTML script RegExp for this brush. If 
    * this language will not be implanted into HTML, leave it null.
    */
-  protected HTMLScriptRegExp htmlScriptRegExp;
+  private HTMLScriptRegExp htmlScriptRegExp;
 
-  /**
-   * Constructor.
-   */
-  public Brush() {
-    regExpRuleList = new ArrayList<RegExpRule>();
-    commonFileExtensionList = new ArrayList<String>();
+  protected Brush() {
+    regExpRuleList = new java.util.ArrayList<RegExpRule>();
     htmlScriptRegExp = null;
   }
 
-  /**
-   * Get the regular expression rule list.
-   * @return a copy of the list
-   */
   public List<RegExpRule> getRegExpRuleList() {
-    return new ArrayList<RegExpRule>(regExpRuleList);
+    return java.util.Collections.unmodifiableList(regExpRuleList);
   }
 
-  /**
-   * Set the regular expression rule list.
-   * @param regExpRuleList the list
-   */
-  public void setRegExpRuleList(List<RegExpRule> regExpRuleList) {
-    if (regExpRuleList == null) {
-      this.regExpRuleList = new ArrayList<RegExpRule>();
-      return;
-    }
-    this.regExpRuleList = new ArrayList<RegExpRule>(regExpRuleList);
+  protected void add(RegExpRule rule) {
+    if (rule == null)  throw new NullPointerException("argument 'rule' cannot be null");
+    this.regExpRuleList.add(rule);
   }
 
-  /**
-   * Get the HTML script RegExp.
-   * @return the HTML script RegExp, null means not defined
-   */
   public HTMLScriptRegExp getHTMLScriptRegExp() {
     return htmlScriptRegExp;
   }
 
-  /**
-   * Set the HTML script RegExp.
-   * @param htmlScriptRegExp the RegExp, null means no HTML script RegExp for 
-   * this brush.
-   */
-  public void setHTMLScriptRegExp(HTMLScriptRegExp htmlScriptRegExp) {
+  protected void setHTMLScriptRegExp(HTMLScriptRegExp htmlScriptRegExp) {
     this.htmlScriptRegExp = htmlScriptRegExp;
-  }
-
-  /**
-   * Get the common file extension list.
-   * @return a copy of the list
-   */
-  public List<String> getCommonFileExtensionList() {
-    return new ArrayList<String>(commonFileExtensionList);
-  }
-
-  /**
-   * Set the common file extension list.
-   * @param commonFileExtensionList the list, cannot be null
-   */
-  public void setCommonFileExtensionList(List<String> commonFileExtensionList) {
-    if (commonFileExtensionList == null) {
-      this.commonFileExtensionList = new ArrayList<String>();
-      return;
-    }
-    this.commonFileExtensionList = new ArrayList<String>(commonFileExtensionList);
   }
 
   /**
@@ -123,9 +75,7 @@ public class Brush {
    * @return the treated regexp string
    */
   protected static String getKeywords(String str) {
-    if (str == null) {
-      throw new NullPointerException("argument 'str' cannot be null");
-    }
+    if (str == null)  throw new NullPointerException("argument 'str' cannot be null");
     return "\\b(?:" + str.replaceAll("^\\s+|\\s+$", "").replaceAll("\\s+", "|") + ")\\b";
   }
 
@@ -147,9 +97,6 @@ public class Brush {
       sb.append(": ");
       sb.append(rule.toString());
     }
-    sb.append("\n");
-    sb.append("common file extension list: ");
-    sb.append(commonFileExtensionList);
     sb.append("\n");
     sb.append("HTML Script RegExp: ");
     sb.append(htmlScriptRegExp);

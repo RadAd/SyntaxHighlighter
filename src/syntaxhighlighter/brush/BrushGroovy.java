@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushGroovy extends Brush {
 
-  public BrushGroovy() {
-    super();
+    public final static String[] exts = { "groovy" };
 
+  public BrushGroovy() {
     // Contributed by Andres Almiray
     // http://jroller.com/aalmiray/entry/nice_source_code_syntax_highlighter
 
@@ -54,21 +51,17 @@ public class BrushGroovy extends Brush {
             + "dump inspect invokeMethod print println step times upto use waitForOrKill "
             + "getText";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule("\"\"\".*\"\"\"", "string")); // GStrings
-    _regExpRuleList.add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // goovy keyword
-    _regExpRuleList.add(new RegExpRule(getKeywords(types), Pattern.MULTILINE, "color1")); // goovy/java type
-    _regExpRuleList.add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE, "constants")); // constants
-    _regExpRuleList.add(new RegExpRule(getKeywords(methods), Pattern.MULTILINE, "functions")); // methods
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
+    add(new RegExpRule("\"\"\".*\"\"\"", "string")); // GStrings
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // goovy keyword
+    add(new RegExpRule(getKeywords(types), Pattern.MULTILINE, "color1")); // goovy/java type
+    add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE, "constants")); // constants
+    add(new RegExpRule(getKeywords(methods), Pattern.MULTILINE, "functions")); // methods
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("groovy"));
   }
 }

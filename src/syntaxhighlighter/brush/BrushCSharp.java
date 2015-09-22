@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushCSharp extends Brush {
 
-  public BrushCSharp() {
-    super();
+    public final static String[] exts = { "cs" };
 
+  public BrushCSharp() {
     String keywords = "abstract as base bool break byte case catch char checked class const "
             + "continue decimal default delegate do double else enum event explicit "
             + "extern false finally fixed float for foreach get goto if implicit in int "
@@ -42,21 +39,17 @@ public class BrushCSharp extends Brush {
             + "short sizeof stackalloc static string struct switch this throw true try "
             + "typeof uint ulong unchecked unsafe ushort using virtual void while var";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("\\/\\/\\/.*$", Pattern.MULTILINE, "color1")); // documents
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    _regExpRuleList.add(new RegExpRule("@\"(?:[^\"]|\"\")*\"", "string")); // @-quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    _regExpRuleList.add(new RegExpRule("^\\s*#.*", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // c# keyword
-    _regExpRuleList.add(new RegExpRule("\\bpartial(?=\\s+(?:class|interface|struct)\\b)", "keyword")); // contextual keyword: 'partial'
-    _regExpRuleList.add(new RegExpRule("\\byield(?=\\s+(?:return|break)\\b)", "keyword")); // contextual keyword: 'yield'
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule("\\/\\/\\/.*$", Pattern.MULTILINE, "color1")); // documents
+    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule("@\"(?:[^\"]|\"\")*\"", "string")); // @-quoted strings
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
+    add(new RegExpRule("^\\s*#.*", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // c# keyword
+    add(new RegExpRule("\\bpartial(?=\\s+(?:class|interface|struct)\\b)", "keyword")); // contextual keyword: 'partial'
+    add(new RegExpRule("\\byield(?=\\s+(?:return|break)\\b)", "keyword")); // contextual keyword: 'yield'
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("cs"));
   }
 }

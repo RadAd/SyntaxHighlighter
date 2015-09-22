@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushBash extends Brush {
 
-  public BrushBash() {
-    super();
+    public final static String[] exts = { "sh" };
 
+  public BrushBash() {
     String keywords = "if fi then elif else for do done until while break continue case function return in eq ne ge le";
     String commands = "alias apropos awk basename bash bc bg builtin bzip2 cal cat cd cfdisk chgrp chmod chown chroot"
             + "cksum clear cmp comm command cp cron crontab csplit cut date dc dd ddrescue declare df "
@@ -50,16 +47,12 @@ public class BrushBash extends Brush {
             + "uname unexpand uniq units unset unshar useradd usermod users uuencode uudecode v vdir "
             + "vi watch wc whereis which who whoami Wget xargs yes";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule("^#!.*$", Pattern.MULTILINE, "preprocessor"));
-    _regExpRuleList.add(new RegExpRule("\\/[\\w-\\/]+", Pattern.MULTILINE, "plain"));
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    _regExpRuleList.add(new RegExpRule(getKeywords(commands), Pattern.MULTILINE, "functions")); // commands
-    setRegExpRuleList(_regExpRuleList);
-
-    setCommonFileExtensionList(Arrays.asList("sh"));
+    add(new RegExpRule("^#!.*$", Pattern.MULTILINE, "preprocessor"));
+    add(new RegExpRule("\\/[\\w-\\/]+", Pattern.MULTILINE, "plain"));
+    add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
+    add(new RegExpRule(getKeywords(commands), Pattern.MULTILINE, "functions")); // commands
   }
 }

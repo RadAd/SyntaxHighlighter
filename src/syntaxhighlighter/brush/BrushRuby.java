@@ -20,9 +20,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -31,9 +28,9 @@ import java.util.regex.Pattern;
  */
 public class BrushRuby extends Brush {
 
-  public BrushRuby() {
-    super();
+    public final static String[] exts = { "rb", "rbw" };
 
+  public BrushRuby() {
     // Contributed by Erik Peterson.
 
     String keywords = "alias and BEGIN begin break case class def define_method defined do each else elsif "
@@ -43,19 +40,15 @@ public class BrushRuby extends Brush {
             + "Hash Integer IO MatchData Method Module NilClass Numeric Object Proc Range Regexp String Struct::TMS Symbol "
             + "ThreadGroup Thread Time TrueClass";
 
-    List<RegExpRule> _regExpRuleList = new ArrayList<RegExpRule>();
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments")); // one line comments
-    _regExpRuleList.add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    _regExpRuleList.add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    _regExpRuleList.add(new RegExpRule("\\b[A-Z0-9_]+\\b", "constants")); // constants
-    _regExpRuleList.add(new RegExpRule(":[a-z][A-Za-z0-9_]*", "color2")); // symbols
-    _regExpRuleList.add(new RegExpRule("(\\$|@@|@)\\w+", "variable")); // $global, @instance, and @@class variables
-    _regExpRuleList.add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    _regExpRuleList.add(new RegExpRule(getKeywords(builtins), Pattern.MULTILINE, "color1")); // builtins
-    setRegExpRuleList(_regExpRuleList);
+    add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments")); // one line comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
+    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
+    add(new RegExpRule("\\b[A-Z0-9_]+\\b", "constants")); // constants
+    add(new RegExpRule(":[a-z][A-Za-z0-9_]*", "color2")); // symbols
+    add(new RegExpRule("(\\$|@@|@)\\w+", "variable")); // $global, @instance, and @@class variables
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
+    add(new RegExpRule(getKeywords(builtins), Pattern.MULTILINE, "color1")); // builtins
 
     setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
-
-    setCommonFileExtensionList(Arrays.asList("rb", "rbw"));
   }
 }
