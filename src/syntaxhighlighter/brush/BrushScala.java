@@ -38,14 +38,14 @@ public class BrushScala extends Brush {
             + "else do if return protected private this package false";
     String keyops = "[_:=><%#@]+";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, "string")); // multi-line strings
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, STRING));
     // problem: scala should start multiple line string with triple double-quote
-    add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, "string")); // double-quoted string
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule("0x[a-f0-9]+|\\d+(\\.\\d+)?", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    add(new RegExpRule(keyops, Pattern.MULTILINE, "keyword")); // scala keyword
+    add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("0x[a-f0-9]+|\\d+(\\.\\d+)?", Pattern.CASE_INSENSITIVE, VALUE));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(keyops, Pattern.MULTILINE, KEYWORD));
   }
 }

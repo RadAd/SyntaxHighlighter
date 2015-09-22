@@ -44,13 +44,13 @@ public class BrushJavaFX extends Brush {
             + "step super then this throw true try tween typeof var where while with "
             + "attribute let private readonly static trigger";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments"));
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments"));
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
-    add(new RegExpRule("(-?\\.?)(\\b(\\d*\\.?\\d+|\\d+\\.?\\d*)(e[+-]?\\d+)?|0x[a-f\\d]+)\\b\\.?", Pattern.CASE_INSENSITIVE, "color2")); // numbers
-    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, "variable")); // datatypes
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule("(-?\\.?)(\\b(\\d*\\.?\\d+|\\d+\\.?\\d*)(e[+-]?\\d+)?|0x[a-f\\d]+)\\b\\.?", Pattern.CASE_INSENSITIVE, VALUE));
+    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, VARIABLE));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
   }

@@ -34,6 +34,20 @@ import java.util.List;
  * @author Adam Gates <Adam.Gates84+github@gmail.com>
  */
 public class Brush {
+    
+    public final static String NONE = "";
+    public final static String PLAIN = "plain";
+    public final static String PREPROCESSOR = "preprocessor";
+    public final static String COMMENTS = "comments";
+    public final static String KEYWORD = "keyword";
+    public final static String FUNCTIONS = "functions";
+    public final static String STRING = "string";
+    public final static String VALUE = "value";
+    public final static String VARIABLE = "variable";
+    public final static String CONSTANTS = "constants";
+    public final static String COLOR1 = "color1";
+    public final static String COLOR2 = "color2";
+    public final static String COLOR3 = "color3";
 
   /**
    * Regular expression rules list. It will be executed in sequence.

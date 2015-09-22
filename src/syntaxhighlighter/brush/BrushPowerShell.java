@@ -63,12 +63,12 @@ public class BrushPowerShell extends Brush {
             + "mount mv popd ps pushd pwd r rm rmdir echo cls chdir del dir "
             + "erase rd ren type % \\?";
 
-    add(new RegExpRule("#.*$", Pattern.MULTILINE, "comments")); // one line comments
-    add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", "value")); // variables $Computer1
-    add(new RegExpRule("\\-[a-zA-Z]+\\b", "keyword")); // Operators    -not  -and  -eq
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));
-    add(new RegExpRule(getKeywords(alias), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));
+    add(new RegExpRule("#.*$", Pattern.MULTILINE, COMMENTS)); // one line comments
+    add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", VALUE)); // variables $Computer1
+    add(new RegExpRule("\\-[a-zA-Z]+\\b", KEYWORD)); // Operators    -not  -and  -eq
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, KEYWORD));
+    add(new RegExpRule(getKeywords(alias), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, KEYWORD));
   }
 }

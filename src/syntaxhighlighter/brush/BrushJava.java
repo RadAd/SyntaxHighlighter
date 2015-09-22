@@ -39,15 +39,15 @@ public class BrushJava extends Brush {
             + "short static strictfp super switch synchronized this throw throws true "
             + "transient try void volatile while";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule("\\/\\*([^\\*][\\s\\S]*?)?\\*\\/", Pattern.MULTILINE, "comments")); // multiline comments
-    add(new RegExpRule("\\/\\*(?!\\*\\/)\\*[\\s\\S]*?\\*\\/", Pattern.MULTILINE, "preprocessor")); // documentation comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", "color1")); // annotation @anno
-    add(new RegExpRule("\\@interface\\b", "color2")); // @interface keyword
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // java keyword
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule("\\/\\*([^\\*][\\s\\S]*?)?\\*\\/", Pattern.MULTILINE, COMMENTS)); // multiline comments
+    add(new RegExpRule("\\/\\*(?!\\*\\/)\\*[\\s\\S]*?\\*\\/", Pattern.MULTILINE, PREPROCESSOR)); // documentation comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
+    add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", COLOR1)); // annotation @anno
+    add(new RegExpRule("\\@interface\\b", COLOR2)); // @interface keyword
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
     setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)%[@!=]?", "%(?:&gt;|>)"));
   }

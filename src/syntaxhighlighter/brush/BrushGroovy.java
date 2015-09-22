@@ -51,16 +51,16 @@ public class BrushGroovy extends Brush {
             + "dump inspect invokeMethod print println step times upto use waitForOrKill "
             + "getText";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule("\"\"\".*\"\"\"", "string")); // GStrings
-    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // goovy keyword
-    add(new RegExpRule(getKeywords(types), Pattern.MULTILINE, "color1")); // goovy/java type
-    add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE, "constants")); // constants
-    add(new RegExpRule(getKeywords(methods), Pattern.MULTILINE, "functions")); // methods
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\"\"\".*\"\"\"", STRING)); // GStrings
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(types), Pattern.MULTILINE, COLOR1));
+    add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE, CONSTANTS));
+    add(new RegExpRule(getKeywords(methods), Pattern.MULTILINE, FUNCTIONS));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
   }

@@ -63,25 +63,25 @@ public class BrushSass extends Brush {
     String statements = "!important !default";
     String preprocessors = "import extend debug warn if for while mixin include";
 
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // singleline comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule("\\#[a-fA-F0-9]{3,6}", "value")); // html colors
-    add(new RegExpRule("\\b(-?\\d+)(\\.\\d+)?(px|em|pt|\\:|\\%|)\\b", "value")); // sizes
-    add(new RegExpRule("(\\$|!)\\w+", "variable")); // variables
-    add(new RegExpRule(getKeywords(statements), "color3")); // statements
-    add(new RegExpRule(getKeywordsPrependedBy(preprocessors, "@"), "preprocessor")); // preprocessor
-    add(new RegExpRule("(^|\\n)\\s*=.*", "functions")); // short mixin declarations
-    add(new RegExpRule("(^|\\n)\\s*\\+.*", "functions")); // short mixin call
-    add(new RegExpRule("&amp;", "keyword")); // &
-    add(new RegExpRule("#(\\w|-|_)+", "color2")); // ids
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\#[a-fA-F0-9]{3,6}", VALUE)); // html colors
+    add(new RegExpRule("\\b(-?\\d+)(\\.\\d+)?(px|em|pt|\\:|\\%|)\\b", VALUE)); // sizes
+    add(new RegExpRule("(\\$|!)\\w+", VARIABLE)); // variables
+    add(new RegExpRule(getKeywords(statements), COLOR3));
+    add(new RegExpRule(getKeywordsPrependedBy(preprocessors, "@"), PREPROCESSOR));
+    add(new RegExpRule("(^|\\n)\\s*=.*", FUNCTIONS)); // short mixin declarations
+    add(new RegExpRule("(^|\\n)\\s*\\+.*", FUNCTIONS)); // short mixin call
+    add(new RegExpRule("&amp;", KEYWORD)); // &
+    add(new RegExpRule("#(\\w|-|_)+", COLOR2)); // ids
     // original code uses 'color4' which do not exist yet, here uses color1 as a temporary replacement
-    add(new RegExpRule("(\\.(\\w|-|_)+)", "color1")); // classes
-    add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    add(new RegExpRule(getKeywordsPrependedBy(keywords, ":"), "keyword")); // :keyword value
-    add(new RegExpRule(getValuesCSS(values), "value")); // values
-    add(new RegExpRule(getKeywords(fonts), "color1")); // fonts
+    add(new RegExpRule("(\\.(\\w|-|_)+)", COLOR1)); // classes
+    add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywordsPrependedBy(keywords, ":"), KEYWORD)); // :keyword value
+    add(new RegExpRule(getValuesCSS(values), VALUE));
+    add(new RegExpRule(getKeywords(fonts), COLOR1));
   }
 
   protected static String getKeywordsCSS(String str) {

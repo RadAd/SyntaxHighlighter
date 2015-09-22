@@ -31,7 +31,7 @@ public class BrushPhp extends Brush {
     public final static String[] exts = { "php", "php3", "php4", "php5", "phps", "phtml" };
 
   public BrushPhp() {
-    String funcs = "abs acos acosh addcslashes addslashes "
+    String functions = "abs acos acosh addcslashes addslashes "
             + "array_change_key_case array_chunk array_combine array_count_values array_diff "
             + "array_diff_assoc array_diff_key array_diff_uassoc array_diff_ukey array_fill "
             + "array_filter array_flip array_intersect array_intersect_assoc array_intersect_key "
@@ -72,14 +72,14 @@ public class BrushPhp extends Brush {
             + "throw try use var while xor";
     String constants = "__FILE__ __LINE__ __METHOD__ __FUNCTION__ __CLASS__";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule("\\$\\w+", "variable")); // variables
-    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions")); // common functions
-    add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "constants")); // constants
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keyword
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\$\\w+", VARIABLE)); // variables
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
+    add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, CONSTANTS));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
   }

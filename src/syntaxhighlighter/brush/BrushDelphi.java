@@ -43,13 +43,13 @@ public class BrushDelphi extends Brush {
             + "threadvar to true try type unit until uses val var varirnt while widechar "
             + "widestring with word write writeln xor";
 
-    add(new RegExpRule("\\(\\*[\\s\\S]*?\\*\\)", Pattern.MULTILINE, "comments")); // multiline comments (* *)
-    add(new RegExpRule("\\{(?!\\$)[\\s\\S]*?\\}", Pattern.MULTILINE, "comments")); // multiline comments { }
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule("\\{\\$[a-zA-Z]+ .+\\}", "color1")); // compiler Directives and Region tags
-    add(new RegExpRule("\\b[\\d\\.]+\\b", "value")); // numbers 12345
-    add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", "value")); // numbers $F5D3
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword")); // keyword
+    add(new RegExpRule("\\(\\*[\\s\\S]*?\\*\\)", Pattern.MULTILINE, COMMENTS)); // multiline comments (* *)
+    add(new RegExpRule("\\{(?!\\$)[\\s\\S]*?\\}", Pattern.MULTILINE, COMMENTS)); // multiline comments { }
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\{\\$[a-zA-Z]+ .+\\}", COLOR1)); // compiler Directives and Region tags
+    add(new RegExpRule("\\b[\\d\\.]+\\b", VALUE)); // numbers 12345
+    add(new RegExpRule("\\$[a-zA-Z0-9]+\\b", VALUE)); // numbers $F5D3
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, KEYWORD));
   }
 }

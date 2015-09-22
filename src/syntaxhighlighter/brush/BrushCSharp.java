@@ -39,16 +39,16 @@ public class BrushCSharp extends Brush {
             + "short sizeof stackalloc static string struct switch this throw true try "
             + "typeof uint ulong unchecked unsafe ushort using virtual void while var";
 
-    add(new RegExpRule("\\/\\/\\/.*$", Pattern.MULTILINE, "color1")); // documents
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule("@\"(?:[^\"]|\"\")*\"", "string")); // @-quoted strings
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule("^\\s*#.*", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // c# keyword
-    add(new RegExpRule("\\bpartial(?=\\s+(?:class|interface|struct)\\b)", "keyword")); // contextual keyword: 'partial'
-    add(new RegExpRule("\\byield(?=\\s+(?:return|break)\\b)", "keyword")); // contextual keyword: 'yield'
+    add(new RegExpRule("\\/\\/\\/.*$", Pattern.MULTILINE, COLOR1)); // documents
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule("@\"(?:[^\"]|\"\")*\"", STRING)); // @-quoted strings
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("^\\s*#.*", Pattern.MULTILINE, PREPROCESSOR)); // preprocessor tags like #region and #endregion
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule("\\bpartial(?=\\s+(?:class|interface|struct)\\b)", KEYWORD)); // contextual keyword: 'partial'
+    add(new RegExpRule("\\byield(?=\\s+(?:return|break)\\b)", KEYWORD)); // contextual keyword: 'yield'
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
   }

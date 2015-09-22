@@ -31,7 +31,7 @@ public class BrushSql extends Brush {
     public final static String[] exts = { "sql" };
 
   public BrushSql() {
-    String funcs = "abs avg case cast coalesce convert count current_timestamp "
+    String functions = "abs avg case cast coalesce convert count current_timestamp "
             + "current_user day isnull left lower month nullif replace right "
             + "session_user space substring sum system_user upper user year";
     String keywords = "absolute action add after alter as asc at authorization begin bigint "
@@ -53,11 +53,11 @@ public class BrushSql extends Brush {
             + "varchar varying view when where with work";
     String operators = "all and any between cross in join like not null or outer some";
 
-    add(new RegExpRule("--(.*)$", Pattern.MULTILINE, "comments")); // one line and multiline comments
-    add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "color2")); // functions
-    add(new RegExpRule(getKeywords(operators), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "color1")); // operators and such
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "keyword"));// keyword
+    add(new RegExpRule("--(.*)$", Pattern.MULTILINE, COMMENTS)); // one line and multiline comments
+    add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, STRING));
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, COLOR2));
+    add(new RegExpRule(getKeywords(operators), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, COLOR1));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, KEYWORD));
   }
 }

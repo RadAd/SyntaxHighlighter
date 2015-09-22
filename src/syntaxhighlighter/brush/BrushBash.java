@@ -47,12 +47,12 @@ public class BrushBash extends Brush {
             + "uname unexpand uniq units unset unshar useradd usermod users uuencode uudecode v vdir "
             + "vi watch wc whereis which who whoami Wget xargs yes";
 
-    add(new RegExpRule("^#!.*$", Pattern.MULTILINE, "preprocessor"));
-    add(new RegExpRule("\\/[\\w-\\/]+", Pattern.MULTILINE, "plain"));
-    add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    add(new RegExpRule(getKeywords(commands), Pattern.MULTILINE, "functions")); // commands
+    add(new RegExpRule("^#!.*$", Pattern.MULTILINE, PREPROCESSOR));
+    add(new RegExpRule("\\/[\\w-\\/]+", Pattern.MULTILINE, PLAIN));
+    add(new RegExpRule(RegExpRule.singleLinePerlComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(commands), Pattern.MULTILINE, FUNCTIONS));
   }
 }

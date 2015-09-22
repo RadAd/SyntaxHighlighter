@@ -31,11 +31,11 @@ public class BrushDiff extends Brush {
     public final static String[] exts = { "diff", "patch" };
 
   public BrushDiff() {
-    add(new RegExpRule("^\\+\\+\\+\\s.*$", Pattern.MULTILINE, "color2")); // new file
-    add(new RegExpRule("^\\-\\-\\-\\s.*$", Pattern.MULTILINE, "color2")); // old file
-    add(new RegExpRule("^\\s.*$", Pattern.MULTILINE, "color1")); // unchanged
-    add(new RegExpRule("^@@.*@@$", Pattern.MULTILINE, "variable")); // location
-    add(new RegExpRule("^\\+.*$", Pattern.MULTILINE, "string")); // additions
-    add(new RegExpRule("^\\-.*$", Pattern.MULTILINE, "color3")); // deletions
+    add(new RegExpRule("^\\+\\+\\+\\s.*$", Pattern.MULTILINE, COLOR2)); // new file
+    add(new RegExpRule("^\\-\\-\\-\\s.*$", Pattern.MULTILINE, COLOR2)); // old file
+    add(new RegExpRule("^\\s.*$", Pattern.MULTILINE, COLOR1)); // unchanged
+    add(new RegExpRule("^@@.*@@$", Pattern.MULTILINE, VARIABLE)); // location
+    add(new RegExpRule("^\\+.*$", Pattern.MULTILINE, STRING)); // additions
+    add(new RegExpRule("^\\-.*$", Pattern.MULTILINE, COLOR3)); // deletions
   }
 }

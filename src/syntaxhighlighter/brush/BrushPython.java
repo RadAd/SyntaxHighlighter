@@ -36,7 +36,7 @@ public class BrushPython extends Brush {
     String keywords = "and assert break class continue def del elif else "
             + "except exec finally for from global if import in is "
             + "lambda not or pass print raise return try yield while";
-    String funcs = "__import__ abs all any apply basestring bin bool buffer callable "
+    String functions = "__import__ abs all any apply basestring bin bool buffer callable "
             + "chr classmethod cmp coerce compile complex delattr dict dir "
             + "divmod enumerate eval execfile file filter float format frozenset "
             + "getattr globals hasattr hash help hex id input int intern "
@@ -46,16 +46,16 @@ public class BrushPython extends Brush {
             + "str sum super tuple type type unichr unicode vars xrange zip";
     String special = "None True False self cls class_";
 
-    add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments"));
-    add(new RegExpRule("^\\s*@\\w+", Pattern.MULTILINE, "color2"));
-    add(new RegExpRule("(['\\\"]{3})([^['\\\"]{3}])*?['\\\"]{3}", Pattern.MULTILINE, "comments"));
-    add(new RegExpRule("\"(?!\")(?:\\.|\\\\\\\"|[^\\\"\"\\n])*\"", Pattern.MULTILINE, "string"));
-    add(new RegExpRule("'(?!')(?:\\.|(\\\\\\')|[^\\''\\n])*'", Pattern.MULTILINE, "string"));
-    add(new RegExpRule("\\+|\\-|\\*|\\/|\\%|=|==", Pattern.MULTILINE, "keyword"));
+    add(new RegExpRule(RegExpRule.singleLinePerlComments, COMMENTS));
+    add(new RegExpRule("^\\s*@\\w+", Pattern.MULTILINE, COLOR2));
+    add(new RegExpRule("(['\\\"]{3})([^['\\\"]{3}])*?['\\\"]{3}", Pattern.MULTILINE, COMMENTS));
+    add(new RegExpRule("\"(?!\")(?:\\.|\\\\\\\"|[^\\\"\"\\n])*\"", Pattern.MULTILINE, STRING));
+    add(new RegExpRule("'(?!')(?:\\.|(\\\\\\')|[^\\''\\n])*'", Pattern.MULTILINE, STRING));
+    add(new RegExpRule("\\+|\\-|\\*|\\/|\\%|=|==", Pattern.MULTILINE, KEYWORD));
     add(new RegExpRule("\\b\\d+\\.?\\w*", "value"));
-    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions"));
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
-    add(new RegExpRule(getKeywords(special), Pattern.MULTILINE, "color1"));
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(special), Pattern.MULTILINE, COLOR1));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
   }

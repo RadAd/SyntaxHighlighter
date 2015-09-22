@@ -61,15 +61,15 @@ public class BrushCss extends Brush {
             + "upper-roman url visible wait white wider w-resize x-fast x-high x-large x-loud x-low x-slow x-small x-soft xx-large xx-small yellow";
     String fonts = "[mM]onospace [tT]ahoma [vV]erdana [aA]rial [hH]elvetica [sS]ans-serif [sS]erif [cC]ourier mono sans serif";
 
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule("\\#[a-fA-F0-9]{3,6}", "value")); // html colors
-    add(new RegExpRule("(-?\\d+)(\\.\\d+)?(px|em|pt|\\:|\\%|)", "value")); // sizes
-    add(new RegExpRule("!important", "color3")); // !important
-    add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    add(new RegExpRule(getValuesCSS(values), "value")); // values
-    add(new RegExpRule(getKeywords(fonts), "color1")); // fonts
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\#[a-fA-F0-9]{3,6}", VALUE)); // html colors
+    add(new RegExpRule("(-?\\d+)(\\.\\d+)?(px|em|pt|\\:|\\%|)", VALUE)); // sizes
+    add(new RegExpRule("!important", COLOR3)); // !important
+    add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getValuesCSS(values), VALUE));
+    add(new RegExpRule(getKeywords(fonts), COLOR1));
 
     setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)\\s*style.*?(?:&gt;|>)", "(?:&lt;|<)\\/\\s*style\\s*(?:&gt;|>)"));
   }

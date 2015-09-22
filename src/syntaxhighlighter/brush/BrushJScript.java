@@ -37,13 +37,13 @@ public class BrushJScript extends Brush {
             + "new null return super switch "
             + "this throw true try typeof var while with";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
     // it's a standard not to use multi-line string
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule("\\s*#.*", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\s*#.*", Pattern.MULTILINE, PREPROCESSOR)); // preprocessor tags like #region and #endregion
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.scriptScriptTags);
   }

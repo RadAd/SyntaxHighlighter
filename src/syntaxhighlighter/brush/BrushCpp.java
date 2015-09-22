@@ -83,13 +83,13 @@ public class BrushCpp extends Brush {
             + "strncpy strpbrk strrchr strspn strstr strtok strxfrm asctime "
             + "clock ctime difftime gmtime localtime mktime strftime time";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // strings
-    add(new RegExpRule("^ *#.*", Pattern.MULTILINE, "preprocessor"));
-    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, "color1"));
-    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE, "functions"));
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("^ *#.*", Pattern.MULTILINE, PREPROCESSOR));
+    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, COLOR1));
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE, FUNCTIONS));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
   }
 }

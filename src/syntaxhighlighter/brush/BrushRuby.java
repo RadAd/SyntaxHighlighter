@@ -40,14 +40,14 @@ public class BrushRuby extends Brush {
             + "Hash Integer IO MatchData Method Module NilClass Numeric Object Proc Range Regexp String Struct::TMS Symbol "
             + "ThreadGroup Thread Time TrueClass";
 
-    add(new RegExpRule(RegExpRule.singleLinePerlComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule("\\b[A-Z0-9_]+\\b", "constants")); // constants
-    add(new RegExpRule(":[a-z][A-Za-z0-9_]*", "color2")); // symbols
-    add(new RegExpRule("(\\$|@@|@)\\w+", "variable")); // $global, @instance, and @@class variables
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    add(new RegExpRule(getKeywords(builtins), Pattern.MULTILINE, "color1")); // builtins
+    add(new RegExpRule(RegExpRule.singleLinePerlComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\b[A-Z0-9_]+\\b", CONSTANTS)); // constants
+    add(new RegExpRule(":[a-z][A-Za-z0-9_]*", COLOR2)); // symbols
+    add(new RegExpRule("(\\$|@@|@)\\w+", VARIABLE)); // $global, @instance, and @@class variables
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(builtins), Pattern.MULTILINE, COLOR1)); // builtins
 
     setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
   }

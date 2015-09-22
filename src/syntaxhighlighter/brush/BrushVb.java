@@ -46,10 +46,10 @@ public class BrushVb extends Brush {
             + "Structure Sub SyncLock Then Throw To True Try TypeOf Unicode Until "
             + "Variant When While With WithEvents WriteOnly Xor";
 
-    add(new RegExpRule("'.*$", Pattern.MULTILINE, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // strings
-    add(new RegExpRule("^\\s*#.*$", Pattern.MULTILINE, "preprocessor")); // preprocessor tags like #region and #endregion
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // vb keyword
+    add(new RegExpRule("'.*$", Pattern.MULTILINE, COMMENTS)); // one line comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING)); // strings
+    add(new RegExpRule("^\\s*#.*$", Pattern.MULTILINE, PREPROCESSOR)); // preprocessor tags like #region and #endregion
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD)); // vb keyword
 
     setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
   }

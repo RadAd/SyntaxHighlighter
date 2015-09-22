@@ -33,7 +33,7 @@ public class BrushPerl extends Brush {
   public BrushPerl() {
     // Contributed by David Simmons-Duffin and Marty Kube
 
-    String funcs = "abs accept alarm atan2 bind binmode chdir chmod chomp chop chown chr "
+    String functions = "abs accept alarm atan2 bind binmode chdir chmod chomp chop chown chr "
             + "chroot close closedir connect cos crypt defined delete each endgrent "
             + "endhostent endnetent endprotoent endpwent endservent eof exec exists "
             + "exp fcntl fileno flock fork format formline getc getgrent getgrgid "
@@ -56,13 +56,13 @@ public class BrushPerl extends Brush {
             + "for foreach goto if import last local my next no our package redo ref "
             + "require return sub tie tied unless untie until use wantarray while";
 
-    add(new RegExpRule("#[^!].*$", Pattern.MULTILINE, "comments"));
-    add(new RegExpRule("^\\s*#!.*$", Pattern.MULTILINE, "preprocessor")); // shebang
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string"));
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string"));
-    add(new RegExpRule("(\\$|@|%)\\w+", "variable"));
-    add(new RegExpRule(getKeywords(funcs), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, "functions"));
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword"));
+    add(new RegExpRule("#[^!].*$", Pattern.MULTILINE, COMMENTS));
+    add(new RegExpRule("^\\s*#!.*$", Pattern.MULTILINE, PREPROCESSOR)); // shebang
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("(\\$|@|%)\\w+", VARIABLE));
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
   }

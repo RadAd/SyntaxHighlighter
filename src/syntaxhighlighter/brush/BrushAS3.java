@@ -33,7 +33,7 @@ public class BrushAS3 extends Brush {
   public BrushAS3() {
     // Created by Peter Atoria @ http://iAtoria.com
 
-    String inits = "class interface function package";
+    String initializations = "class interface function package";
     String keywords = "-Infinity ...rest Array as AS3 Boolean break case catch const continue Date decodeURI "
             + "decodeURIComponent default delete do dynamic each else encodeURI encodeURIComponent escape "
             + "extends false final finally flash_proxy for get if implements import in include Infinity "
@@ -42,15 +42,15 @@ public class BrushAS3 extends Brush {
             + "return set static String super switch this throw true try typeof uint undefined unescape "
             + "use void while with";
 
-    add(new RegExpRule(RegExpRule.singleLineCComments, "comments")); // one line comments
-    add(new RegExpRule(RegExpRule.multiLineCComments, "comments")); // multiline comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, "string")); // double quoted strings
-    add(new RegExpRule(RegExpRule.singleQuotedString, "string")); // single quoted strings
-    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, "value")); // numbers
-    add(new RegExpRule(getKeywords(inits), Pattern.MULTILINE, "color3")); // initializations
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, "keyword")); // keywords
-    add(new RegExpRule("var", Pattern.MULTILINE, "variable")); // variable
-    add(new RegExpRule("trace", Pattern.MULTILINE, "color1")); // trace
+    add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
+    add(new RegExpRule(getKeywords(initializations), Pattern.MULTILINE, COLOR3));
+    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule("var", Pattern.MULTILINE, VARIABLE));
+    add(new RegExpRule("trace", Pattern.MULTILINE, COLOR1));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.scriptScriptTags);
   }
