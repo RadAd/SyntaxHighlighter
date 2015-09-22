@@ -106,7 +106,7 @@ public class Example {
         highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
         try {
           // set the content of the script, the example.html is located in the jar: /syntaxhighlighter/example/example.html
-          highlighter.setContent(new String(readResourceFile("/syntaxhighlighter/example/example.html")));
+          highlighter.setContent(new String(readResourceFile("/example.html")));
         } catch (IOException ex) {
           LOG.log(Level.SEVERE, null, ex);
         }
