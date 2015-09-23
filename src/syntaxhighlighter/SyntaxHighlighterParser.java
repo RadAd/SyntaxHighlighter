@@ -44,6 +44,6 @@ public final class SyntaxHighlighterParser {
 
   public List<MatchResult> parse(String content) {
     syntaxHighlighter.setBrush(brush);
-    return syntaxHighlighter.parse(content.toCharArray(), 0, content.length());
+    return syntaxHighlighter.parse(content, 0, content.length());
   }
 }
