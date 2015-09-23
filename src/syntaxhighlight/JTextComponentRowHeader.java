@@ -44,6 +44,8 @@ import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.JTextComponent;
 
+import syntaxhighlight.theme.Theme;
+
 /**
  * A row header panel for {@link JScrollPane} showing the line numbers of 
  * {@link JTextComponent}.
@@ -237,6 +239,18 @@ public class JTextComponentRowHeader extends JPanel {
     }
   }
 
+  public void applyTheme(Theme theme) {
+    setBackground(theme.getBackground());
+    setHighlightedColor(theme.getBackground());
+
+    setForeground(theme.getGutterText());
+    setBorderColor(theme.getGutterBorderColor());
+    setBorderWidth(theme.getGutterBorderWidth());
+    setFont(theme.getGutterTextFont());
+    setPaddingLeft(theme.getGutterTextPaddingLeft());
+    setPaddingRight(theme.getGutterTextPaddingRight());
+  }
+  
   /**
    * The font of the line number.
    */

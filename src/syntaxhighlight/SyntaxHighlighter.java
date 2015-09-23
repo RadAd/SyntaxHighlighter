@@ -94,7 +94,7 @@ public class SyntaxHighlighter extends JScrollPane {
     setViewportView(highlighter);
 
     highlighterRowHeader = new JTextComponentRowHeader(this, highlighter);
-    theme.setTheme(highlighterRowHeader);
+    highlighterRowHeader.applyTheme(theme);
     setRowHeaderView(highlighterRowHeader);
   }
 
@@ -158,7 +158,7 @@ public class SyntaxHighlighter extends JScrollPane {
     if (!this.theme.equals(theme)) {
       this.theme = theme;
       highlighter.setTheme(theme);
-      theme.setTheme(highlighterRowHeader);
+      highlighterRowHeader.applyTheme(theme);
     }
   }
 

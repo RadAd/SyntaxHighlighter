@@ -29,51 +29,15 @@ import javax.swing.text.StyleConstants;
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class Style implements Cloneable {
+public final class Style {
+  private boolean changed;
+  private SimpleAttributeSet attributeSet;
+  private boolean bold;
+  private Color color;
+  private Color background;
+  private boolean underline;
+  private boolean italic;
 
-  /**
-   * It indicate whether the {@link #attributeSet} has updated after any style 
-   * changes.
-   */
-  protected boolean changed;
-  /**
-   * The {@link AttributeSet} representation of this style.
-   */
-  protected SimpleAttributeSet attributeSet;
-  /**
-   * Font bold.
-   */
-  protected boolean bold;
-  /**
-   * Font color.
-   */
-  protected Color color;
-  /**
-   * The background color, null means no background color is set.
-   */
-  protected Color background;
-  /**
-   * Font underline.
-   */
-  protected boolean underline;
-  /**
-   * Font italic.
-   */
-  protected boolean italic;
-
-  /**
-   * Constructor.
-   * <p>
-   * <b>Default values:</b><br />
-   * <ul>
-   * <li>bold: false;</li>
-   * <li>color: black;</li>
-   * <li>background: null;</li>
-   * <li>underline: false;</li>
-   * <li>italic: false;</li>
-   * </ul>
-   * </p>
-   */
   public Style() {
     changed = true;
     attributeSet = null;
@@ -85,10 +49,6 @@ public class Style implements Cloneable {
     italic = false;
   }
 
-  /**
-   * Get the {@link AttributeSet} of this style.
-   * @return the {@link AttributeSet}
-   */
   public SimpleAttributeSet getAttributeSet() {
     if (changed) {
       attributeSet = new SimpleAttributeSet();
@@ -104,60 +64,55 @@ public class Style implements Cloneable {
     return attributeSet;
   }
 
-  /**
-   * Get the background color.
-   * @return the background color or null if no color is set
-   */
   public Color getBackground() {
     return background;
   }
 
-  /**
-   * Set the background color.
-   * @param background null means do not set the background
-   */
-  public void setBackground(Color background) {
+  public Style setBackground(Color background) {
     changed = true;
     this.background = background;
+    return this;
   }
 
   public boolean isBold() {
     return bold;
   }
 
-  public void setBold(boolean bold) {
+  public Style setBold(boolean bold) {
     changed = true;
     this.bold = bold;
+    return this;
   }
 
   public Color getColor() {
     return color;
   }
 
-  public void setColor(Color color) {
-    if (color == null) {
-      throw new NullPointerException("argument 'color' cannot be null");
-    }
+  public Style setColor(Color color) {
+    if (color == null) throw new NullPointerException("argument 'color' cannot be null");
     changed = true;
     this.color = color;
+    return this;
   }
 
   public boolean isItalic() {
     return italic;
   }
 
-  public void setItalic(boolean italic) {
+  public Style setItalic(boolean italic) {
     changed = true;
     this.italic = italic;
+    return this;
   }
 
   public boolean isUnderline() {
     return underline;
   }
 
-  public void setUnderline(boolean underline) {
+  public Style setUnderline(boolean underline) {
     changed = true;
     this.underline = underline;
+    return this;
   }
 
   /**
@@ -188,19 +143,6 @@ public class Style implements Cloneable {
     Style _object = (Style) obj;
     return _object.bold == bold && _object.color.equals(color) && _object.background.equals(background)
             && _object.underline == underline && _object.italic == italic;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Style clone() {
-    Style object = null;
-    try {
-      object = (Style) super.clone();
-    } catch (CloneNotSupportedException ex) {
-    }
-    return object;
   }
 
   /**

@@ -26,8 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.swing.text.SimpleAttributeSet;
 
-import syntaxhighlight.JTextComponentRowHeader;
-
 /**
  * Theme for the {@link SyntaxHighlighterPane} and 
  * {@link JTextComponentRowHeader}.
@@ -40,77 +38,19 @@ import syntaxhighlight.JTextComponentRowHeader;
  */
 public class Theme {
 
-  /**
-   * The font of the script text.
-   */
   protected Font font;
-  /**
-   * The background color of the script text area.
-   */
   protected Color background;
-  /**
-   * The background color of the highlighted line of script text.
-   */
   protected Color highlightedBackground;
-  /**
-   * Gutter (line number column on the left)
-   */
-  /**
-   * The color of the gutter text.
-   */
   protected Color gutterText;
-  /**
-   * The color of the border that joint the gutter and the script text area.
-   */
   protected Color gutterBorderColor;
-  /**
-   * The width of the border that joint the gutter and the script text area.
-   */
   protected int gutterBorderWidth;
-  /**
-   * The font of the gutter text.
-   */
   protected Font gutterTextFont;
-  /**
-   * The minimum padding from 'the leftmost of the line number text' to 
-   * 'the left margin'.
-   */
   protected int gutterTextPaddingLeft;
-  /**
-   * The minimum padding from 'the rightmost of the line number text' to 
-   * 'the right margin' (not to the gutter border).
-   */
   protected int gutterTextPaddingRight;
-  /**
-   * Text area.
-   */
-  /**
-   * The default style. When the style requested by {@link #getStyle(String)} 
-   * not exist, this will be returned.
-   */
   protected Style plain;
-  /**
-   * The styles of this theme.
-   */
-  protected Map<String, Style> styles;
+  protected final Map<String, Style> styles;
 
-  /**
-   * Constructor.<br />
-   * <p>
-   * <b>Default value:</b><br />
-   * <ul>
-   * <li>font: Consolas 12pt</li>
-   * <li>background: white</li>
-   * <li>gutter text: black</li>
-   * <li>gutter border: R: 184, G: 184, B: 184</li>
-   * <li>gutter border width: 3px</li>
-   * <li>gutter text font: Consolas 12pt</li>
-   * <li>gutter text padding-left: 7px</li>
-   * <li>gutter text padding-right: 7px</li>
-   * </ul>
-   * </p>
-   */
-  public Theme() {
+  protected Theme() {
     font = new Font("Consolas", Font.PLAIN, 12);
     background = Color.white;
 
@@ -128,37 +68,11 @@ public class Theme {
     styles = new HashMap<String, Style>();
   }
 
-  /**
-   * Apply the theme to the row header panel.
-   * @param rowHeader the row header to apply the theme on
-   */
-  public void setTheme(JTextComponentRowHeader rowHeader) {
-    rowHeader.setBackground(background);
-    rowHeader.setHighlightedColor(background);
-
-    rowHeader.setForeground(gutterText);
-    rowHeader.setBorderColor(gutterBorderColor);
-    rowHeader.setBorderWidth(gutterBorderWidth);
-    rowHeader.setFont(gutterTextFont);
-    rowHeader.setPaddingLeft(gutterTextPaddingLeft);
-    rowHeader.setPaddingRight(gutterTextPaddingRight);
-  }
-
-  /**
-   * Set the default style.
-   * @param plain the style
-   */
-  public void setPlain(Style plain) {
-    if (plain == null) {
-      throw new NullPointerException("argument 'plain' cannot be null");
-    }
+  protected void setPlain(Style plain) {
+    if (plain == null) throw new NullPointerException("argument 'plain' cannot be null");
     this.plain = plain;
   }
 
-  /**
-   * Get the default style.
-   * @return the style
-   */
   public Style getPlain() {
     return plain;
   }
@@ -182,233 +96,91 @@ public class Theme {
     }
   }
 
-  /**
-   * Add style.
-   * @param styleKey the keyword of the style
-   * @param style the style
-   * @return see the return value of {@link Map#put(Object, Object)}
-   */
-  public Style addStyle(String styleKey, Style style) {
+  protected Style addStyle(String styleKey, Style style) {
     return styles.put(styleKey, style);
   }
 
-  /**
-   * Remove style by keyword.
-   * @param styleKey the keyword of the style
-   * @return see the return value of {@link Map#remove(Object)}
-   */
-  public Style removeStyle(String styleKey) {
-    return styles.remove(styleKey);
-  }
-
-  /**
-   * Get the style by keyword.
-   * @param key the keyword
-   * @return the {@link syntaxhighlighter.theme.Style} related to the 
-   * {@code key}; if the style related to the {@code key} not exist, the 
-   * style of 'plain' will return.
-   */
   public Style getStyle(String key) {
     Style returnStyle = styles.get(key);
     return returnStyle != null ? returnStyle : plain;
   }
 
-  /**
-   * Get all styles.
-   * @return the styles
-   */
-  public Map<String, Style> getStyles() {
-    return new HashMap<String, Style>(styles);
-  }
-
-  /**
-   * Clear all styles.
-   */
-  public void clearStyles() {
-    styles.clear();
-  }
-
-  /**
-   * The font of the script text.
-   * @return the font
-   */
   public Font getFont() {
     return font;
   }
 
-  /**
-   * The font of the script text.
-   * @param font the font
-   */
-  public void setFont(Font font) {
-    if (font == null) {
-      throw new NullPointerException("argument 'font' cannot be null");
-    }
+  protected void setFont(Font font) {
+    if (font == null) throw new NullPointerException("argument 'font' cannot be null");
     this.font = font;
   }
 
-  /**
-   * The background color of the script text area.
-   * @return the color
-   */
   public Color getBackground() {
     return background;
   }
 
-  /**
-   * The background color of the script text area.
-   * @param background the color
-   */
-  public void setBackground(Color background) {
-    if (background == null) {
-      throw new NullPointerException("argument 'background' cannot be null");
-    }
+  protected void setBackground(Color background) {
+    if (background == null) throw new NullPointerException("argument 'background' cannot be null");
     this.background = background;
   }
 
-  /**
-   * The background color of the highlighted line of script text.
-   * @return the color
-   */
   public Color getHighlightedBackground() {
     return highlightedBackground;
   }
 
-  /**
-   * The background color of the highlighted line of script text.
-   * @param highlightedBackground the color
-   */
-  public void setHighlightedBackground(Color highlightedBackground) {
-    if (highlightedBackground == null) {
-      throw new NullPointerException("argument 'highlightedBackground' cannot be null");
-    }
+  protected void setHighlightedBackground(Color highlightedBackground) {
+    if (highlightedBackground == null) throw new NullPointerException("argument 'highlightedBackground' cannot be null");
     this.highlightedBackground = highlightedBackground;
   }
 
-  /**
-   * The color of the gutter text.
-   * @return the color
-   */
   public Color getGutterText() {
     return gutterText;
   }
 
-  /**
-   * The color of the gutter text.
-   * @param gutterText the color
-   */
-  public void setGutterText(Color gutterText) {
-    if (gutterText == null) {
-      throw new NullPointerException("argument 'gutterText' cannot be null");
-    }
+  protected void setGutterText(Color gutterText) {
+    if (gutterText == null) throw new NullPointerException("argument 'gutterText' cannot be null");
     this.gutterText = gutterText;
   }
 
-  /**
-   * The color of the border that joint the gutter and the script text area.
-   * @return the color
-   */
   public Color getGutterBorderColor() {
     return gutterBorderColor;
   }
 
-  /**
-   * The color of the border that joint the gutter and the script text area.
-   * @param gutterBorderColor the color
-   */
-  public void setGutterBorderColor(Color gutterBorderColor) {
-    if (gutterBorderColor == null) {
-      throw new NullPointerException("argument 'gutterBorderColor' cannot be null");
-    }
+  protected void setGutterBorderColor(Color gutterBorderColor) {
+    if (gutterBorderColor == null) throw new NullPointerException("argument 'gutterBorderColor' cannot be null");
     this.gutterBorderColor = gutterBorderColor;
   }
 
-  /**
-   * The width of the border that joint the gutter and the script text area.
-   * @return the width in pixel
-   */
   public int getGutterBorderWidth() {
     return gutterBorderWidth;
   }
 
-  /**
-   * The width of the border that joint the gutter and the script text area.
-   * @param gutterBorderWidth in pixel
-   */
-  public void setGutterBorderWidth(int gutterBorderWidth) {
+  protected void setGutterBorderWidth(int gutterBorderWidth) {
     this.gutterBorderWidth = gutterBorderWidth;
   }
 
-  /**
-   * The font of the gutter text.
-   * @return the font
-   */
   public Font getGutterTextFont() {
     return gutterTextFont;
   }
 
-  /**
-   * The font of the gutter text.
-   * @param gutterTextFont the font
-   */
-  public void setGutterTextFont(Font gutterTextFont) {
-    if (gutterTextFont == null) {
-      throw new NullPointerException("argument 'gutterTextFont' cannot be null");
-    }
+  protected void setGutterTextFont(Font gutterTextFont) {
+    if (gutterTextFont == null) throw new NullPointerException("argument 'gutterTextFont' cannot be null");
     this.gutterTextFont = gutterTextFont;
   }
 
-  /**
-   * The minimum padding from 'the leftmost of the line number text' to 
-   * 'the left margin'.
-   * @return the padding in pixel
-   */
   public int getGutterTextPaddingLeft() {
     return gutterTextPaddingLeft;
   }
 
-  /**
-   * The minimum padding from 'the leftmost of the line number text' to 
-   * 'the left margin'.
-   * @param gutterTextPaddingLeft in pixel
-   */
-  public void setGutterTextPaddingLeft(int gutterTextPaddingLeft) {
+  protected void setGutterTextPaddingLeft(int gutterTextPaddingLeft) {
     this.gutterTextPaddingLeft = gutterTextPaddingLeft;
   }
 
-  /**
-   * The minimum padding from 'the rightmost of the line number text' to 
-   * 'the right margin' (not to the gutter border).
-   * @return the padding in pixel
-   */
   public int getGutterTextPaddingRight() {
     return gutterTextPaddingRight;
   }
 
-  /**
-   * The minimum padding from 'the rightmost of the line number text' to 
-   * 'the right margin' (not to the gutter border).
-   * @param gutterTextPaddingRight in pixel
-   */
-  public void setGutterTextPaddingRight(int gutterTextPaddingRight) {
+  protected void setGutterTextPaddingRight(int gutterTextPaddingRight) {
     this.gutterTextPaddingRight = gutterTextPaddingRight;
-  }
-
-  /**
-   * {@inheritDoc}
-   */
-  @Override
-  public Theme clone() {
-    Theme object = null;
-    try {
-      object = (Theme) super.clone();
-      object.styles = new HashMap<String, Style>();
-      for (String key : styles.keySet()) {
-        object.styles.put(key, styles.get(key).clone());
-      }
-    } catch (CloneNotSupportedException ex) {
-    }
-    return object;
   }
 
   /**
