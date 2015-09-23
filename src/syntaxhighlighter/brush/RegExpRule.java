@@ -52,7 +52,6 @@ public final class RegExpRule {
 
   RegExpRule(Pattern pattern, String styleKey) {
     if (pattern == null) throw new NullPointerException("argument 'pattern' cannot be null");
-    if (styleKey == null) throw new NullPointerException("argument 'styleKey' cannot be null");
 
     this.pattern = pattern;
     this.groupOperations = new java.util.HashMap<Integer, Object>();

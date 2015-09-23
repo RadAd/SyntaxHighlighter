@@ -35,8 +35,6 @@ import java.util.List;
  */
 public class Brush {
     
-    public final static String NONE = "";
-    public final static String PLAIN = "plain";
     public final static String PREPROCESSOR = "preprocessor";
     public final static String COMMENTS = "comments";
     public final static String KEYWORD = "keyword";

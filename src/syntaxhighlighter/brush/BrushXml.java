@@ -38,20 +38,20 @@ public class BrushXml extends Brush {
     add(new RegExpRule(RegExpRule.xmlComments, COMMENTS)); // <!-- ... -->
 
     // regular expression for highlighting the tag
-    RegExpRule tagRegExpRule = new RegExpRule("(?:&lt;|<)[\\s\\/\\?]*([:\\w-\\.]+)", Pattern.COMMENTS, NONE);
+    RegExpRule tagRegExpRule = new RegExpRule("(?:&lt;|<)[\\s\\/\\?]*([:\\w-\\.]+)", Pattern.COMMENTS, null);
     // highlight the tag only, not including the symbols at the start, 1 means the group 1 of the matched results
-    tagRegExpRule.setGroupOperation(1, "keyword");
+    tagRegExpRule.setGroupOperation(1, KEYWORD);
 
     // regular expression for highlighting the variable assignment
     RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)"
             + "\\s*=\\s*"
-            + "(\".*?\"|'.*?'|\\w+)", Pattern.COMMENTS, NONE);
+            + "(\".*?\"|'.*?'|\\w+)", Pattern.COMMENTS, null);
     // highlight the variable name, 1 means the group 1 of the matched results
-    valueRegExpRule.setGroupOperation(1, "color1");
+    valueRegExpRule.setGroupOperation(1, COLOR1);
     // highlight the value, 2 means the group 2 of the matched results
-    valueRegExpRule.setGroupOperation(2, "string");
+    valueRegExpRule.setGroupOperation(2, STRING);
 
-    RegExpRule _regExpRule = new RegExpRule("((?:&lt;|<)[\\s\\/\\?]*(?:\\w+))(.*?)[\\s\\/\\?]*(?:&gt;|>)", Pattern.DOTALL, NONE);
+    RegExpRule _regExpRule = new RegExpRule("((?:&lt;|<)[\\s\\/\\?]*(?:\\w+))(.*?)[\\s\\/\\?]*(?:&gt;|>)", Pattern.DOTALL, null);
     // perform futher operation on the group 1 of the matched results
     _regExpRule.setGroupOperation(1, tagRegExpRule);
     // perform futher operation on the group 2 of the matched results
