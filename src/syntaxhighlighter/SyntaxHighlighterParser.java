@@ -1,8 +1,6 @@
 package syntaxhighlighter;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.parser.MatchResult;
 import syntaxhighlighter.parser.SyntaxHighlighter;
@@ -45,15 +43,7 @@ public final class SyntaxHighlighterParser {
   }
 
   public List<MatchResult> parse(String content) {
-    List<MatchResult> returnList = new ArrayList<MatchResult>();
-
-    Map<Integer, List<MatchResult>> parsedResult = syntaxHighlighter.parse(brush, content.toCharArray(), 0, content.length());
-    for (List<MatchResult> resultList : parsedResult.values()) {
-      for (MatchResult result : resultList) {
-        returnList.add(result);
-      }
-    }
-
-    return returnList;
+    syntaxHighlighter.setBrush(brush);
+    return syntaxHighlighter.parse(content.toCharArray(), 0, content.length());
   }
 }

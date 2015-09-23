@@ -89,17 +89,33 @@ public final class SyntaxHighlighter {
         register(BrushXml.extshtml, new BrushXml(true));
     }
 
+  private Brush brush;
   private List<Brush> htmlScriptBrushList;
 
   public SyntaxHighlighter() {
-    htmlScriptBrushList = htmlBrushes;
+    this(plainBrush);
+  }
+
+  public SyntaxHighlighter(Brush brush) {
+    if (brush == null) throw new NullPointerException("argument 'brush' cannot be null");
+    this.brush = brush;
+    this.htmlScriptBrushList = htmlBrushes;
   }
 
   public void setHTMLScriptBrushList(List<Brush> htmlScriptBrushList) {
     this.htmlScriptBrushList = htmlScriptBrushList;
   }
   
-  private void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
+  public Brush getBrush() {
+    return brush;
+  }
+
+  public void setBrush(Brush brush) {
+    if (brush == null) throw new NullPointerException("argument 'brush' cannot be null");
+    this.brush = brush;
+  }
+  
+  private static void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
     List<MatchResult> matchList = matches.get(match.getOffset());
     if (matchList == null) {
       matchList = new ArrayList<MatchResult>();
@@ -108,7 +124,7 @@ public final class SyntaxHighlighter {
     matchList.add(match);
   }
 
-  private void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
+  private static void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
     for (int offset : matches.keySet()) {
       List<MatchResult> offsetMatches = matches.get(offset);
 
@@ -139,21 +155,13 @@ public final class SyntaxHighlighter {
     }
   }
 
-  public Map<Integer, List<MatchResult>> parse(Brush brush, char[] content, int offset, int length) {
-    if (brush == null) throw new NullPointerException("argument 'brush' cannot be null");
+  public List<MatchResult> parse(char[] content, int offset, int length) {
     if (content == null) throw new NullPointerException("argument 'content' cannot be null");
+    
     Map<Integer, List<MatchResult>> matches = new TreeMap<Integer, List<MatchResult>>();
+    
     parse1(matches, brush, content, offset, length);
-    return matches;
-  }
-
-  private void parse1(Map<Integer, List<MatchResult>> matches, Brush brush, char[] content, int offset, int length) {
-    // parse the RegExpRule in the brush first
-    List<RegExpRule> regExpRuleList = brush.getRegExpRuleList();
-    for (RegExpRule regExpRule : regExpRuleList) {
-      parse2(matches, regExpRule, content, offset, length);
-    }
-
+    
     // parse the HTML-Script brushes later
     if (brush.isHtml() && htmlScriptBrushList != null) {
         for (Brush htmlScriptBrush : htmlScriptBrushList) {
@@ -180,9 +188,27 @@ public final class SyntaxHighlighter {
           }
         }
     }
+    
+    List<MatchResult> returnList = new ArrayList<MatchResult>();
+
+    for (List<MatchResult> resultList : matches.values()) {
+      for (MatchResult result : resultList) {
+        returnList.add(result);
+      }
+    }
+    
+    return returnList;
   }
 
-  protected void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, char[] content, int offset, int length) {
+  private static void parse1(Map<Integer, List<MatchResult>> matches, Brush brush, char[] content, int offset, int length) {
+    // parse the RegExpRule in the brush first
+    List<RegExpRule> regExpRuleList = brush.getRegExpRuleList();
+    for (RegExpRule regExpRule : regExpRuleList) {
+      parse2(matches, regExpRule, content, offset, length);
+    }
+  }
+
+  private static void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, char[] content, int offset, int length) {
     Map<Integer, Object> groupOperations = regExpRule.getGroupOperations();
 
     Pattern regExpPattern = regExpRule.getPattern();
