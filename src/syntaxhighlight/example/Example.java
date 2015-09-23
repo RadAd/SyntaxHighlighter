@@ -12,10 +12,10 @@ package syntaxhighlight.example;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
+//import java.util.Arrays;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
 import syntaxhighlight.SyntaxHighlighterView;
 import syntaxhighlight.theme.ThemeRDark;
 import syntaxhighlighter.brush.Brush;
