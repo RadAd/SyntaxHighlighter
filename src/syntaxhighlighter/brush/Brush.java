@@ -50,20 +50,21 @@ public class Brush {
     public final static String COLOR3 = "color3";
     public final static String SCRIPT = "script";
 
-  /**
-   * Regular expression rules list. It will be executed in sequence.
-   */
-  private List<RegExpRule> regExpRuleList;
-
-  /**
-   * HTML script RegExp, null means no HTML script RegExp for this brush. If 
-   * this language will not be implanted into HTML, leave it null.
-   */
-  private HTMLScriptRegExp htmlScriptRegExp;
+  private final List<RegExpRule> regExpRuleList = new java.util.ArrayList<RegExpRule>();
+  private HTMLScriptRegExp htmlScriptRegExp = null;
+  private boolean isHtml = false;
 
   protected Brush() {
-    regExpRuleList = new java.util.ArrayList<RegExpRule>();
-    htmlScriptRegExp = null;
+  }
+  
+  public boolean isHtml()
+  {
+    return this.isHtml;
+  }
+  
+  protected void setIsHtml(boolean isHtml)
+  {
+    this.isHtml = isHtml;
   }
 
   public List<RegExpRule> getRegExpRuleList() {

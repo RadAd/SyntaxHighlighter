@@ -38,7 +38,7 @@ import syntaxhighlighter.brush.*;
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class SyntaxHighlighter {
+public final class SyntaxHighlighter {
 
     private static final Brush plainBrush = new BrushPlain();
     private static final Map<String, Brush> brushes = new HashMap<String, Brush>();
@@ -62,7 +62,6 @@ public class SyntaxHighlighter {
     }
     
     static {
-        register(BrushXml.exts, new BrushXml());
         register(BrushAppleScript.exts, new BrushAppleScript());
         register(BrushAS3.exts, new BrushAS3());
         register(BrushBash.exts, new BrushBash());
@@ -86,7 +85,8 @@ public class SyntaxHighlighter {
         register(BrushScala.exts, new BrushScala());
         register(BrushSql.exts, new BrushSql());
         register(BrushVb.exts, new BrushVb());
-        register(BrushXml.exts, new BrushXml());
+        register(BrushXml.exts, new BrushXml(false));
+        register(BrushXml.extshtml, new BrushXml(true));
     }
 
   private List<Brush> htmlScriptBrushList;
@@ -95,7 +95,11 @@ public class SyntaxHighlighter {
     htmlScriptBrushList = htmlBrushes;
   }
 
-  protected void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
+  public void setHTMLScriptBrushList(List<Brush> htmlScriptBrushList) {
+    this.htmlScriptBrushList = htmlScriptBrushList;
+  }
+  
+  private void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
     List<MatchResult> matchList = matches.get(match.getOffset());
     if (matchList == null) {
       matchList = new ArrayList<MatchResult>();
@@ -104,7 +108,7 @@ public class SyntaxHighlighter {
     matchList.add(match);
   }
 
-  protected void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
+  private void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
     for (int offset : matches.keySet()) {
       List<MatchResult> offsetMatches = matches.get(offset);
 
@@ -135,52 +139,23 @@ public class SyntaxHighlighter {
     }
   }
 
-  /**
-   * Parse the content start from {@code offset} with {@code length} and 
-   * return the result.
-   * 
-   * @param brush the brush to use
-   * @param htmlScript turn HTML-Script on or not
-   * @param content the content to parse in char array
-   * @param offset the offset
-   * @param length the length
-   * 
-   * @return the parsed result, the key of the map is style key
-   */
-  public Map<Integer, List<MatchResult>> parse(Brush brush, boolean htmlScript, char[] content, int offset, int length) {
-    if (brush == null || content == null) {
-      return null;
-    }
+  public Map<Integer, List<MatchResult>> parse(Brush brush, char[] content, int offset, int length) {
+    if (brush == null) throw new NullPointerException("argument 'brush' cannot be null");
+    if (content == null) throw new NullPointerException("argument 'content' cannot be null");
     Map<Integer, List<MatchResult>> matches = new TreeMap<Integer, List<MatchResult>>();
-    return parse(matches, brush, htmlScript, content, offset, length);
+    parse1(matches, brush, content, offset, length);
+    return matches;
   }
 
-  /**
-   * Parse the content start from {@code offset} with {@code length} with the
-   * brush and return the result. All new matches will be added to 
-   * {@code matches}.
-   * 
-   * @param matches the list of matches
-   * @param brush the brush to use
-   * @param htmlScript turn HTML-Script on or not
-   * @param content the content to parse in char array
-   * @param offset the offset
-   * @param length the length
-   * 
-   * @return the parsed result, the key of the map is style key
-   */
-  protected Map<Integer, List<MatchResult>> parse(Map<Integer, List<MatchResult>> matches, Brush brush, boolean htmlScript, char[] content, int offset, int length) {
-    if (matches == null || brush == null || content == null) {
-      return null;
-    }
+  private void parse1(Map<Integer, List<MatchResult>> matches, Brush brush, char[] content, int offset, int length) {
     // parse the RegExpRule in the brush first
     List<RegExpRule> regExpRuleList = brush.getRegExpRuleList();
     for (RegExpRule regExpRule : regExpRuleList) {
-      parse(matches, regExpRule, content, offset, length);
+      parse2(matches, regExpRule, content, offset, length);
     }
 
     // parse the HTML-Script brushes later
-    if (htmlScript) {
+    if (brush.isHtml() && htmlScriptBrushList != null) {
         for (Brush htmlScriptBrush : htmlScriptBrushList) {
           Pattern _pattern = htmlScriptBrush.getHTMLScriptRegExp().getpattern();
 
@@ -196,7 +171,7 @@ public class SyntaxHighlighter {
             // the content of HTML-Script, parse it using the HTML-Script brush
             start = matcher.start(2) + offset;
             end = matcher.end(2) + offset;
-            parse(matches, htmlScriptBrush, false, content, start, end - start);
+            parse1(matches, htmlScriptBrush, content, start, end - start);
 
             // the right tag of HTML-Script
             start = matcher.start(3) + offset;
@@ -205,24 +180,9 @@ public class SyntaxHighlighter {
           }
         }
     }
-
-    return matches;
   }
 
-  /**
-   * Parse the content start from {@code offset} with {@code length} using the 
-   * {@code regExpRule}. All new matches will be added to {@code matches}.
-   * 
-   * @param matches the list of matches
-   * @param regExpRule the RegExp rule to use
-   * @param content the content to parse in char array
-   * @param offset the offset
-   * @param length the length
-   */
-  protected void parse(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, char[] content, int offset, int length) {
-    if (matches == null || regExpRule == null || content == null) {
-      return;
-    }
+  protected void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, char[] content, int offset, int length) {
     Map<Integer, Object> groupOperations = regExpRule.getGroupOperations();
 
     Pattern regExpPattern = regExpRule.getPattern();
@@ -243,15 +203,11 @@ public class SyntaxHighlighter {
         if (operation instanceof String) {
           // add the style to the match
           addMatch(matches, new MatchResult(start, end - start, (String) operation));
-        } else {
+        } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
-          parse(matches, (RegExpRule) operation, content, start, end - start);
+          parse2(matches, (RegExpRule) operation, content, start, end - start);
         }
       }
     }
-  }
-
-  public void setHTMLScriptBrushList(List<Brush> htmlScriptBrushList) {
-    this.htmlScriptBrushList = htmlScriptBrushList;
   }
 }

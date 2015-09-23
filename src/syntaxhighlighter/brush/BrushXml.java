@@ -28,9 +28,12 @@ import java.util.regex.Pattern;
  */
 public class BrushXml extends Brush {
 
-    public final static String[] exts = { "xml", "htm", "html", "xhtml", "xslt" };
+    public final static String[] exts = { "xml", "xslt" };
+    public final static String[] extshtml = { "htm", "html", "xhtml" };
 
-  public BrushXml() {
+  public BrushXml(boolean java) {
+    setIsHtml(java);
+    
     add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)", Pattern.MULTILINE, COLOR2)); // <![ ... [ ... ]]>
     add(new RegExpRule(RegExpRule.xmlComments, COMMENTS)); // <!-- ... -->
 

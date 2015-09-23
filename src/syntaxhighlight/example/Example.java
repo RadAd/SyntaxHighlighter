@@ -13,8 +13,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -30,8 +28,6 @@ import syntaxhighlighter.SyntaxHighlighterParser;
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
 public class Example {
-
-  private static final Logger LOG = Logger.getLogger(Example.class.getName());
 
   /**
    * Read the resource file from the jar.
@@ -70,55 +66,30 @@ public class Example {
     return bout.toByteArray();
   }
 
-  public static void main(String[] args) {
-    // set look & feel
-    try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch (Exception ex) {
-      LOG.log(Level.INFO, "Failed to set system look and feel.", ex);
-    }
+  public static void main(String[] args) throws Exception {
+    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
-    SwingUtilities.invokeLater(new Runnable() {
+    long start = System.currentTimeMillis();
 
-      @Override
-      public void run() {
-        // timer start
-        long start, end;
-        start = System.currentTimeMillis();
+    Brush brush = syntaxhighlighter.parser.SyntaxHighlighter.getBrush("html");
+    SyntaxHighlighterParser parser = new SyntaxHighlighterParser(brush);
 
-        Brush brush = syntaxhighlighter.parser.SyntaxHighlighter.getBrush("html");
-        // the SyntaxHighlighter parser
-        SyntaxHighlighterParser parser = new SyntaxHighlighterParser(brush);
-        // turn HTML script on
-        parser.setHtmlScript(true);
+    SyntaxHighlighter highlighter = new SyntaxHighlighter(parser, new ThemeRDark());
+    //highlighter.setFirstLine(10);
+    //highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
+    highlighter.setContent(new String(readResourceFile("/example.html")));
 
-        // initialize the highlighter and use RDark theme
-        SyntaxHighlighter highlighter = new SyntaxHighlighter(parser, new ThemeRDark());
-        // set the line number count from 10 instead of 1
-        highlighter.setFirstLine(10);
-        // set to highlight line 13, 27, 28, 38, 42, 43 and 53
-        highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
-        try {
-          // set the content of the script, the example.html is located in the jar: /syntaxhighlighter/example/example.html
-          highlighter.setContent(new String(readResourceFile("/example.html")));
-        } catch (IOException ex) {
-          LOG.log(Level.SEVERE, null, ex);
-        }
+    long end = System.currentTimeMillis();
+    System.out.println("time elapsed: " + (end - start) + "ms");
 
-        // timer end
-        end = System.currentTimeMillis();
-        System.out.println("time elapsed: " + (end - start) + "ms");
-
-        // initiate a frame and display
-        JFrame frame = new JFrame();
-        frame.setTitle("Syntax Highlighter");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        // SyntaxHighlighter is actually a JScrollPane
-        frame.setContentPane(highlighter);
-        frame.setLocationByPlatform(true);
-        frame.pack();
-        frame.setVisible(true);
-      }
-    });
+    // initiate a frame and display
+    JFrame frame = new JFrame();
+    frame.setTitle("Syntax Highlighter");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    // SyntaxHighlighter is actually a JScrollPane
+    frame.setContentPane(highlighter);
+    frame.setLocationByPlatform(true);
+    frame.pack();
+    frame.setVisible(true);
   }
 }
