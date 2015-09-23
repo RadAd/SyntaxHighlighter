@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import syntaxhighlight.ParseResult;
-import syntaxhighlight.Parser;
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.parser.MatchResult;
 import syntaxhighlighter.parser.SyntaxHighlighter;
@@ -14,7 +13,7 @@ import syntaxhighlighter.parser.SyntaxHighlighter;
  * The SyntaxHighlighter parser for syntax highlight.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class SyntaxHighlighterParser implements Parser {
+public class SyntaxHighlighterParser {
 
   protected SyntaxHighlighter syntaxHighlighter;
   /**
@@ -136,7 +135,6 @@ public class SyntaxHighlighterParser implements Parser {
     }
   }
 
-  @Override
   public List<ParseResult> parse(String fileExtension, String content) {
     List<ParseResult> returnList = new ArrayList<ParseResult>();
 

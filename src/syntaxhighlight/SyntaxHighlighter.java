@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import syntaxhighlighter.SyntaxHighlighterParser;
 
 /**
  * The syntax highlighter.
@@ -50,7 +51,7 @@ public class SyntaxHighlighter extends JScrollPane {
   /**
    * The parser.
    */
-  protected Parser parser;
+  protected SyntaxHighlighterParser parser;
   /**
    * The content of the syntax highlighter, null if there is no content so far.
    */
@@ -61,7 +62,7 @@ public class SyntaxHighlighter extends JScrollPane {
    * @param parser the parser to use
    * @param theme the theme for the syntax highlighter
    */
-  public SyntaxHighlighter(Parser parser, Theme theme) {
+  public SyntaxHighlighter(SyntaxHighlighterParser parser, Theme theme) {
     this(parser, theme, new SyntaxHighlighterPane());
   }
 
@@ -71,7 +72,7 @@ public class SyntaxHighlighter extends JScrollPane {
    * @param theme the theme for the syntax highlighter
    * @param highlighterPane the script text pane of the syntax highlighter
    */
-  public SyntaxHighlighter(Parser parser, Theme theme, SyntaxHighlighterPane highlighterPane) {
+  public SyntaxHighlighter(SyntaxHighlighterParser parser, Theme theme, SyntaxHighlighterPane highlighterPane) {
     super();
 
     if (theme == null) {
