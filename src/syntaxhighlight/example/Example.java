@@ -10,6 +10,8 @@
 package syntaxhighlight.example;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 //import java.util.Arrays;
@@ -45,18 +47,30 @@ public class Example {
     
     return new String(bout.toByteArray());
   }
+  
+  static InputStream open(String filename) throws FileNotFoundException
+  {
+    if (filename.startsWith("res:"))
+        return Example.class.getResourceAsStream(filename.substring(4));
+    else
+        return new FileInputStream(filename);
+  }
 
   public static void main(String[] args) throws Exception {
     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
     long start = System.currentTimeMillis();
 
+    String filename = args.length > 0 ? args[0] : "res:/example.html";
+    
+    int p = filename.lastIndexOf('.');
+    String ext = filename.substring(p + 1);
 
     SyntaxHighlighterView highlighter = new SyntaxHighlighterView(new ThemeRDark());
     //highlighter.setFirstLine(10);
     //highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
-    Brush brush = SyntaxHighlighter.getBrush("html");
-    highlighter.setContent(readFile(Example.class.getResourceAsStream("/example.html")), brush);
+    Brush brush = SyntaxHighlighter.getBrush(ext);
+    highlighter.setContent(readFile(open(filename)), brush);
 
     long end = System.currentTimeMillis();
     System.out.println("time elapsed: " + (end - start) + "ms");
