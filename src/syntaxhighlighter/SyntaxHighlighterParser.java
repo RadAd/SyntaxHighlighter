@@ -1,10 +1,8 @@
 package syntaxhighlighter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import syntaxhighlight.ParseResult;
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.parser.MatchResult;
 import syntaxhighlighter.parser.SyntaxHighlighter;
@@ -13,13 +11,13 @@ import syntaxhighlighter.parser.SyntaxHighlighter;
  * The SyntaxHighlighter parser for syntax highlight.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class SyntaxHighlighterParser {
+public final class SyntaxHighlighterParser {
 
-  protected SyntaxHighlighter syntaxHighlighter;
+  private final SyntaxHighlighter syntaxHighlighter;
   /**
    * The brush to use for this syntax highlighter.
    */
-  protected Brush brush;
+  private Brush brush;
   /**
    * Indicate whether the HTML-Script option is turned on or not.
    */
@@ -27,7 +25,7 @@ public class SyntaxHighlighterParser {
   /**
    * The brushes list for HTML-Script.
    */
-  protected final List<Brush> htmlScriptBrushesList;
+  private final List<Brush> htmlScriptBrushesList;
 
   /**
    * Constructor.
@@ -135,15 +133,14 @@ public class SyntaxHighlighterParser {
     }
   }
 
-  public List<ParseResult> parse(String fileExtension, String content) {
-    List<ParseResult> returnList = new ArrayList<ParseResult>();
+  public List<MatchResult> parse(String fileExtension, String content) {
+    List<MatchResult> returnList = new ArrayList<MatchResult>();
 
     syntaxHighlighter.setHTMLScriptBrushList(htmlScriptBrushesList);
     Map<Integer, List<MatchResult>> parsedResult = syntaxHighlighter.parse(brush, htmlScript, content.toCharArray(), 0, content.length());
     for (List<MatchResult> resultList : parsedResult.values()) {
       for (MatchResult result : resultList) {
-        List<String> styleKeyList = Arrays.asList(new String[]{result.getStyleKey()});
-        returnList.add(new ParseResult(result.getOffset(), result.getLength(), styleKeyList));
+        returnList.add(result);
       }
     }
 

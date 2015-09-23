@@ -53,6 +53,8 @@ import javax.swing.text.StyledEditorKit;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
+import syntaxhighlighter.parser.MatchResult;
+
 /**
  * The text pane for displaying the script text.
  * @author Chan Wai Shing <cws1989@gmail.com>
@@ -91,7 +93,7 @@ public class SyntaxHighlighterPane extends JTextPane {
   /**
    * The style list.
    */
-  protected Map<String, List<ParseResult>> styleList;
+  protected Map<String, List<MatchResult>> styleList;
   /**
    * Record the mouse cursor is currently pointing at which line of the 
    * document. -1 means not any line.
@@ -319,18 +321,18 @@ public class SyntaxHighlighterPane extends JTextPane {
     styleList = null;
   }
 
-  public void setStyle(List<ParseResult> styleList) {
+  public void setStyle(List<MatchResult> styleList) {
     if (styleList == null) {
       throw new NullPointerException("argumenst 'styleList' cannot be null");
     }
 
-    this.styleList = new HashMap<String, List<ParseResult>>();
+    this.styleList = new HashMap<String, List<MatchResult>>();
 
-    for (ParseResult parseResult : styleList) {
-      String styleKeysString = parseResult.getStyleKeysString();
-      List<ParseResult> _styleList = this.styleList.get(styleKeysString);
+    for (MatchResult parseResult : styleList) {
+      String styleKeysString = parseResult.getStyleKey();
+      List<MatchResult> _styleList = this.styleList.get(styleKeysString);
       if (_styleList == null) {
-        _styleList = new ArrayList<ParseResult>();
+        _styleList = new ArrayList<MatchResult>();
         this.styleList.put(styleKeysString, _styleList);
       }
       _styleList.add(parseResult);
@@ -354,10 +356,10 @@ public class SyntaxHighlighterPane extends JTextPane {
 
     // apply style according to the style list
     for (String key : styleList.keySet()) {
-      List<ParseResult> posList = styleList.get(key);
+      List<MatchResult> posList = styleList.get(key);
 
       SimpleAttributeSet attributeSet = theme.getStyle(key).getAttributeSet();
-      for (ParseResult pos : posList) {
+      for (MatchResult pos : posList) {
         document.setCharacterAttributes(pos.getOffset(), pos.getLength(), attributeSet, true);
       }
     }

@@ -25,29 +25,11 @@ package syntaxhighlighter.parser;
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class MatchResult {
+public final class MatchResult {
+  private final int offset;
+  private final int length;
+  private final String styleKey;
 
-  /**
-   * The position in the document for this matched result.
-   */
-  private int offset;
-  /**
-   * The length of the matched result.
-   */
-  private int length;
-  /**
-   * The style key for this matched result, see {@link syntaxhighlighter.theme}.
-   */
-  private String styleKey;
-
-  /**
-   * Constructor.
-   * 
-   * @param offset the position in the document for this matched result
-   * @param length the length of the matched result.
-   * @param styleKey the style key for this matched result, cannot be null, see 
-   * {@link syntaxhighlighter.theme}
-   */
   protected MatchResult(int offset, int length, String styleKey) {
     if (styleKey == null) {
       throw new NullPointerException("argument 'styleKey' cannot be null");
@@ -57,42 +39,14 @@ public class MatchResult {
     this.styleKey = styleKey;
   }
 
-  /**
-   * The position in the document for this matched result.
-   * @return the offset in the document
-   */
   public int getOffset() {
     return offset;
   }
 
-  /**
-   * The position in the document for this matched result.
-   * @param offset the offset in the document
-   */
-  public void setOffset(int offset) {
-    this.offset = offset;
-  }
-
-  /**
-   * The length of the matched result.
-   * @return the length
-   */
   public int getLength() {
     return length;
   }
 
-  /**
-   * The length of the matched result.
-   * @param length the length
-   */
-  public void setLength(int length) {
-    this.length = length;
-  }
-
-  /**
-   * The style key for this matched result, see {@link syntaxhighlighter.theme}.
-   * @return the style key
-   */
   public String getStyleKey() {
     return styleKey;
   }
