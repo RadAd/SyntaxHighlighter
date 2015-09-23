@@ -23,10 +23,9 @@ public final class SyntaxHighlighterParser {
    * Constructor.
    * @param brush the brush to use
    */
-  public SyntaxHighlighterParser(Brush brush) {
-    if (brush == null) throw new NullPointerException("argument 'brush' cannot be null");
+  public SyntaxHighlighterParser() {
     syntaxHighlighter = new SyntaxHighlighter();
-    this.brush = brush;
+    this.brush = SyntaxHighlighter.getBrush(null);
   }
 
   /**
@@ -45,7 +44,7 @@ public final class SyntaxHighlighterParser {
     this.brush = brush;
   }
 
-  public List<MatchResult> parse(String fileExtension, String content) {
+  public List<MatchResult> parse(String content) {
     List<MatchResult> returnList = new ArrayList<MatchResult>();
 
     Map<Integer, List<MatchResult>> parsedResult = syntaxHighlighter.parse(brush, content.toCharArray(), 0, content.length());

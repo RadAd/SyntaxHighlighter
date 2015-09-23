@@ -321,6 +321,17 @@ public class SyntaxHighlighterPane extends JTextPane {
     // clear the style list
     styleList = null;
   }
+  
+  public String getContent() {
+    DefaultStyledDocument document = (DefaultStyledDocument) getDocument();
+    try
+    {
+        return document.getText(0, document.getLength());
+    } catch (BadLocationException ex) {
+        LOG.log(Level.SEVERE, null, ex);
+        return null;
+    }
+  } 
 
   public void setStyle(List<MatchResult> styleList) {
     if (styleList == null) {

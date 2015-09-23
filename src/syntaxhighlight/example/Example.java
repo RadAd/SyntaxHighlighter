@@ -29,25 +29,10 @@ import syntaxhighlighter.SyntaxHighlighterParser;
  */
 public class Example {
 
-  /**
-   * Read the resource file from the jar.
-   * @param path the resource path
-   * @return the content of the resource file in byte array
-   * @throws IOException error occurred when reading the content from the file
-   */
-  public static byte[] readResourceFile(String path) throws IOException {
-    if (path == null) {
-      throw new NullPointerException("argument 'path' cannot be null");
-    }
-
+  public static String readFile(InputStream in) throws IOException {
     ByteArrayOutputStream bout = new ByteArrayOutputStream();
-    InputStream in = null;
+    
     try {
-      in = Example.class.getResourceAsStream(path);
-      if (in == null) {
-        throw new IOException("Resources not found: " + path);
-      }
-
       int byteRead = 0;
       byte[] b = new byte[8096];
 
@@ -55,15 +40,10 @@ public class Example {
         bout.write(b, 0, byteRead);
       }
     } finally {
-      if (in != null) {
-        try {
-          in.close();
-        } catch (IOException ex) {
-        }
-      }
+      in.close();
     }
-
-    return bout.toByteArray();
+    
+    return new String(bout.toByteArray());
   }
 
   public static void main(String[] args) throws Exception {
@@ -71,13 +51,12 @@ public class Example {
 
     long start = System.currentTimeMillis();
 
-    Brush brush = syntaxhighlighter.parser.SyntaxHighlighter.getBrush("html");
-    SyntaxHighlighterParser parser = new SyntaxHighlighterParser(brush);
 
-    SyntaxHighlighter highlighter = new SyntaxHighlighter(parser, new ThemeRDark());
+    SyntaxHighlighter highlighter = new SyntaxHighlighter(new ThemeRDark());
     //highlighter.setFirstLine(10);
     //highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
-    highlighter.setContent(new String(readResourceFile("/example.html")));
+    Brush brush = syntaxhighlighter.parser.SyntaxHighlighter.getBrush("html");
+    highlighter.setContent(readFile(Example.class.getResourceAsStream("/example.html")), brush);
 
     long end = System.currentTimeMillis();
     System.out.println("time elapsed: " + (end - start) + "ms");
