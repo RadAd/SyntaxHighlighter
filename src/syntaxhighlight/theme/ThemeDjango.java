@@ -23,6 +23,9 @@ package syntaxhighlight.theme;
 import java.awt.Color;
 import java.awt.Font;
 
+import syntaxhighlighter.brush.Brush;
+
+
 /**
  * Django theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
@@ -30,79 +33,27 @@ import java.awt.Font;
 public class ThemeDjango extends Theme {
 
   public ThemeDjango() {
-    setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0x0a2b1d"));
+    setBackground(new Color(0x0a2b1d));
 
-    setHighlightedBackground(Color.decode("0x233729"));
+    setHighlightedBackground(new Color(0x233729));
 
-    setGutterText(Color.decode("0x497958"));
-    setGutterBorderColor(Color.decode("0x41a83e"));
-    setGutterBorderWidth(3);
-    setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
-    setGutterTextPaddingLeft(7);
-    setGutterTextPaddingRight(7);
+    setGutterText(new Color(0x497958));
+    setGutterBorderColor(new Color(0x41a83e));
 
-    Style style = new Style();
-    style.setBold(true);
-    addStyle("bold", style);
+    setPlain(new Style().setColor(new Color(0xf8f8f8)));
 
-    style = new Style();
-    style.setColor(Color.decode("0xf8f8f8"));
-    addStyle("plain", style);
-    setPlain(style);
-
-    style = new Style();
-    style.setItalic(true);
-    style.setColor(Color.decode("0x336442"));
-    addStyle("comments", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x9df39f"));
-    addStyle("string", style);
-
-    style = new Style();
-    style.setBold(true);
-    style.setColor(Color.decode("0x96dd3b"));
-    addStyle("keyword", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x91bb9e"));
-    addStyle("preprocessor", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
-    addStyle("variable", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xf7e741"));
-    addStyle("value", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
-    addStyle("functions", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xe0e8ff"));
-    addStyle("constants", style);
-
-    style = new Style();
-    style.setBold(true);
-    style.setColor(Color.decode("0x96dd3b"));
-    addStyle("script", style);
-
-    style = new Style();
-    addStyle("scriptBackground", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xeb939a"));
-    addStyle("color3", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x91bb9e"));
-    addStyle("color2", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xedef7d"));
-    addStyle("color3", style);
+    addStyle(Brush.COMMENTS,     new Style().setColor(new Color(0x336442)));
+    addStyle(Brush.STRING,       new Style().setColor(new Color(0x9df39f)));
+    addStyle(Brush.KEYWORD,      new Style().setColor(new Color(0x96dd3b)));
+    addStyle(Brush.PREPROCESSOR, new Style().setColor(new Color(0x91bb9e)));
+    addStyle(Brush.VARIABLE,     new Style().setColor(new Color(0xffaa3e)));
+    addStyle(Brush.VALUE,        new Style().setColor(new Color(0xf7e741)));
+    addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xffaa3e)));
+    addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0xe0e8ff)));
+    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x96dd3b)).setBold(true));
+    //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
+    addStyle(Brush.COLOR1,       new Style().setColor(new Color(0xeb939a)));
+    addStyle(Brush.COLOR2,       new Style().setColor(new Color(0x91bb9e)));
+    addStyle(Brush.COLOR3,       new Style().setColor(new Color(0xedef7d)));
   }
 }

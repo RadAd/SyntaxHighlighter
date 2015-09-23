@@ -161,7 +161,7 @@ public class SyntaxHighlighter {
 
             // the left tag of HTML-Script
             int start = matcher.start(1) + offset, end = matcher.end(1) + offset;
-            addMatch(matches, new MatchResult(start, end - start, "script"));
+            addMatch(matches, new MatchResult(start, end - start, Brush.SCRIPT));
 
             // the content of HTML-Script, parse it using the HTML-Script brush
             start = matcher.start(2) + offset;
@@ -171,7 +171,7 @@ public class SyntaxHighlighter {
             // the right tag of HTML-Script
             start = matcher.start(3) + offset;
             end = matcher.end(3) + offset;
-            addMatch(matches, new MatchResult(start, end - start, "script"));
+            addMatch(matches, new MatchResult(start, end - start, Brush.SCRIPT));
           }
         }
       }

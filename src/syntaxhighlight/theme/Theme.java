@@ -59,7 +59,7 @@ public class Theme {
     gutterText = Color.black;
     gutterBorderColor = new Color(184, 184, 184);
     gutterBorderWidth = 3;
-    gutterTextFont = new Font("Consolas", Font.PLAIN, 12);
+    gutterTextFont = new Font("Verdana", Font.PLAIN, 11);
     gutterTextPaddingLeft = 7;
     gutterTextPaddingRight = 7;
 
@@ -75,25 +75,6 @@ public class Theme {
 
   public Style getPlain() {
     return plain;
-  }
-
-  /**
-   * Get the {@link AttributeSet} of {@code styleKeys}. For more than one 
-   * styles, separate the styles by space, e.g. 'plain comments'.
-   * @param styleKeys the style keys with keys separated by space
-   * @return the combined {@link AttributeSet}
-   */
-  public SimpleAttributeSet getStylesAttributeSet(String styleKeys) {
-    if (styleKeys.indexOf(' ') != -1) {
-      SimpleAttributeSet returnAttributeSet = new SimpleAttributeSet();
-      String[] _keys = styleKeys.split(" ");
-      for (String _key : _keys) {
-        returnAttributeSet.addAttributes(getStyle(_key).getAttributeSet());
-      }
-      return returnAttributeSet;
-    } else {
-      return getStyle(styleKeys).getAttributeSet();
-    }
   }
 
   protected Style addStyle(String styleKey, Style style) {

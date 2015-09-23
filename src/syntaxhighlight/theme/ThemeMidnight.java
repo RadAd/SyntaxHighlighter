@@ -23,6 +23,8 @@ package syntaxhighlight.theme;
 import java.awt.Color;
 import java.awt.Font;
 
+import syntaxhighlighter.brush.Brush;
+
 /**
  * Midnight theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
@@ -34,76 +36,27 @@ public class ThemeMidnight extends Theme {
     // http://webdesign.lsnjd.com/
 
     setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0x0f192a"));
+    setBackground(new Color(0x0f192a));
 
-    setHighlightedBackground(Color.decode("0x253e5a"));
+    setHighlightedBackground(new Color(0x253e5a));
 
-    setGutterText(Color.decode("0xafafaf"));
-    setGutterBorderColor(Color.decode("0x435a5f"));
-    setGutterBorderWidth(3);
-    setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
-    setGutterTextPaddingLeft(7);
-    setGutterTextPaddingRight(7);
+    setGutterText(new Color(0xafafaf));
+    setGutterBorderColor(new Color(0x435a5f));
 
-    Style style = new Style();
-    style.setBold(true);
-    addStyle("bold", style);
+    setPlain(new Style().setColor(new Color(0xd1edff)));
 
-    style = new Style();
-    style.setColor(Color.decode("0xd1edff"));
-    addStyle("plain", style);
-    setPlain(style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x428bdd"));
-    addStyle("comments", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x1dc116"));
-    addStyle("string", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xb43d3d"));
-    addStyle("keyword", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x8aa6c1"));
-    addStyle("preprocessor", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
-    addStyle("variable", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xf7e741"));
-    addStyle("value", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
-    addStyle("functions", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xe0e8ff"));
-    addStyle("constants", style);
-
-    style = new Style();
-    style.setBold(true);
-    style.setColor(Color.decode("0xb43d3d"));
-    addStyle("script", style);
-
-    style = new Style();
-    addStyle("scriptBackground", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xf8bb00"));
-    addStyle("color3", style);
-
-    style = new Style();
-    style.setColor(Color.white);
-    addStyle("color2", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x0ffaa3e"));
-    addStyle("color3", style);
+    addStyle(Brush.COMMENTS,     new Style().setColor(new Color(0x428bdd)));
+    addStyle(Brush.STRING,       new Style().setColor(new Color(0x1dc116)));
+    addStyle(Brush.KEYWORD,      new Style().setColor(new Color(0xb43d3d)));
+    addStyle(Brush.PREPROCESSOR, new Style().setColor(new Color(0x8aa6c1)));
+    addStyle(Brush.VARIABLE,     new Style().setColor(new Color(0xffaa3e)));
+    addStyle(Brush.VALUE,        new Style().setColor(new Color(0xf7e741)));
+    addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xffaa3e)));
+    addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0xe0e8ff)));
+    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xb43d3d)).setBold(true));
+    //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
+    addStyle(Brush.COLOR1,       new Style().setColor(new Color(0xf8bb00)));
+    addStyle(Brush.COLOR2,       new Style().setColor(Color.white));
+    addStyle(Brush.COLOR3,       new Style().setColor(new Color(0xffaa3e)));
   }
 }

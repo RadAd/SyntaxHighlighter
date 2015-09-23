@@ -23,6 +23,8 @@ package syntaxhighlight.theme;
 import java.awt.Color;
 import java.awt.Font;
 
+import syntaxhighlighter.brush.Brush;
+
 /**
  * MD Ultra theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
@@ -33,77 +35,27 @@ public class ThemeMDUltra extends Theme {
     // MDUltra SyntaxHighlighter theme based on Midnight Theme
     // http://www.mddev.co.uk/
 
-    setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0x222222"));
+    setBackground(new Color(0x222222));
 
-    setHighlightedBackground(Color.decode("0x253e5a"));
+    setHighlightedBackground(new Color(0x253e5a));
 
-    setGutterText(Color.decode("0x38566f"));
-    setGutterBorderColor(Color.decode("0x435a5f"));
-    setGutterBorderWidth(3);
-    setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
-    setGutterTextPaddingLeft(7);
-    setGutterTextPaddingRight(7);
+    setGutterText(new Color(0x38566f));
+    setGutterBorderColor(new Color(0x435a5f));
 
-    Style style = new Style();
-    style.setBold(true);
-    addStyle("bold", style);
+    setPlain(new Style().setColor(new Color(0x00ff00)));
 
-    style = new Style();
-    style.setColor(Color.decode("0x00ff00"));
-    addStyle("plain", style);
-    setPlain(style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x428bdd"));
-    addStyle("comments", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x00ff00"));
-    addStyle("string", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xaaaaff"));
-    addStyle("keyword", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x8aa6c1"));
-    addStyle("preprocessor", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0x00ffff"));
-    addStyle("variable", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xf7e741"));
-    addStyle("value", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xff8000"));
-    addStyle("functions", style);
-
-    style = new Style();
-    style.setColor(Color.yellow);
-    addStyle("constants", style);
-
-    style = new Style();
-    style.setBold(true);
-    style.setColor(Color.decode("0xaaaaff"));
-    addStyle("script", style);
-
-    style = new Style();
-    addStyle("scriptBackground", style);
-
-    style = new Style();
-    style.setColor(Color.red);
-    addStyle("color3", style);
-
-    style = new Style();
-    style.setColor(Color.yellow);
-    addStyle("color2", style);
-
-    style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
-    addStyle("color3", style);
+    addStyle(Brush.COMMENTS,     new Style().setColor(new Color(0x428bdd)));
+    addStyle(Brush.STRING,       new Style().setColor(new Color(0x00ff00)));
+    addStyle(Brush.KEYWORD,      new Style().setColor(new Color(0xaaaaff)));
+    addStyle(Brush.PREPROCESSOR, new Style().setColor(new Color(0x8aa6c1)));
+    addStyle(Brush.VARIABLE,     new Style().setColor(new Color(0x00ffff)));
+    addStyle(Brush.VALUE,        new Style().setColor(new Color(0xf7e741)));
+    addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xff8000)));
+    addStyle(Brush.CONSTANTS,    new Style().setColor(Color.yellow));
+    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xaaaaff)).setBold(true));
+    //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
+    addStyle(Brush.COLOR1,       new Style().setColor(Color.red));
+    addStyle(Brush.COLOR2,       new Style().setColor(Color.yellow));
+    addStyle(Brush.COLOR3,       new Style().setColor(new Color(0xffaa3e)));
   }
 }
