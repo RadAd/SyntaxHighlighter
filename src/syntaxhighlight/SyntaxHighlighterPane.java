@@ -53,6 +53,7 @@ import javax.swing.text.StyledEditorKit;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
+import syntaxhighlight.theme.Theme;
 import syntaxhighlighter.parser.MatchResult;
 
 /**

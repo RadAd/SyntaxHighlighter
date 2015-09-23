@@ -18,32 +18,25 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.theme;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-import syntaxhighlight.Style;
-import syntaxhighlight.Theme;
 
 /**
- * Fade to Grey theme.
+ * Django theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class ThemeFadeToGrey extends Theme {
+public class ThemeDjango extends Theme {
 
-  public ThemeFadeToGrey() {
-    super();
-
-    // Fade to Grey SyntaxHighlighter theme based on theme by Brasten Sager
-    // :http//www.ibrasten.com/
-
+  public ThemeDjango() {
     setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0x121212"));
+    setBackground(Color.decode("0x0a2b1d"));
 
-    setHighlightedBackground(Color.decode("0x2C2C29"));
+    setHighlightedBackground(Color.decode("0x233729"));
 
-    setGutterText(Color.decode("0xafafaf"));
-    setGutterBorderColor(Color.decode("0x3185b9"));
+    setGutterText(Color.decode("0x497958"));
+    setGutterBorderColor(Color.decode("0x41a83e"));
     setGutterBorderWidth(3);
     setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
     setGutterTextPaddingLeft(7);
@@ -54,61 +47,62 @@ public class ThemeFadeToGrey extends Theme {
     addStyle("bold", style);
 
     style = new Style();
-    style.setColor(Color.white);
+    style.setColor(Color.decode("0xf8f8f8"));
     addStyle("plain", style);
     setPlain(style);
 
     style = new Style();
-    style.setColor(Color.decode("0x696854"));
+    style.setItalic(true);
+    style.setColor(Color.decode("0x336442"));
     addStyle("comments", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xe3e658"));
+    style.setColor(Color.decode("0x9df39f"));
     addStyle("string", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xd01d33"));
+    style.setBold(true);
+    style.setColor(Color.decode("0x96dd3b"));
     addStyle("keyword", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x435a5f"));
+    style.setColor(Color.decode("0x91bb9e"));
     addStyle("preprocessor", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x898989"));
+    style.setColor(Color.decode("0xffaa3e"));
     addStyle("variable", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x009900"));
+    style.setColor(Color.decode("0xf7e741"));
     addStyle("value", style);
 
     style = new Style();
-    style.setBold(true);
-    style.setColor(Color.decode("0xaaaaaa"));
+    style.setColor(Color.decode("0xffaa3e"));
     addStyle("functions", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x96daff"));
+    style.setColor(Color.decode("0xe0e8ff"));
     addStyle("constants", style);
 
     style = new Style();
     style.setBold(true);
-    style.setColor(Color.decode("0xd01d33"));
+    style.setColor(Color.decode("0x96dd3b"));
     addStyle("script", style);
 
     style = new Style();
     addStyle("scriptBackground", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xffc074"));
+    style.setColor(Color.decode("0xeb939a"));
     addStyle("color3", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x4a8cdb"));
+    style.setColor(Color.decode("0x91bb9e"));
     addStyle("color2", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x96daff"));
+    style.setColor(Color.decode("0xedef7d"));
     addStyle("color3", style);
   }
 }

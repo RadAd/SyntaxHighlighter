@@ -18,14 +18,15 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlight;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 import javax.swing.text.SimpleAttributeSet;
+
+import syntaxhighlight.JTextComponentRowHeader;
 
 /**
  * Theme for the {@link SyntaxHighlighterPane} and 
@@ -39,7 +40,6 @@ import javax.swing.text.SimpleAttributeSet;
  */
 public class Theme {
 
-  private static final Logger LOG = Logger.getLogger(Theme.class.getName());
   /**
    * The font of the script text.
    */

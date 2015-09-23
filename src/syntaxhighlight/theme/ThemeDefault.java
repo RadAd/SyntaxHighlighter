@@ -18,29 +18,25 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.theme;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-import syntaxhighlight.Style;
-import syntaxhighlight.Theme;
 
 /**
- * Django theme.
+ * Default theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class ThemeDjango extends Theme {
+public class ThemeDefault extends Theme {
 
-  public ThemeDjango() {
-    super();
-
+  public ThemeDefault() {
     setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0x0a2b1d"));
+    setBackground(Color.white);
 
-    setHighlightedBackground(Color.decode("0x233729"));
+    setHighlightedBackground(Color.decode("0xe0e0e0"));
 
-    setGutterText(Color.decode("0x497958"));
-    setGutterBorderColor(Color.decode("0x41a83e"));
+    setGutterText(Color.decode("0xafafaf"));
+    setGutterBorderColor(Color.decode("0x6ce26c"));
     setGutterBorderWidth(3);
     setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
     setGutterTextPaddingLeft(7);
@@ -51,62 +47,61 @@ public class ThemeDjango extends Theme {
     addStyle("bold", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xf8f8f8"));
+    style.setColor(Color.black);
     addStyle("plain", style);
     setPlain(style);
 
     style = new Style();
-    style.setItalic(true);
-    style.setColor(Color.decode("0x336442"));
+    style.setColor(Color.decode("0x008200"));
     addStyle("comments", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x9df39f"));
+    style.setColor(Color.blue);
     addStyle("string", style);
 
     style = new Style();
     style.setBold(true);
-    style.setColor(Color.decode("0x96dd3b"));
+    style.setColor(Color.decode("0x006699"));
     addStyle("keyword", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x91bb9e"));
+    style.setColor(Color.gray);
     addStyle("preprocessor", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
+    style.setColor(Color.decode("0xaa7700"));
     addStyle("variable", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xf7e741"));
+    style.setColor(Color.decode("0x009900"));
     addStyle("value", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
+    style.setColor(Color.decode("0xff1493"));
     addStyle("functions", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xe0e8ff"));
+    style.setColor(Color.decode("0x0066cc"));
     addStyle("constants", style);
 
     style = new Style();
     style.setBold(true);
-    style.setColor(Color.decode("0x96dd3b"));
+    style.setColor(Color.decode("0x006699"));
     addStyle("script", style);
 
     style = new Style();
     addStyle("scriptBackground", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xeb939a"));
+    style.setColor(Color.gray);
     addStyle("color3", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x91bb9e"));
+    style.setColor(Color.decode("0xff1493"));
     addStyle("color2", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xedef7d"));
+    style.setColor(Color.red);
     addStyle("color3", style);
   }
 }

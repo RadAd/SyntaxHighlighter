@@ -18,32 +18,28 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.theme;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-import syntaxhighlight.Style;
-import syntaxhighlight.Theme;
 
 /**
- * Emacs theme.
+ * RDark theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class ThemeEmacs extends Theme {
+public class ThemeRDark extends Theme {
 
-  public ThemeEmacs() {
-    super();
-
-    // Emacs SyntaxHighlighter theme based on theme by Joshua Emmons
-    // http://www.skia.net/
+  public ThemeRDark() {
+    // RDark SyntaxHighlighter theme based on theme by Radu Dineiu
+    // http://www.vim.org/scripts/script.php?script_id=1732
 
     setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.black);
+    setBackground(Color.decode("0x1b2426"));
 
-    setHighlightedBackground(Color.decode("0x2A3133"));
+    setHighlightedBackground(Color.decode("0x323E41"));
 
-    setGutterText(Color.decode("0xd3d3d3"));
-    setGutterBorderColor(Color.decode("0x990000"));
+    setGutterText(Color.decode("0xafafaf"));
+    setGutterBorderColor(Color.decode("0x435a5f"));
     setGutterBorderWidth(3);
     setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
     setGutterTextPaddingLeft(7);
@@ -54,24 +50,24 @@ public class ThemeEmacs extends Theme {
     addStyle("bold", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xd3d3d3"));
+    style.setColor(Color.decode("0xb9bdb6"));
     addStyle("plain", style);
     setPlain(style);
 
     style = new Style();
-    style.setColor(Color.decode("0xff7d27"));
+    style.setColor(Color.decode("0x878a85"));
     addStyle("comments", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xff9e7b"));
+    style.setColor(Color.decode("0x5ce638"));
     addStyle("string", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x00ffff"));
+    style.setColor(Color.decode("0x5ba1cf"));
     addStyle("keyword", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xaec4de"));
+    style.setColor(Color.decode("0x435a5f"));
     addStyle("preprocessor", style);
 
     style = new Style();
@@ -83,31 +79,31 @@ public class ThemeEmacs extends Theme {
     addStyle("value", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x81cef9"));
+    style.setColor(Color.decode("0xffaa3e"));
     addStyle("functions", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xff9e7b"));
+    style.setColor(Color.decode("0xe0e8ff"));
     addStyle("constants", style);
 
     style = new Style();
     style.setBold(true);
-    style.setColor(Color.decode("0x00ffff"));
+    style.setColor(Color.decode("0x5ba1cf"));
     addStyle("script", style);
 
     style = new Style();
     addStyle("scriptBackground", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xebdb8d"));
+    style.setColor(Color.decode("0xe0e8ff"));
     addStyle("color3", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xff7d27"));
+    style.setColor(Color.white);
     addStyle("color2", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xaec4de"));
+    style.setColor(Color.decode("0xffaa3e"));
     addStyle("color3", style);
   }
 }

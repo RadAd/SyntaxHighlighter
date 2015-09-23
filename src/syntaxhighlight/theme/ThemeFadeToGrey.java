@@ -18,32 +18,28 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.theme;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-import syntaxhighlight.Style;
-import syntaxhighlight.Theme;
 
 /**
- * Eclipse theme.
+ * Fade to Grey theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class ThemeEclipse extends Theme {
+public class ThemeFadeToGrey extends Theme {
 
-  public ThemeEclipse() {
-    super();
-
-    // (C) Code-House
-    // :http//blog.code-house.org/2009/10/xml-i-adnotacje-kod-ogolnego-przeznaczenia-i-jpa/
+  public ThemeFadeToGrey() {
+    // Fade to Grey SyntaxHighlighter theme based on theme by Brasten Sager
+    // :http//www.ibrasten.com/
 
     setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0xffffff"));
+    setBackground(Color.decode("0x121212"));
 
-    setHighlightedBackground(Color.decode("0xc3defe"));
+    setHighlightedBackground(Color.decode("0x2C2C29"));
 
-    setGutterText(Color.decode("0x787878"));
-    setGutterBorderColor(Color.decode("0xd4d0c8"));
+    setGutterText(Color.decode("0xafafaf"));
+    setGutterBorderColor(Color.decode("0x3185b9"));
     setGutterBorderWidth(3);
     setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
     setGutterTextPaddingLeft(7);
@@ -54,29 +50,28 @@ public class ThemeEclipse extends Theme {
     addStyle("bold", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x000000"));
+    style.setColor(Color.white);
     addStyle("plain", style);
     setPlain(style);
 
     style = new Style();
-    style.setColor(Color.decode("0x3f5fbf"));
+    style.setColor(Color.decode("0x696854"));
     addStyle("comments", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x2a00ff"));
+    style.setColor(Color.decode("0xe3e658"));
     addStyle("string", style);
 
     style = new Style();
-    style.setBold(true);
-    style.setColor(Color.decode("0x7f0055"));
+    style.setColor(Color.decode("0xd01d33"));
     addStyle("keyword", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x646464"));
+    style.setColor(Color.decode("0x435a5f"));
     addStyle("preprocessor", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xaa7700"));
+    style.setColor(Color.decode("0x898989"));
     addStyle("variable", style);
 
     style = new Style();
@@ -84,31 +79,32 @@ public class ThemeEclipse extends Theme {
     addStyle("value", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xff1493"));
+    style.setBold(true);
+    style.setColor(Color.decode("0xaaaaaa"));
     addStyle("functions", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x0066cc"));
+    style.setColor(Color.decode("0x96daff"));
     addStyle("constants", style);
 
     style = new Style();
     style.setBold(true);
-    style.setColor(Color.decode("0x7f0055"));
+    style.setColor(Color.decode("0xd01d33"));
     addStyle("script", style);
 
     style = new Style();
     addStyle("scriptBackground", style);
 
     style = new Style();
-    style.setColor(Color.gray);
+    style.setColor(Color.decode("0xffc074"));
     addStyle("color3", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xff1493"));
+    style.setColor(Color.decode("0x4a8cdb"));
     addStyle("color2", style);
 
     style = new Style();
-    style.setColor(Color.red);
+    style.setColor(Color.decode("0x96daff"));
     addStyle("color3", style);
   }
 }

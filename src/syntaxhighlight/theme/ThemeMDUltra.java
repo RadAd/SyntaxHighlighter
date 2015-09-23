@@ -18,31 +18,27 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.theme;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-import syntaxhighlight.Style;
-import syntaxhighlight.Theme;
 
 /**
- * RDark theme.
+ * MD Ultra theme.
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class ThemeRDark extends Theme {
+public class ThemeMDUltra extends Theme {
 
-  public ThemeRDark() {
-    super();
-
-    // RDark SyntaxHighlighter theme based on theme by Radu Dineiu
-    // http://www.vim.org/scripts/script.php?script_id=1732
+  public ThemeMDUltra() {
+    // MDUltra SyntaxHighlighter theme based on Midnight Theme
+    // http://www.mddev.co.uk/
 
     setFont(new Font("Consolas", Font.PLAIN, 12));
-    setBackground(Color.decode("0x1b2426"));
+    setBackground(Color.decode("0x222222"));
 
-    setHighlightedBackground(Color.decode("0x323E41"));
+    setHighlightedBackground(Color.decode("0x253e5a"));
 
-    setGutterText(Color.decode("0xafafaf"));
+    setGutterText(Color.decode("0x38566f"));
     setGutterBorderColor(Color.decode("0x435a5f"));
     setGutterBorderWidth(3);
     setGutterTextFont(new Font("Verdana", Font.PLAIN, 11));
@@ -54,56 +50,56 @@ public class ThemeRDark extends Theme {
     addStyle("bold", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xb9bdb6"));
+    style.setColor(Color.decode("0x00ff00"));
     addStyle("plain", style);
     setPlain(style);
 
     style = new Style();
-    style.setColor(Color.decode("0x878a85"));
+    style.setColor(Color.decode("0x428bdd"));
     addStyle("comments", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x5ce638"));
+    style.setColor(Color.decode("0x00ff00"));
     addStyle("string", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x5ba1cf"));
+    style.setColor(Color.decode("0xaaaaff"));
     addStyle("keyword", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x435a5f"));
+    style.setColor(Color.decode("0x8aa6c1"));
     addStyle("preprocessor", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
+    style.setColor(Color.decode("0x00ffff"));
     addStyle("variable", style);
 
     style = new Style();
-    style.setColor(Color.decode("0x009900"));
+    style.setColor(Color.decode("0xf7e741"));
     addStyle("value", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xffaa3e"));
+    style.setColor(Color.decode("0xff8000"));
     addStyle("functions", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xe0e8ff"));
+    style.setColor(Color.yellow);
     addStyle("constants", style);
 
     style = new Style();
     style.setBold(true);
-    style.setColor(Color.decode("0x5ba1cf"));
+    style.setColor(Color.decode("0xaaaaff"));
     addStyle("script", style);
 
     style = new Style();
     addStyle("scriptBackground", style);
 
     style = new Style();
-    style.setColor(Color.decode("0xe0e8ff"));
+    style.setColor(Color.red);
     addStyle("color3", style);
 
     style = new Style();
-    style.setColor(Color.white);
+    style.setColor(Color.yellow);
     addStyle("color2", style);
 
     style = new Style();

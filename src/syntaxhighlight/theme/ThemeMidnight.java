@@ -18,12 +18,10 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.theme;
+package syntaxhighlight.theme;
 
 import java.awt.Color;
 import java.awt.Font;
-import syntaxhighlight.Style;
-import syntaxhighlight.Theme;
 
 /**
  * Midnight theme.
@@ -32,8 +30,6 @@ import syntaxhighlight.Theme;
 public class ThemeMidnight extends Theme {
 
   public ThemeMidnight() {
-    super();
-
     // Midnight SyntaxHighlighter theme based on theme by J.D. Myers
     // http://webdesign.lsnjd.com/
 

@@ -7,7 +7,7 @@
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-package syntaxhighlighter.example;
+package syntaxhighlight.example;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -19,12 +19,12 @@ import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import syntaxhighlight.SyntaxHighlighter;
+import syntaxhighlight.theme.ThemeRDark;
 import syntaxhighlighter.brush.BrushCss;
 import syntaxhighlighter.brush.BrushJScript;
 import syntaxhighlighter.brush.BrushPhp;
 import syntaxhighlighter.brush.BrushXml;
 import syntaxhighlighter.SyntaxHighlighterParser;
-import syntaxhighlighter.theme.ThemeRDark;
 
 /**
  * Usage example. This will just cover some of the functions. To know other 

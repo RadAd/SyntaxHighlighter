@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import syntaxhighlight.theme.Theme;
 import syntaxhighlighter.SyntaxHighlighterParser;
 
 /**
