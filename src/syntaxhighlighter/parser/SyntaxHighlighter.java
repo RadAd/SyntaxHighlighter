@@ -40,6 +40,7 @@ import syntaxhighlighter.brush.*;
  */
 public class SyntaxHighlighter {
 
+    private static final Brush plainBrush = new BrushPlain();
     private static final Map<String, Brush> brushes = new HashMap<String, Brush>();
     private static final List<Brush> htmlBrushes = new ArrayList<Brush>();
     
@@ -50,6 +51,14 @@ public class SyntaxHighlighter {
         if (brush.getHTMLScriptRegExp() != null) {
             htmlBrushes.add(brush);
         }
+    }
+    
+    public static Brush getBrush(String ext) {
+        Brush brush = brushes.get(ext);
+        if (brush == null) {
+            brush = plainBrush;
+        }
+        return brush;
     }
     
     static {

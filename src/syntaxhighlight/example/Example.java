@@ -20,10 +20,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import syntaxhighlight.SyntaxHighlighter;
 import syntaxhighlight.theme.ThemeRDark;
-import syntaxhighlighter.brush.BrushCss;
-import syntaxhighlighter.brush.BrushJScript;
-import syntaxhighlighter.brush.BrushPhp;
-import syntaxhighlighter.brush.BrushXml;
+import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.SyntaxHighlighterParser;
 
 /**
@@ -89,8 +86,9 @@ public class Example {
         long start, end;
         start = System.currentTimeMillis();
 
+        Brush brush = syntaxhighlighter.parser.SyntaxHighlighter.getBrush("html");
         // the SyntaxHighlighter parser
-        SyntaxHighlighterParser parser = new SyntaxHighlighterParser(new BrushXml());
+        SyntaxHighlighterParser parser = new SyntaxHighlighterParser(brush);
         // turn HTML script on
         parser.setHtmlScript(true);
 
