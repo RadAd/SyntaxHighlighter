@@ -54,7 +54,7 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
 import syntaxhighlight.theme.Theme;
-import syntaxhighlighter.parser.MatchResult;
+import syntaxhighlighter.MatchResult;
 
 /**
  * The text pane for displaying the script text.

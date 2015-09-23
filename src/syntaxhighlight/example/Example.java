@@ -19,8 +19,7 @@ import javax.swing.UIManager;
 import syntaxhighlight.SyntaxHighlighterView;
 import syntaxhighlight.theme.ThemeRDark;
 import syntaxhighlighter.brush.Brush;
-import syntaxhighlighter.parser.SyntaxHighlighter;
-import syntaxhighlighter.SyntaxHighlighterParser;
+import syntaxhighlighter.SyntaxHighlighter;
 
 /**
  * Usage example. This will just cover some of the functions. To know other 

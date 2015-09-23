@@ -18,7 +18,7 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter.parser;
+package syntaxhighlighter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -154,6 +154,10 @@ public final class SyntaxHighlighter {
     }
   }
 
+  public List<MatchResult> parse(CharSequence content) {
+    return parse(content, 0, content.length());
+  }
+  
   public List<MatchResult> parse(CharSequence content, int offset, int length) {
     if (content == null) throw new NullPointerException("argument 'content' cannot be null");
     
@@ -218,7 +222,8 @@ public final class SyntaxHighlighter {
         Object operation = groupOperations.get(groupId);
 
         // the start and end position of the match
-        int start = matcher.start(groupId), end = matcher.end(groupId);
+        int start = matcher.start(groupId);
+        int end = matcher.end(groupId);
         if (start == -1 || end == -1) {
           continue;
         }

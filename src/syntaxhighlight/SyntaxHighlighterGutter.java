@@ -54,9 +54,9 @@ import syntaxhighlight.theme.Theme;
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class JTextComponentRowHeader extends JPanel {
+public class SyntaxHighlighterGutter extends JPanel {
 
-  private static final Logger LOG = Logger.getLogger(JTextComponentRowHeader.class.getName());
+  private static final Logger LOG = Logger.getLogger(SyntaxHighlighterGutter.class.getName());
   private static final long serialVersionUID = 1L;
   /**
    * The anti-aliasing setting of the line number text. See
@@ -136,7 +136,7 @@ public class JTextComponentRowHeader extends JPanel {
    * @param scrollPane the JScrollPane that it be added into
    * @param textComponent the text component to listen the change events on
    */
-  public JTextComponentRowHeader(JScrollPane scrollPane, JTextComponent textComponent) {
+  public SyntaxHighlighterGutter(JScrollPane scrollPane, JTextComponent textComponent) {
     super();
 
     if (scrollPane == null) {

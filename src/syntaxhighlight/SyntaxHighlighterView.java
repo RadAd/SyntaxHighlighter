@@ -25,7 +25,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import syntaxhighlight.theme.Theme;
 import syntaxhighlighter.brush.Brush;
-import syntaxhighlighter.SyntaxHighlighterParser;
+import syntaxhighlighter.SyntaxHighlighter;
 
 /**
  * The syntax highlighter.
@@ -37,15 +37,15 @@ public class SyntaxHighlighterView extends JScrollPane {
   private static final long serialVersionUID = 1L;
   
   private final SyntaxHighlighterPane highlighter;
-  private final JTextComponentRowHeader highlighterRowHeader;
+  private final SyntaxHighlighterGutter highlighterRowHeader;
   private Theme theme;
-  private final SyntaxHighlighterParser parser;
+  private final SyntaxHighlighter parser;
 
   public SyntaxHighlighterView(Theme theme) {
     if (theme == null) throw new NullPointerException("argument 'theme' cannot be null");
 
     this.theme = theme;
-    this.parser = new SyntaxHighlighterParser();
+    this.parser = new SyntaxHighlighter();
 
     setBorder(null);
 
@@ -54,7 +54,7 @@ public class SyntaxHighlighterView extends JScrollPane {
     this.highlighter.setTheme(theme);
     setViewportView(highlighter);
 
-    this.highlighterRowHeader = new JTextComponentRowHeader(this, highlighter);
+    this.highlighterRowHeader = new SyntaxHighlighterGutter(this, highlighter);
     this.highlighterRowHeader.applyTheme(theme);
     setRowHeaderView(highlighterRowHeader);
   }
@@ -81,17 +81,17 @@ public class SyntaxHighlighterView extends JScrollPane {
    * directly.</b>
    * @return the SyntaxHighlighterPane
    */
-  public SyntaxHighlighterPane getHighlighter() {
+  public SyntaxHighlighterPane getTextPane() {
     return highlighter;
   }
 
   /**
-   * Get the JTextComponentRowHeader, the line number panel.
-   * <b>Note: Normally should not operate on the JTextComponentRowHeader 
+   * Get the SyntaxHighlighterGutter, the line number panel.
+   * <b>Note: Normally should not operate on the SyntaxHighlighterGutter 
    * directly.</b>
-   * @return the JTextComponentRowHeader
+   * @return the SyntaxHighlighterGutter
    */
-  public JTextComponentRowHeader getHighlighterRowHeader() {
+  public SyntaxHighlighterGutter getGutterPane() {
     return highlighterRowHeader;
   }
 
