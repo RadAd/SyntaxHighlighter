@@ -16,9 +16,10 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
-import syntaxhighlight.SyntaxHighlighter;
+import syntaxhighlight.SyntaxHighlighterView;
 import syntaxhighlight.theme.ThemeRDark;
 import syntaxhighlighter.brush.Brush;
+import syntaxhighlighter.parser.SyntaxHighlighter;
 import syntaxhighlighter.SyntaxHighlighterParser;
 
 /**
@@ -52,10 +53,10 @@ public class Example {
     long start = System.currentTimeMillis();
 
 
-    SyntaxHighlighter highlighter = new SyntaxHighlighter(new ThemeRDark());
+    SyntaxHighlighterView highlighter = new SyntaxHighlighterView(new ThemeRDark());
     //highlighter.setFirstLine(10);
     //highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
-    Brush brush = syntaxhighlighter.parser.SyntaxHighlighter.getBrush("html");
+    Brush brush = SyntaxHighlighter.getBrush("html");
     highlighter.setContent(readFile(Example.class.getResourceAsStream("/example.html")), brush);
 
     long end = System.currentTimeMillis();

@@ -32,7 +32,7 @@ import syntaxhighlighter.SyntaxHighlighterParser;
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class SyntaxHighlighter extends JScrollPane {
+public class SyntaxHighlighterView extends JScrollPane {
 
   private static final long serialVersionUID = 1L;
   
@@ -41,7 +41,7 @@ public class SyntaxHighlighter extends JScrollPane {
   private Theme theme;
   private final SyntaxHighlighterParser parser;
 
-  public SyntaxHighlighter(Theme theme) {
+  public SyntaxHighlighterView(Theme theme) {
     if (theme == null) throw new NullPointerException("argument 'theme' cannot be null");
 
     this.theme = theme;
