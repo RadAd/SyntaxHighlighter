@@ -24,12 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.text.Segment;
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.brush.RegExpRule;
+import syntaxhighlighter.brush.*;
 
 /**
  * The parser of the syntax highlighter.
@@ -38,24 +40,53 @@ import syntaxhighlighter.brush.RegExpRule;
  */
 public class SyntaxHighlighter {
 
-  protected final List<Brush> htmlScriptBrushList;
+    private static final Map<String, Brush> brushes = new HashMap<String, Brush>();
+    private static final List<Brush> htmlBrushes = new ArrayList<Brush>();
+    
+    private static void register(String[] exts, Brush brush) {
+        for (String ext : exts) {
+            brushes.put(ext, brush);
+        }
+        if (brush.getHTMLScriptRegExp() != null) {
+            htmlBrushes.add(brush);
+        }
+    }
+    
+    static {
+        register(BrushXml.exts, new BrushXml());
+        register(BrushAppleScript.exts, new BrushAppleScript());
+        register(BrushAS3.exts, new BrushAS3());
+        register(BrushBash.exts, new BrushBash());
+        register(BrushColdFusion.exts, new BrushColdFusion());
+        register(BrushCpp.exts, new BrushCpp());
+        register(BrushCSharp.exts, new BrushCSharp());
+        register(BrushCss.exts, new BrushCss());
+        register(BrushDelphi.exts, new BrushDelphi());
+        register(BrushDiff.exts, new BrushDiff());
+        //register(BrushErlang.exts, new BrushErlang());
+        register(BrushGroovy.exts, new BrushGroovy());
+        register(BrushJava.exts, new BrushJava());
+        register(BrushJavaFX.exts, new BrushJavaFX());
+        register(BrushJScript.exts, new BrushJScript());
+        register(BrushPerl.exts, new BrushPerl());
+        register(BrushPhp.exts, new BrushPhp());
+        register(BrushPowerShell.exts, new BrushPowerShell());
+        register(BrushPython.exts, new BrushPython());
+        register(BrushRuby.exts, new BrushRuby());
+        register(BrushSass.exts, new BrushSass());
+        register(BrushScala.exts, new BrushScala());
+        register(BrushSql.exts, new BrushSql());
+        register(BrushVb.exts, new BrushVb());
+        register(BrushXml.exts, new BrushXml());
+    }
 
-  /**
-   * Constructor.
-   */
+  private List<Brush> htmlScriptBrushList;
+
   public SyntaxHighlighter() {
-    htmlScriptBrushList = new ArrayList<Brush>();
+    htmlScriptBrushList = htmlBrushes;
   }
 
-  /**
-   * Add matched result to {@code matches}.
-   * @param matches the list of matches
-   * @param match the matched result
-   */
   protected void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
-    if (matches == null || match == null) {
-      return;
-    }
     List<MatchResult> matchList = matches.get(match.getOffset());
     if (matchList == null) {
       matchList = new ArrayList<MatchResult>();
@@ -64,16 +95,7 @@ public class SyntaxHighlighter {
     matchList.add(match);
   }
 
-  /**
-   * Remove those matches that fufil the condition from {@code matches}.
-   * @param matches the list of matches
-   * @param start the start position in the document
-   * @param end the end position in the document
-   */
   protected void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
-    if (matches == null) {
-      return;
-    }
     for (int offset : matches.keySet()) {
       List<MatchResult> offsetMatches = matches.get(offset);
 
@@ -150,7 +172,6 @@ public class SyntaxHighlighter {
 
     // parse the HTML-Script brushes later
     if (htmlScript) {
-      synchronized (htmlScriptBrushList) {
         for (Brush htmlScriptBrush : htmlScriptBrushList) {
           Pattern _pattern = htmlScriptBrush.getHTMLScriptRegExp().getpattern();
 
@@ -174,7 +195,6 @@ public class SyntaxHighlighter {
             addMatch(matches, new MatchResult(start, end - start, Brush.SCRIPT));
           }
         }
-      }
     }
 
     return matches;
@@ -222,37 +242,7 @@ public class SyntaxHighlighter {
     }
   }
 
-  /**
-   * Get the list of HTML Script brushes.
-   * @return a copy of the list
-   */
-  public List<Brush> getHTMLScriptBrushList() {
-    return new ArrayList<Brush>(htmlScriptBrushList);
-  }
-
-  /**
-   * Set HTML Script brushes. Note that this will clear all previous recorded 
-   * HTML Script brushes.
-   * 
-   * @param htmlScriptBrushList the list that contain the brushes
-   */
   public void setHTMLScriptBrushList(List<Brush> htmlScriptBrushList) {
-    synchronized (this.htmlScriptBrushList) {
-      this.htmlScriptBrushList.clear();
-      if (htmlScriptBrushList != null) {
-        this.htmlScriptBrushList.addAll(htmlScriptBrushList);
-      }
-    }
-  }
-
-  /**
-   * Add HTML Script brushes.
-   * @param brush the brush to add
-   */
-  public void addHTMLScriptBrush(Brush brush) {
-    if (brush == null) {
-      return;
-    }
-    htmlScriptBrushList.add(brush);
+    this.htmlScriptBrushList = htmlScriptBrushList;
   }
 }

@@ -22,10 +22,6 @@ public final class SyntaxHighlighterParser {
    * Indicate whether the HTML-Script option is turned on or not.
    */
   private boolean htmlScript;
-  /**
-   * The brushes list for HTML-Script.
-   */
-  private final List<Brush> htmlScriptBrushesList;
 
   /**
    * Constructor.
@@ -38,7 +34,6 @@ public final class SyntaxHighlighterParser {
     syntaxHighlighter = new SyntaxHighlighter();
     this.brush = brush;
     htmlScript = false;
-    htmlScriptBrushesList = new ArrayList<Brush>();
   }
 
   /**
@@ -55,56 +50,6 @@ public final class SyntaxHighlighterParser {
    */
   public void setBrush(Brush brush) {
     this.brush = brush;
-  }
-
-  /**
-   * Get the list of HTML Script brushes.
-   * See also {@link #setHtmlScript(boolean)}.
-   * @return a copy of the list
-   */
-  public List<Brush> getHTMLScriptBrushesList() {
-    return new ArrayList<Brush>(htmlScriptBrushesList);
-  }
-
-  /**
-   * Set HTML Script brushes. Note that this will clear all previous recorded 
-   * HTML Script brushes. See also {@link #setHtmlScript(boolean)}.
-   * The highlighter will re-render the script text pane every time this 
-   * function is invoked (if there is any content).
-   * 
-   * @param htmlScriptBrushesList the list that contain the brushes
-   */
-  public void setHTMLScriptBrushes(List<Brush> htmlScriptBrushesList) {
-    synchronized (this.htmlScriptBrushesList) {
-      this.htmlScriptBrushesList.clear();
-      if (htmlScriptBrushesList != null) {
-        this.htmlScriptBrushesList.addAll(htmlScriptBrushesList);
-      }
-    }
-  }
-
-  /**
-   * Add HTML Script brushes.
-   * See also {@link #setHtmlScript(boolean)}.
-   * The highlighter will re-render the script text pane every time this 
-   * function is invoked (if there is any content). If multi brushes is needed 
-   * to be added, use {@link #getHTMLScriptBrushesList()} and 
-   * {@link #setHTMLScriptBrush(java.util.List)}.
-   * 
-   * @param brush the brush to add
-   */
-  public void addHTMLScriptBrush(Brush brush) {
-    if (brush == null) {
-      return;
-    }
-    htmlScriptBrushesList.add(brush);
-  }
-
-  /**
-   * Clear all HTML Script brushes.
-   */
-  public void clearHTMLScriptBrushes() {
-    htmlScriptBrushesList.clear();
   }
 
   /**
@@ -136,7 +81,6 @@ public final class SyntaxHighlighterParser {
   public List<MatchResult> parse(String fileExtension, String content) {
     List<MatchResult> returnList = new ArrayList<MatchResult>();
 
-    syntaxHighlighter.setHTMLScriptBrushList(htmlScriptBrushesList);
     Map<Integer, List<MatchResult>> parsedResult = syntaxHighlighter.parse(brush, htmlScript, content.toCharArray(), 0, content.length());
     for (List<MatchResult> resultList : parsedResult.values()) {
       for (MatchResult result : resultList) {

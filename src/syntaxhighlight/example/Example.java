@@ -93,10 +93,6 @@ public class Example {
         SyntaxHighlighterParser parser = new SyntaxHighlighterParser(new BrushXml());
         // turn HTML script on
         parser.setHtmlScript(true);
-        // set HTML Script brushes
-        parser.setHTMLScriptBrushes(Arrays.asList(new BrushCss(), new BrushJScript()));
-        // besides set, you can also add
-        parser.addHTMLScriptBrush(new BrushPhp());
 
         // initialize the highlighter and use RDark theme
         SyntaxHighlighter highlighter = new SyntaxHighlighter(parser, new ThemeRDark());
