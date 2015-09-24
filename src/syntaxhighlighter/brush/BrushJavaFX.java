@@ -31,6 +31,8 @@ public class BrushJavaFX extends Brush {
     public final static String[] exts = { "fx" };
 
   public BrushJavaFX() {
+    super("JavaFX");
+    
     // Contributed by Patrick Webster
     // http://patrickwebster.blogspot.com/2009/04/javafx-brush-for-syntaxhighlighter.html
 

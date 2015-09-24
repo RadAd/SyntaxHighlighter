@@ -31,6 +31,8 @@ public class BrushAS3 extends Brush {
     public final static String[] exts = { "as" };
 
   public BrushAS3() {
+    super("AS3");
+    
     // Created by Peter Atoria @ http://iAtoria.com
 
     String initializations = "class interface function package";

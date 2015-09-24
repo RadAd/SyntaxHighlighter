@@ -31,6 +31,8 @@ public class BrushPerl extends Brush {
     public final static String[] exts = { "pl", "pm", "t" };
 
   public BrushPerl() {
+    super("Perl");
+    
     // Contributed by David Simmons-Duffin and Marty Kube
 
     String functions = "abs accept alarm atan2 bind binmode chdir chmod chomp chop chown chr "

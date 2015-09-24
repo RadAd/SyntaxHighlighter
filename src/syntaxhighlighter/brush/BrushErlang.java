@@ -31,6 +31,8 @@ public class BrushErlang extends Brush {
     public final static String[] exts = { "erl" };
 
   public BrushErlang() {
+    super("Erlang");
+    
     // Contributed by Jean-Lou Dupont
     // http://jldupont.blogspot.com/2009/06/erlang-syntax-highlighter.html
 

@@ -31,6 +31,8 @@ public class BrushScala extends Brush {
     public final static String[] exts = { "scl", "scala" };
 
   public BrushScala() {
+    super("Scala");
+    
     // Contributed by Yegor Jbanov and David Bernard.
 
     String keywords = "val sealed case def true trait implicit forSome import match object null finally super "

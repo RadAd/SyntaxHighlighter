@@ -31,6 +31,8 @@ public class BrushPhp extends Brush {
     public final static String[] exts = { "php", "php3", "php4", "php5", "phps", "phtml" };
 
   public BrushPhp() {
+    super("PHP");
+    
     String functions = "abs acos acosh addcslashes addslashes "
             + "array_change_key_case array_chunk array_combine array_count_values array_diff "
             + "array_diff_assoc array_diff_key array_diff_uassoc array_diff_ukey array_fill "

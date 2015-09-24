@@ -31,6 +31,8 @@ public class BrushPowerShell extends Brush {
     public final static String[] exts = { "ps1" };
 
   public BrushPowerShell() {
+    super("PowerShell");
+    
     // Contributes by B.v.Zanten, Getronics
     // http://confluence.atlassian.com/display/CONFEXT/New+Code+Macro
 

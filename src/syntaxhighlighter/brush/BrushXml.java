@@ -31,8 +31,10 @@ public class BrushXml extends Brush {
     public final static String[] exts = { "xml", "xslt" };
     public final static String[] extshtml = { "htm", "html", "xhtml" };
 
-  public BrushXml(boolean java) {
-    setIsHtml(java);
+  public BrushXml(boolean html) {
+    super(html ? "HTML" : "XML");
+    
+    setIsHtml(html);
     
     add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)", Pattern.MULTILINE, COLOR2)); // <![ ... [ ... ]]>
     add(new RegExpRule(RegExpRule.xmlComments, COMMENTS)); // <!-- ... -->

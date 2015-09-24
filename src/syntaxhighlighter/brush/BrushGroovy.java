@@ -31,6 +31,8 @@ public class BrushGroovy extends Brush {
     public final static String[] exts = { "groovy" };
 
   public BrushGroovy() {
+    super("Groovy");
+    
     // Contributed by Andres Almiray
     // http://jroller.com/aalmiray/entry/nice_source_code_syntax_highlighter
 

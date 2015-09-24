@@ -32,7 +32,9 @@ import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.brush.RegExpRule;
 import syntaxhighlighter.brush.*;
 
-// TODO Do a special look up for <style type=*"> to get the mime type
+// TODO
+// Do a special look up for <style type=*"> to get the mime type
+// Replace Map<Integer, List<MatchResult>> with RangeSet<Integer, String>
 
 /**
  * The parser of the syntax highlighter.

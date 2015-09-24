@@ -31,6 +31,8 @@ public class BrushJava extends Brush {
     public final static String[] exts = { "java" };
 
   public BrushJava() {
+    super("Java");
+    
     String keywords = "abstract assert boolean break byte case catch char class const "
             + "continue default do double else enum extends "
             + "false final finally float for goto if implements import "

@@ -31,6 +31,8 @@ public class BrushCss extends Brush {
     public final static String[] exts = { "css" };
 
   public BrushCss() {
+    super("CSS");
+    
     String keywords = "ascent azimuth background-attachment background-color background-image background-position "
             + "background-repeat background baseline bbox border-collapse border-color border-spacing border-style border-top "
             + "border-right border-bottom border-left border-top-color border-right-color border-bottom-color border-left-color "

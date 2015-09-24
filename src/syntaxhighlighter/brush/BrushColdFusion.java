@@ -31,6 +31,8 @@ public class BrushColdFusion extends Brush {
     public final static String[] exts = { "cfm", "cfml" };
 
   public BrushColdFusion() {
+    super("ColdFusion");
+    
     // Contributed by Jen
     // http://www.jensbits.com/2009/05/14/coldfusion-brush-for-syntaxhighlighter-plus
 

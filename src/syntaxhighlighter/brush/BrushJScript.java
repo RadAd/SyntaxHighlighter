@@ -31,6 +31,8 @@ public class BrushJScript extends Brush {
     public final static String[] exts = { "js", "es" };
 
   public BrushJScript() {
+    super("JavaScript");
+    
     String keywords = "break case catch continue "
             + "default delete do else false  "
             + "for function if in instanceof "

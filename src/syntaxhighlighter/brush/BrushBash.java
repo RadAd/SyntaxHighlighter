@@ -31,6 +31,8 @@ public class BrushBash extends Brush {
     public final static String[] exts = { "sh" };
 
   public BrushBash() {
+    super("Bash");
+    
     String keywords = "if fi then elif else for do done until while break continue case function return in eq ne ge le";
     String commands = "alias apropos awk basename bash bc bg builtin bzip2 cal cat cd cfdisk chgrp chmod chown chroot"
             + "cksum clear cmp comm command cp cron crontab csplit cut date dc dd ddrescue declare df "

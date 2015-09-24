@@ -31,6 +31,8 @@ public class BrushCpp extends Brush {
     public final static String[] exts = { "c", "h", "cc", "cpp" };
 
   public BrushCpp() {
+    super("C/C++");
+    
     // Copyright 2006 Shin, YoungJin
 
     String datatypes = "ATOM BOOL BOOLEAN BYTE CHAR COLORREF DWORD DWORDLONG DWORD_PTR "

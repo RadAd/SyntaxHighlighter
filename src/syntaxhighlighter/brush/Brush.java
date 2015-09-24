@@ -48,11 +48,18 @@ public class Brush {
     public final static String COLOR3 = "color3";
     public final static String SCRIPT = "script";
 
+  private final String name;
   private final List<RegExpRule> regExpRuleList = new java.util.ArrayList<RegExpRule>();
   private HTMLScriptRegExp htmlScriptRegExp = null;
   private boolean isHtml = false;
 
-  protected Brush() {
+  protected Brush(String name) {
+    if (name == null)  throw new NullPointerException("argument 'name' cannot be null");
+    this.name = name;
+  }
+  
+  public String getName() {
+    return name;
   }
   
   public boolean isHtml()

@@ -31,6 +31,8 @@ public class BrushRuby extends Brush {
     public final static String[] exts = { "rb", "rbw" };
 
   public BrushRuby() {
+    super("Ruby");
+    
     // Contributed by Erik Peterson.
 
     String keywords = "alias and BEGIN begin break case class def define_method defined do each else elsif "

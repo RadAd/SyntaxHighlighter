@@ -31,6 +31,8 @@ public class BrushPython extends Brush {
     public final static String[] exts = { "py" };
 
   public BrushPython() {
+    super("Python");
+    
     // Contributed by Gheorghe Milas and Ahmad Sherif
 
     String keywords = "and assert break class continue def del elif else "

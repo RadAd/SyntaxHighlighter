@@ -31,6 +31,8 @@ public class BrushSql extends Brush {
     public final static String[] exts = { "sql" };
 
   public BrushSql() {
+    super("SQL");
+    
     String functions = "abs avg case cast coalesce convert count current_timestamp "
             + "current_user day isnull left lower month nullif replace right "
             + "session_user space substring sum system_user upper user year";

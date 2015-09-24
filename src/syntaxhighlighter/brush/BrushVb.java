@@ -31,6 +31,8 @@ public class BrushVb extends Brush {
     public final static String[] exts = { "vb", "vbs" };
 
   public BrushVb() {
+    super("VbScript");
+    
     String keywords = "AddHandler AddressOf AndAlso Alias And Ansi As Assembly Auto "
             + "Boolean ByRef Byte ByVal Call Case Catch CBool CByte CChar CDate "
             + "CDec CDbl Char CInt Class CLng CObj Const CShort CSng CStr CType "

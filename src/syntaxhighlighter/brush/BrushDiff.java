@@ -31,6 +31,8 @@ public class BrushDiff extends Brush {
     public final static String[] exts = { "diff", "patch" };
 
   public BrushDiff() {
+    super("Diff");
+    
     add(new RegExpRule("^\\+\\+\\+\\s.*$", Pattern.MULTILINE, COLOR2)); // new file
     add(new RegExpRule("^\\-\\-\\-\\s.*$", Pattern.MULTILINE, COLOR2)); // old file
     add(new RegExpRule("^\\s.*$", Pattern.MULTILINE, COLOR1)); // unchanged

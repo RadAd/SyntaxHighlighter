@@ -31,6 +31,8 @@ public class BrushAppleScript extends Brush {
     public final static String[] exts = { "applescript", "scpt" };
 
   public BrushAppleScript() {
+    super("AppleScript");
+    
     // AppleScript brush by David Chambers
     // http://davidchambersdesign.com/
 
