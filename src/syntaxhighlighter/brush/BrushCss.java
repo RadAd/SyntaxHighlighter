@@ -73,7 +73,7 @@ public class BrushCss extends Brush {
     add(new RegExpRule(getValuesCSS(values), VALUE));
     add(new RegExpRule(getKeywords(fonts), COLOR1));
 
-    setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)\\s*style.*?(?:&gt;|>)", "(?:&lt;|<)\\/\\s*style\\s*(?:&gt;|>)"));
+    setHTMLScriptRegExp(HTMLScriptRegExp.createScriptRegExp("style", "text/css"));
   }
 
   protected static String getKeywordsCSS(String str) {

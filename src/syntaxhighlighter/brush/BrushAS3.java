@@ -54,6 +54,6 @@ public class BrushAS3 extends Brush {
     add(new RegExpRule("var", Pattern.MULTILINE, VARIABLE));
     add(new RegExpRule("trace", Pattern.MULTILINE, COLOR1));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.scriptScriptTags);
+    //setHTMLScriptRegExp(HTMLScriptRegExp.createScriptRegExp("script", "text/as3"));
   }
 }

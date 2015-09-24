@@ -34,9 +34,12 @@ import java.util.regex.Pattern;
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
 public final class HTMLScriptRegExp {
-  public static final HTMLScriptRegExp phpScriptTags = new HTMLScriptRegExp("(?:&lt;|<)\\?=?", "\\?(?:&gt;|>)");
+  public static final HTMLScriptRegExp phpScriptTags = new HTMLScriptRegExp("(?:&lt;|<)\\?(?:=|php)", "\\?(?:&gt;|>)");
   public static final HTMLScriptRegExp aspScriptTags = new HTMLScriptRegExp("(?:&lt;|<)%=?", "%(?:&gt;|>)");
-  public static final HTMLScriptRegExp scriptScriptTags = new HTMLScriptRegExp("(?:&lt;|<)\\s*script.*?(?:&gt;|>)", "(?:&lt;|<)\\/\\s*script\\s*(?:&gt;|>)");
+  
+  static HTMLScriptRegExp createScriptRegExp(String tag, String type) {
+    return new HTMLScriptRegExp("(?:&lt;|<)\\s*" + tag + ".*?type=\"" + type + "\".*?(?:&gt;|>)", "(?:&lt;|<)\\/\\s*" + tag + "\\s*(?:&gt;|>)");
+  }
   
   private final Pattern pattern;
 

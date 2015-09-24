@@ -128,8 +128,8 @@ public final class SyntaxHighlighter {
   }
 
   private static void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
-    for (int offset : matches.keySet()) {
-      List<MatchResult> offsetMatches = matches.get(offset);
+    for (int allstart : matches.keySet()) {
+      List<MatchResult> offsetMatches = matches.get(allstart);
 
       ListIterator<MatchResult> iterator = offsetMatches.listIterator();
       while (iterator.hasNext()) {
@@ -163,36 +163,39 @@ public final class SyntaxHighlighter {
     return parse(content, 0, content.length());
   }
   
-  public List<MatchResult> parse(CharSequence content, int offset, int length) {
+  public List<MatchResult> parse(CharSequence content, int allstart, int allend) {
     if (content == null) throw new NullPointerException("argument 'content' cannot be null");
     
     Map<Integer, List<MatchResult>> matches = new TreeMap<Integer, List<MatchResult>>();
     
-    parse1(matches, brush, content, offset, length);
+    parse1(matches, brush, content, allstart, allend);
     
     // parse the HTML-Script brushes later
     if (brush.isHtml() && htmlScriptBrushList != null) {
         for (Brush htmlScriptBrush : htmlScriptBrushList) {
           Pattern _pattern = htmlScriptBrush.getHTMLScriptRegExp().getpattern();
 
-          Matcher matcher = _pattern.matcher(content.subSequence(offset, offset + length));
+          Matcher matcher = _pattern.matcher(content.subSequence(allstart, allend));
           while (matcher.find()) {
             // HTML-Script brush has superior priority, so remove all previous matches within the matched range
-            removeMatches(matches, matcher.start() + offset, matcher.end() + offset);
+            removeMatches(matches, matcher.start() + allstart, matcher.end() + allstart);
 
             // the left tag of HTML-Script
-            int start = matcher.start(1) + offset;
-            int end = matcher.end(1) + offset;
+            int start = matcher.start(1) + allstart;
+            int end = matcher.end(1) + allstart;
             addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
+            
+            //System.out.println("HTML Found: " + htmlScriptBrush.getName() + " " + content.subSequence(start, end));
 
             // the content of HTML-Script, parse it using the HTML-Script brush
-            start = matcher.start(2) + offset;
-            end = matcher.end(2) + offset;
-            parse1(matches, htmlScriptBrush, content, start, end - start);
+            start = matcher.start(2) + allstart;
+            end = matcher.end(2) + allstart;
+            removeMatches(matches, start, end - start);
+            parse1(matches, htmlScriptBrush, content, start, end);
 
             // the right tag of HTML-Script
-            start = matcher.start(3) + offset;
-            end = matcher.end(3) + offset;
+            start = matcher.start(3) + allstart;
+            end = matcher.end(3) + allstart;
             addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
           }
         }
@@ -209,19 +212,19 @@ public final class SyntaxHighlighter {
     return returnList;
   }
 
-  private static void parse1(Map<Integer, List<MatchResult>> matches, Brush brush, CharSequence content, int offset, int length) {
+  private static void parse1(Map<Integer, List<MatchResult>> matches, Brush brush, CharSequence content, int allstart, int allend) {
     // parse the RegExpRule in the brush first
     List<RegExpRule> regExpRuleList = brush.getRegExpRuleList();
     for (RegExpRule regExpRule : regExpRuleList) {
-      parse2(matches, regExpRule, content, offset, length);
+      parse2(matches, regExpRule, content, allstart, allend);
     }
   }
 
-  private static void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, CharSequence content, int offset, int length) {
+  private static void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, CharSequence content, int allstart, int allend) {
     List<Object> groupOperations = regExpRule.getGroupOperations();
 
     Pattern regExpPattern = regExpRule.getPattern();
-    Matcher matcher = regExpPattern.matcher(content.subSequence(offset, offset + length));
+    Matcher matcher = regExpPattern.matcher(content.subSequence(allstart, allend));
     while (matcher.find()) {
       // deal with the matched result
       for (int groupId = 0; groupId < groupOperations.size(); ++groupId) {
@@ -233,15 +236,15 @@ public final class SyntaxHighlighter {
         if (start == -1 || end == -1) {
           continue;
         }
-        start += offset;
-        end += offset;
+        start += allstart;
+        end += allstart;
 
         if (operation instanceof String) {
           // add the style to the match
           addMatch(matches, new MatchResult(start, end, (String) operation));
         } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
-          parse2(matches, (RegExpRule) operation, content, start, end - start);
+          parse2(matches, (RegExpRule) operation, content, start, end);
         }
       }
     }
