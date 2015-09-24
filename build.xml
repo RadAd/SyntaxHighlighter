@@ -2,7 +2,6 @@
     <property environment="env"/>
 
     <property name="project.displayname"  value="SyntaxHighlighter"/>
-    <property name="project.mainclass"    value="syntaxhighlight.example.Example"/>
     <property name="project.version"      value="1.0"/>
     
     <import file="${env.RAD_BUILD_HOME}\radjava.xml"/>

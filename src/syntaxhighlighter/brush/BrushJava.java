@@ -45,8 +45,8 @@ public class BrushJava extends Brush {
     add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
     add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
     add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
-    add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", COLOR1)); // annotation @anno
-    add(new RegExpRule("\\@interface\\b", COLOR2)); // @interface keyword
+    //add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", COLOR1)); // annotation @anno
+    //add(new RegExpRule("\\@interface\\b", COLOR2)); // @interface keyword
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
     setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)%[@!=]?", "%(?:&gt;|>)"));

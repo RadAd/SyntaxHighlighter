@@ -56,12 +56,13 @@ public class BrushCpp extends Brush {
             + "jmp_buf mbstate_t _off_t _onexit_t _PNH ptrdiff_t _purecall_handler "
             + "sig_atomic_t size_t _stat __stat64 _stati64 terminate_function "
             + "time_t __time64_t _timeb __timeb64 tm uintptr_t _utimbuf "
-            + "va_list wchar_t wctrans_t wctype_t wint_t signed";
+            + "va_list wchar_t wctrans_t wctype_t wint_t signed "
+            + "std const_iterator iterator map string vector wstring";
     String keywords = "break case catch class const __finally __exception __try "
             + "const_cast continue private public protected __declspec "
             + "default delete deprecated dllexport dllimport do dynamic_cast "
             + "else enum explicit extern if for friend goto inline "
-            + "mutable naked namespace new noinline noreturn nothrow "
+            + "mutable naked namespace new noinline noreturn nothrow nullptr "
             + "register reinterpret_cast return selectany "
             + "sizeof static static_cast struct switch template this "
             + "thread throw true false try typedef typeid typename union "
@@ -87,6 +88,7 @@ public class BrushCpp extends Brush {
     add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
     add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
     add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+|0b[\\d]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
     add(new RegExpRule("^ *#.*", Pattern.MULTILINE, PREPROCESSOR));
     add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, COLOR1));
     add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE, FUNCTIONS));
