@@ -179,7 +179,8 @@ public final class SyntaxHighlighter {
             removeMatches(matches, matcher.start() + offset, matcher.end() + offset);
 
             // the left tag of HTML-Script
-            int start = matcher.start(1) + offset, end = matcher.end(1) + offset;
+            int start = matcher.start(1) + offset;
+            int end = matcher.end(1) + offset;
             addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
 
             // the content of HTML-Script, parse it using the HTML-Script brush
