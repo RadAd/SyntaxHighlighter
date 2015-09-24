@@ -28,6 +28,8 @@ import java.util.regex.Pattern;
  */
 public class BrushErlang extends Brush {
 
+    public final static String[] exts = { "erl" };
+
   public BrushErlang() {
     // Contributed by Jean-Lou Dupont
     // http://jldupont.blogspot.com/2009/06/erlang-syntax-highlighter.html

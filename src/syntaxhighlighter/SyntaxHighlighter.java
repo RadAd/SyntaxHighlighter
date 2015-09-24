@@ -70,7 +70,7 @@ public final class SyntaxHighlighter {
         register(BrushCss.exts, new BrushCss());
         register(BrushDelphi.exts, new BrushDelphi());
         register(BrushDiff.exts, new BrushDiff());
-        //register(BrushErlang.exts, new BrushErlang());
+        register(BrushErlang.exts, new BrushErlang());
         register(BrushGroovy.exts, new BrushGroovy());
         register(BrushJava.exts, new BrushJava());
         register(BrushJavaFX.exts, new BrushJavaFX());
@@ -115,10 +115,10 @@ public final class SyntaxHighlighter {
   }
   
   private static void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
-    List<MatchResult> matchList = matches.get(match.getOffset());
+    List<MatchResult> matchList = matches.get(match.getStart());
     if (matchList == null) {
       matchList = new ArrayList<MatchResult>();
-      matches.put(match.getOffset(), matchList);
+      matches.put(match.getStart(), matchList);
     }
     matchList.add(match);
   }
@@ -132,7 +132,8 @@ public final class SyntaxHighlighter {
         MatchResult match = iterator.next();
 
         // the start and end position in the document for this matched result
-        int _start = match.getOffset(), _end = _start + match.getLength();
+        int _start = match.getStart();
+        int _end = match.getEnd();
 
         if (_start >= end || _end <= start) {
           // out of the range
@@ -144,11 +145,11 @@ public final class SyntaxHighlighter {
         } else if (_end <= end) {
           // overlap with the start
           // remove the style within the range and remain those without the range
-          iterator.set(new MatchResult(_start, start - _start, match.getStyleKey()));
+          iterator.set(new MatchResult(_start, start, match.getStyleKey()));
         } else if (_start >= start) {
           // overlap with the end
           // remove the style within the range and remain those without the range
-          iterator.set(new MatchResult(end, _end - end, match.getStyleKey()));
+          iterator.set(new MatchResult(end, _end, match.getStyleKey()));
         }
       }
     }
@@ -177,7 +178,7 @@ public final class SyntaxHighlighter {
 
             // the left tag of HTML-Script
             int start = matcher.start(1) + offset, end = matcher.end(1) + offset;
-            addMatch(matches, new MatchResult(start, end - start, Brush.SCRIPT));
+            addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
 
             // the content of HTML-Script, parse it using the HTML-Script brush
             start = matcher.start(2) + offset;
@@ -187,7 +188,7 @@ public final class SyntaxHighlighter {
             // the right tag of HTML-Script
             start = matcher.start(3) + offset;
             end = matcher.end(3) + offset;
-            addMatch(matches, new MatchResult(start, end - start, Brush.SCRIPT));
+            addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
           }
         }
     }
@@ -232,7 +233,7 @@ public final class SyntaxHighlighter {
 
         if (operation instanceof String) {
           // add the style to the match
-          addMatch(matches, new MatchResult(start, end - start, (String) operation));
+          addMatch(matches, new MatchResult(start, end, (String) operation));
         } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
           parse2(matches, (RegExpRule) operation, content, start, end - start);

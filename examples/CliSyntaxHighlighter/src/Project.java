@@ -7,9 +7,6 @@ import syntaxhighlighter.MatchResult;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
-// TODO
-// Don't print BOM
-
 class Project
 {
     static final char ESCAPE = (char) 27;
@@ -52,11 +49,11 @@ class Project
             java.util.List<MatchResult> rs = sh.parse(sb);
             for (MatchResult r : rs)
             {
-                if (r.getOffset() > last)
+                if (r.getStart() > last)
                 {
-                    if (r.getOffset() > last)
-                        System.out.print(sb.substring(last, r.getOffset()));
-                    //System.out.println(r.getStyleKey() + " " + r.getOffset() + ":" + (r.getOffset() + r.getLength()) + " " + sb.substring(r.getOffset(), r.getOffset() + r.getLength()));
+                    if (r.getStart() > last)
+                        System.out.print(sb.substring(last, r.getStart()));
+                    //System.out.println(r.getStyleKey() + " " + r.getStart() + ":" + r.getEnd() + " " + sb.substring(r.getStart(), r.getEnd()));
                     String Color = COLOR_NORMAL;
                     switch (r.getStyleKey())
                     {
@@ -80,8 +77,8 @@ class Project
                         Color = COLOR_WHITE;
                         break;
                     }
-                    System.out.print(Color + sb.substring(r.getOffset(), r.getOffset() + r.getLength()) + COLOR_NORMAL);
-                    last = r.getOffset() + r.getLength();
+                    System.out.print(Color + sb.substring(r.getStart(), r.getEnd()) + COLOR_NORMAL);
+                    last = r.getEnd();
                 }
             }
         }

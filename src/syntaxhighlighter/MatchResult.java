@@ -26,25 +26,25 @@ package syntaxhighlighter;
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
 public final class MatchResult {
-  private final int offset;
-  private final int length;
+  private final int start;
+  private final int end;
   private final String styleKey;
 
-  protected MatchResult(int offset, int length, String styleKey) {
+  protected MatchResult(int start, int end, String styleKey) {
     if (styleKey == null) {
       throw new NullPointerException("argument 'styleKey' cannot be null");
     }
-    this.offset = offset;
-    this.length = length;
+    this.start = start;
+    this.end = end;
     this.styleKey = styleKey;
   }
 
-  public int getOffset() {
-    return offset;
+  public int getStart() {
+    return start;
   }
 
-  public int getLength() {
-    return length;
+  public int getEnd() {
+    return end;
   }
 
   public String getStyleKey() {
@@ -56,9 +56,9 @@ public final class MatchResult {
     StringBuilder sb = new StringBuilder();
 
     sb.append("[");
-    sb.append(offset);
+    sb.append(start);
     sb.append(", ");
-    sb.append(length);
+    sb.append(end);
     sb.append(", ");
     sb.append(styleKey);
     sb.append("]");

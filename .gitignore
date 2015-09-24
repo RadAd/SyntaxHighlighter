@@ -1,8 +1,4 @@
 bin/
 classes/
-examples\CliSyntaxHighlighter\bin\
-examples\SyntaxHighlighterView\bin\
-examples\CliSyntaxHighlighter\libs\SyntaxHighlighter.jar
-examples\SyntaxHighlighterView\libs\SyntaxHighlighter.jar
-examples\CliSyntaxHighlighter\classes\
-examples\SyntaxHighlighterView\classes\
+examples/CliSyntaxHighlighter/libs/SyntaxHighlighter.jar
+examples/SyntaxHighlighterView/libs/SyntaxHighlighter.jar
