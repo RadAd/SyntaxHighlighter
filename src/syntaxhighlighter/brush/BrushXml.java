@@ -39,16 +39,16 @@ public class BrushXml extends Brush {
 
     // regular expression for highlighting the tag
     RegExpRule tagRegExpRule = new RegExpRule("(?:&lt;|<)[\\s\\/\\?]*([:\\w-\\.]+)", Pattern.COMMENTS, null);
-    tagRegExpRule.setGroupOperation(1, KEYWORD);
+    tagRegExpRule.addGroupOperation(KEYWORD);
 
     // regular expression for highlighting the variable assignment
     RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)" + "\\s*=\\s*" + "(\".*?\"|'.*?'|\\w+)", Pattern.COMMENTS, null);
-    valueRegExpRule.setGroupOperation(1, COLOR1);
-    valueRegExpRule.setGroupOperation(2, STRING);
+    valueRegExpRule.addGroupOperation(COLOR1);
+    valueRegExpRule.addGroupOperation(STRING);
 
     RegExpRule _regExpRule = new RegExpRule("((?:&lt;|<)[\\s\\/\\?]*(?:\\w+))(.*?)[\\s\\/\\?]*(?:&gt;|>)", Pattern.DOTALL, null);
-    _regExpRule.setGroupOperation(1, tagRegExpRule);
-    _regExpRule.setGroupOperation(2, valueRegExpRule);
+    _regExpRule.addGroupOperation(tagRegExpRule);
+    _regExpRule.addGroupOperation(valueRegExpRule);
     add(_regExpRule);
   }
 }

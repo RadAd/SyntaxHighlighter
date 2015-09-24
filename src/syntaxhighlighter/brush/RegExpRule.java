@@ -20,7 +20,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 package syntaxhighlighter.brush;
 
-import java.util.Map;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -40,7 +40,7 @@ public final class RegExpRule {
   protected static final Pattern xmlComments = Pattern.compile("\\w+:\\/\\/[\\w-.\\/?%&=:@;]*");
 
   private final Pattern pattern;
-  private final Map<Integer, Object> groupOperations;
+  private final List<Object> groupOperations;
 
   RegExpRule(String regExp, String styleKey) {
     this(regExp, 0, styleKey);
@@ -54,23 +54,23 @@ public final class RegExpRule {
     if (pattern == null) throw new NullPointerException("argument 'pattern' cannot be null");
 
     this.pattern = pattern;
-    this.groupOperations = new java.util.HashMap<Integer, Object>();
-    setGroupOperation(0, styleKey);
+    this.groupOperations = new java.util.ArrayList<Object>();
+    addGroupOperation(styleKey);
   }
 
   public Pattern getPattern() {
     return pattern;
   }
 
-  public Map<Integer, Object> getGroupOperations() {
-    return java.util.Collections.unmodifiableMap(groupOperations);
+  public List<Object> getGroupOperations() {
+    return java.util.Collections.unmodifiableList(groupOperations);
   }
 
-  void setGroupOperation(int i, String styleKey) {
-    this.groupOperations.put(i, styleKey);
+  void addGroupOperation(String styleKey) {
+    this.groupOperations.add(styleKey);
   }
-  void setGroupOperation(int i, RegExpRule subRule) {
-    this.groupOperations.put(i, subRule);
+  void addGroupOperation(RegExpRule subRule) {
+    this.groupOperations.add(subRule);
   }
 
   @Override

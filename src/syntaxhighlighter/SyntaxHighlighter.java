@@ -32,6 +32,8 @@ import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.brush.RegExpRule;
 import syntaxhighlighter.brush.*;
 
+// TODO Do a special look up for <style type=*"> to get the mime type
+
 /**
  * The parser of the syntax highlighter.
  * 
@@ -213,13 +215,13 @@ public final class SyntaxHighlighter {
   }
 
   private static void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, CharSequence content, int offset, int length) {
-    Map<Integer, Object> groupOperations = regExpRule.getGroupOperations();
+    List<Object> groupOperations = regExpRule.getGroupOperations();
 
     Pattern regExpPattern = regExpRule.getPattern();
     Matcher matcher = regExpPattern.matcher(content.subSequence(offset, offset + length));
     while (matcher.find()) {
       // deal with the matched result
-      for (int groupId : groupOperations.keySet()) {
+      for (int groupId = 0; groupId < groupOperations.size(); ++groupId) {
         Object operation = groupOperations.get(groupId);
 
         // the start and end position of the match
