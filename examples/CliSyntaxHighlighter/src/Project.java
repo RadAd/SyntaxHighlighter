@@ -1,9 +1,11 @@
 package test;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.SyntaxHighlighter;
 import java.util.Map;
+import java.util.Set;
 import com.google.common.collect.Range;
 
 import org.mozilla.universalchardet.UniversalDetector;
@@ -32,7 +34,51 @@ class Project
     public static void main(String[] s)
         throws Exception
     {
-        String filename = s[0];
+        if (s.length == 0)
+            showAbout();
+        else
+            showFile(s[0]);
+    }
+    
+    static void showAbout() {
+        System.out.println("CliSyntaxHighlighter");
+        System.out.println();
+        System.out.println("Output to stdout syntax highlighting using ANSI escape sequences.");
+        System.out.println();
+        System.out.println("Brushes supported:");
+        
+        Map<String, Set<String>> b = new java.util.TreeMap<String, Set<String>>();
+        
+        for (Map.Entry<String, Brush> brushEntry : SyntaxHighlighter.getBrushes().entrySet())
+        {
+            Set<String> s = b.get(brushEntry.getValue().getName());
+            if (s == null)
+            {
+                s = new java.util.TreeSet<String>();
+                b.put(brushEntry.getValue().getName(), s);
+            }
+            s.add(brushEntry.getKey());
+            //System.out.println("\t" + brushEntry.getKey() +"\t" + brushEntry.getValue().getName());
+        }
+        
+        for (Map.Entry<String, Set<String>> brushEntry : b.entrySet())
+        {
+            System.out.print("\t" + brushEntry.getKey() +"\t");
+            boolean first = true;
+            for (String s : brushEntry.getValue())
+            {
+                if (!first)
+                    System.out.print(", ");
+                System.out.print(s);
+                first = false;
+            }
+            System.out.println();
+        }
+    }
+    
+    static void showFile(String filename)
+        throws java.io.IOException
+    {
         final String sb = loadFile(filename);
         int p = filename.lastIndexOf('.');
         String ext = filename.substring(p + 1);
@@ -48,39 +94,42 @@ class Project
         {
             SyntaxHighlighter sh = new SyntaxHighlighter(scheme);
             Map<Range<Integer>, String> rs = sh.parse(sb);
-            for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
+            if (true)
             {
-                int start = r.getKey().lowerEndpoint();
-                int end = r.getKey().upperEndpoint();
-
-                if (start > last)
-                    System.out.print(sb.substring(last, start));
-                //System.out.println(r.getValue() + " " + start + ":" + end + " " + sb.substring(start, end));
-                String Color = COLOR_NORMAL;
-                switch (r.getValue())
+                for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
                 {
-                case Brush.PREPROCESSOR:
-                    Color = COLOR_YELLOW;
-                    break;
-                case Brush.KEYWORD:
-                    Color = COLOR_CYAN;
-                    break;
-                case Brush.STRING:
-                case Brush.VALUE:
-                    Color = COLOR_PURPLE;
-                    break;
-                case Brush.COLOR1:
-                    Color = COLOR_YELLOW;
-                    break;
-                case Brush.VARIABLE:
-                    Color = COLOR_RED;
-                    break;
-                case Brush.COMMENTS:
-                    Color = COLOR_WHITE;
-                    break;
+                    int start = r.getKey().lowerEndpoint();
+                    int end = r.getKey().upperEndpoint();
+
+                    if (start > last)
+                        System.out.print(sb.substring(last, start));
+                    String Color = COLOR_NORMAL;
+                    switch (r.getValue())
+                    {
+                    case Brush.PREPROCESSOR: Color = COLOR_YELLOW;    break;
+                    case Brush.KEYWORD:      Color = COLOR_CYAN;      break;
+                    case Brush.STRING:
+                    case Brush.VALUE:        Color = COLOR_PURPLE;    break;
+                    case Brush.COLOR1:       Color = COLOR_YELLOW;    break;
+                    case Brush.COLOR2:       Color = COLOR_GRAY;      break;
+                    case Brush.VARIABLE:     Color = COLOR_RED;       break;
+                    case Brush.COMMENTS:     Color = COLOR_WHITE;     break;
+                    }
+                    System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
+                    last = end;
                 }
-                System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
-                last = end;
+            }
+            else
+            {
+                for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
+                {
+                    int start = r.getKey().lowerEndpoint();
+                    int end = r.getKey().upperEndpoint();
+
+                    System.out.println(r.getValue() + " " + start + ":" + end + " " + sb.substring(start, end));
+
+                    last = end;
+                }
             }
         }
         
