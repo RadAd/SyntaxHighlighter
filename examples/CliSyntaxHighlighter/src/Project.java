@@ -130,6 +130,7 @@ class Project
 
                     last = end;
                 }
+                last = sb.length();
             }
         }
         
