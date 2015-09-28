@@ -65,6 +65,10 @@ public final class SyntaxHighlighter {
         return brush;
     }
     
+    public static Map<String, Brush> getBrushes() {
+        return java.util.Collections.unmodifiableMap(brushes);
+    }
+    
     static {
         register(BrushAppleScript.exts, new BrushAppleScript());
         register(BrushAS3.exts, new BrushAS3());
@@ -123,8 +127,17 @@ public final class SyntaxHighlighter {
     if (styleKey == null) throw new NullPointerException("argument 'styleKey' cannot be null");
     Range<Integer> r = Range.closedOpen(start, end);
     // TODO Dont put if there is already something there
-    if (override || matches.subRangeMap(r).asMapOfRanges().isEmpty())
+    Map.Entry<Range<Integer>, String> e = matches.getEntry(start);
+    //if (override || matches.subRangeMap(r).asMapOfRanges().isEmpty())
+    if (override || e == null)
+    {
+        if (e != null)
+            matches.remove(e.getKey());
+        e = matches.getEntry(end);
+        if (e != null)
+            matches.remove(e.getKey());
         matches.put(r, styleKey);
+    }
   }
 
   private static void removeMatches(RangeMap<Integer, String> matches, int start, int end) {
