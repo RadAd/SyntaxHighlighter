@@ -22,6 +22,12 @@ package syntaxhighlighter.brush;
 
 import java.util.List;
 
+// TODO
+// @Annotation for Java
+// Incomplete strings
+// New brushes Batch, Conf/INI
+// Load brushes from a file
+
 /**
  * Brush for syntax highlighter.
  * 

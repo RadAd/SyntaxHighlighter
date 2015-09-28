@@ -37,9 +37,6 @@ import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.brush.RegExpRule;
 import syntaxhighlighter.brush.*;
 
-// TODO
-// Do a special look up for <style type=*"> to get the mime type
-
 /**
  * The parser of the syntax highlighter.
  * 
@@ -122,11 +119,11 @@ public final class SyntaxHighlighter {
     this.brush = brush;
   }
   
-  private static void addMatch(RangeMap<Integer, String> matches, int start, int end, String styleKey) {
+  private static void addMatch(RangeMap<Integer, String> matches, int start, int end, String styleKey, boolean override) {
     if (styleKey == null) throw new NullPointerException("argument 'styleKey' cannot be null");
     Range<Integer> r = Range.closedOpen(start, end);
     // TODO Dont put if there is already something there
-    if (matches.subRangeMap(r).asMapOfRanges().isEmpty())
+    if (override || matches.subRangeMap(r).asMapOfRanges().isEmpty())
         matches.put(r, styleKey);
   }
 
@@ -194,7 +191,7 @@ public final class SyntaxHighlighter {
 
         if (operation instanceof String) {
           // add the style to the match
-          addMatch(matches, start, end, (String) operation);
+          addMatch(matches, start, end, (String) operation, regExpRule.getOverride());
         } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
           parse2(matches, (RegExpRule) operation, content, start, end);
