@@ -52,7 +52,7 @@ public class ThemeMDUltra extends Theme {
     addStyle(Brush.VALUE,        new Style().setColor(new Color(0xf7e741)));
     addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xff8000)));
     addStyle(Brush.CONSTANTS,    new Style().setColor(Color.yellow));
-    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xaaaaff)).setBold(true));
+    //addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xaaaaff)).setBold(true));
     //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
     addStyle(Brush.COLOR1,       new Style().setColor(Color.red));
     addStyle(Brush.COLOR2,       new Style().setColor(Color.yellow));

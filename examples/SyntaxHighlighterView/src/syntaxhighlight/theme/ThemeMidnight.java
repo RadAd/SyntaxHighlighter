@@ -53,7 +53,7 @@ public class ThemeMidnight extends Theme {
     addStyle(Brush.VALUE,        new Style().setColor(new Color(0xf7e741)));
     addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xffaa3e)));
     addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0xe0e8ff)));
-    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xb43d3d)).setBold(true));
+    //addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xb43d3d)).setBold(true));
     //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
     addStyle(Brush.COLOR1,       new Style().setColor(new Color(0xf8bb00)));
     addStyle(Brush.COLOR2,       new Style().setColor(Color.white));

@@ -47,7 +47,7 @@ public final class HTMLScriptRegExp {
     if (left == null) throw new NullPointerException("argument 'left' cannot be null");
     if (right == null) throw new NullPointerException("argument 'right' cannot be null");
     
-    pattern = Pattern.compile("(" + left + ")(.*?)(" + right + ")", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+    pattern = Pattern.compile(left + "(.*?)" + right, Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
   }
 
   public Pattern getpattern() {

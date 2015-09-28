@@ -51,7 +51,7 @@ public class ThemeRDark extends Theme {
     addStyle(Brush.VALUE,        new Style().setColor(new Color(0x009900)));
     addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xffaa3e)));
     addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0xe0e8ff)));
-    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x5ba1cf)).setBold(true));
+    //addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x5ba1cf)).setBold(true));
     //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
     addStyle(Brush.COLOR1,       new Style().setColor(new Color(0xe0e8ff)));
     addStyle(Brush.COLOR2,       new Style().setColor(Color.white));

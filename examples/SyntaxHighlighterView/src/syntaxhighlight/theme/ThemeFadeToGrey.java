@@ -52,7 +52,7 @@ public class ThemeFadeToGrey extends Theme {
     addStyle(Brush.VALUE,        new Style().setColor(new Color(0x009900)));
     addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xaaaaaa)));
     addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0x96daff)));
-    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xd01d33)).setBold(true));
+    //addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0xd01d33)).setBold(true));
     //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
     addStyle(Brush.COLOR1,       new Style().setColor(new Color(0xffc074)));
     addStyle(Brush.COLOR2,       new Style().setColor(new Color(0x4a8cdb)));

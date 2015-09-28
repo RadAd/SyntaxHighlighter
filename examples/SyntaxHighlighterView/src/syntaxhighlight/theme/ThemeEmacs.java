@@ -52,7 +52,7 @@ public class ThemeEmacs extends Theme {
     addStyle(Brush.VALUE,        new Style().setColor(new Color(0x009900)));
     addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0x81cef9)));
     addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0xff9e7b)));
-    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x00ffff)).setBold(true));
+    //addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x00ffff)).setBold(true));
     //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
     addStyle(Brush.COLOR1,       new Style().setColor(new Color(0xebdb8d)));
     addStyle(Brush.COLOR2,       new Style().setColor(new Color(0xff7d27)));

@@ -48,7 +48,7 @@ public class ThemeDefault extends Theme {
     addStyle(Brush.VALUE,        new Style().setColor(new Color(0x009900)));
     addStyle(Brush.FUNCTIONS,    new Style().setColor(new Color(0xff1493)));
     addStyle(Brush.CONSTANTS,    new Style().setColor(new Color(0x0066cc)));
-    addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x006699)).setBold(true));
+    //addStyle(Brush.SCRIPT,       new Style().setColor(new Color(0x006699)).setBold(true));
     //addStyle(Brush.SCRIPTBACKGROUND, new Style()));
     addStyle(Brush.COLOR1,       new Style().setColor(Color.gray));
     addStyle(Brush.COLOR2,       new Style().setColor(new Color(0xff1493)));

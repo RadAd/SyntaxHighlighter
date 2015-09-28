@@ -153,26 +153,11 @@ public final class SyntaxHighlighter {
 
           Matcher matcher = _pattern.matcher(content.subSequence(allstart, allend));
           while (matcher.find()) {
-            // HTML-Script brush has superior priority, so remove all previous matches within the matched range
-            removeMatches(matches, matcher.start() + allstart, matcher.end() + allstart);
-
-            // the left tag of HTML-Script
+            // the content of HTML-Script, parse it using the HTML-Script brush
             int start = matcher.start(1) + allstart;
             int end = matcher.end(1) + allstart;
-            addMatch(matches, start, end, Brush.SCRIPT);
-            
-            //System.out.println("HTML Found: " + htmlScriptBrush.getName() + " " + content.subSequence(start, end));
-
-            // the content of HTML-Script, parse it using the HTML-Script brush
-            start = matcher.start(2) + allstart;
-            end = matcher.end(2) + allstart;
             removeMatches(matches, start, end);
             parse1(matches, htmlScriptBrush, content, start, end);
-
-            // the right tag of HTML-Script
-            start = matcher.start(3) + allstart;
-            end = matcher.end(3) + allstart;
-            addMatch(matches, start, end, Brush.SCRIPT);
           }
         }
     }

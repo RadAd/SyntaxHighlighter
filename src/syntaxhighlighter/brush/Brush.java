@@ -46,7 +46,6 @@ public class Brush {
     public final static String COLOR1 = "color1";
     public final static String COLOR2 = "color2";
     public final static String COLOR3 = "color3";
-    public final static String SCRIPT = "script";
 
   private final String name;
   private final List<RegExpRule> regExpRuleList = new java.util.ArrayList<RegExpRule>();

@@ -55,7 +55,7 @@ class Project
 
                 if (start > last)
                     System.out.print(sb.substring(last, start));
-                System.out.println(r.getValue() + " " + start + ":" + end + " " + sb.substring(start, end));
+                //System.out.println(r.getValue() + " " + start + ":" + end + " " + sb.substring(start, end));
                 String Color = COLOR_NORMAL;
                 switch (r.getValue())
                 {
@@ -79,7 +79,7 @@ class Project
                     Color = COLOR_WHITE;
                     break;
                 }
-                //System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
+                System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
                 last = end;
             }
         }
