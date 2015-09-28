@@ -90,7 +90,7 @@ public class BrushColdFusion extends Brush {
     String operators = "all and any between cross in join like not null or outer some";
 
     add(new RegExpRule("--(.*)$", Pattern.MULTILINE, COMMENTS)); // one line and multiline comments
-    add(new RegExpRule(RegExpRule.xmlComments, COMMENTS)); // single quoted strings
+    add(new RegExpRule("\\w+:\\/\\/[\\w-.\\/?%&=:@;]*", COMMENTS)); // single quoted strings
     add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
     add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
     add(new RegExpRule(getKeywords(functions), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, FUNCTIONS));

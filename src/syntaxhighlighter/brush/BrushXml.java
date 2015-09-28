@@ -36,20 +36,17 @@ public class BrushXml extends Brush {
     
     setIsHtml(html);
     
-    add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)", Pattern.MULTILINE, COLOR2)); // <![ ... [ ... ]]>
-    add(new RegExpRule(RegExpRule.xmlComments, COMMENTS)); // <!-- ... -->
-
-    // regular expression for highlighting the tag
-    RegExpRule tagRegExpRule = new RegExpRule("(?:&lt;|<)[\\s\\/\\?]*([:\\w-\\.]+)", Pattern.COMMENTS, null);
-    tagRegExpRule.addGroupOperation(KEYWORD);
+    add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.*?)\\]\\](\\&gt;|>)", Pattern.DOTALL, PREPROCESSOR)); // <![ ... [ ... ]]>
+    add(new RegExpRule("(\\&lt;|<)\\!--(.*?)--(\\&gt;|>)", Pattern.DOTALL, COMMENTS)); // <!-- ... -->
 
     // regular expression for highlighting the variable assignment
-    RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)" + "\\s*=\\s*" + "(\".*?\"|'.*?'|\\w+)", Pattern.COMMENTS, null);
-    valueRegExpRule.addGroupOperation(COLOR1);
+    RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)\\s*=\\s*(\".*\"|'.*')", Pattern.COMMENTS, null);
+    valueRegExpRule.addGroupOperation(VARIABLE);
     valueRegExpRule.addGroupOperation(STRING);
 
-    RegExpRule _regExpRule = new RegExpRule("((?:&lt;|<)[\\s\\/\\?]*(?:\\w+))(.*?)[\\s\\/\\?]*(?:&gt;|>)", Pattern.DOTALL, null);
-    _regExpRule.addGroupOperation(tagRegExpRule);
+    // includes regular expression for highlighting the tag
+    RegExpRule _regExpRule = new RegExpRule("(?:&lt;|<)[\\?\\/]?\\s*([:\\w-\\.]+)(.*?)\\s*[\\/\\?]?(?:&gt;|>)", Pattern.DOTALL, null);
+    _regExpRule.addGroupOperation(KEYWORD);
     _regExpRule.addGroupOperation(valueRegExpRule);
     add(_regExpRule);
   }
