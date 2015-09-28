@@ -3,7 +3,8 @@ package test;
 import java.io.*;
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.SyntaxHighlighter;
-import syntaxhighlighter.MatchResult;
+import java.util.Map;
+import com.google.common.collect.Range;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
@@ -46,40 +47,40 @@ class Project
         if (scheme != null)
         {
             SyntaxHighlighter sh = new SyntaxHighlighter(scheme);
-            java.util.List<MatchResult> rs = sh.parse(sb);
-            for (MatchResult r : rs)
+            Map<Range<Integer>, String> rs = sh.parse(sb);
+            for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
             {
-                if (r.getStart() > last)
+                int start = r.getKey().lowerEndpoint();
+                int end = r.getKey().upperEndpoint();
+
+                if (start > last)
+                    System.out.print(sb.substring(last, start));
+                System.out.println(r.getValue() + " " + start + ":" + end + " " + sb.substring(start, end));
+                String Color = COLOR_NORMAL;
+                switch (r.getValue())
                 {
-                    if (r.getStart() > last)
-                        System.out.print(sb.substring(last, r.getStart()));
-                    //System.out.println(r.getStyleKey() + " " + r.getStart() + ":" + r.getEnd() + " " + sb.substring(r.getStart(), r.getEnd()));
-                    String Color = COLOR_NORMAL;
-                    switch (r.getStyleKey())
-                    {
-                    case Brush.PREPROCESSOR:
-                        Color = COLOR_YELLOW;
-                        break;
-                    case Brush.KEYWORD:
-                        Color = COLOR_CYAN;
-                        break;
-                    case Brush.STRING:
-                    case Brush.VALUE:
-                        Color = COLOR_PURPLE;
-                        break;
-                    case Brush.COLOR1:
-                        Color = COLOR_YELLOW;
-                        break;
-                    case Brush.VARIABLE:
-                        Color = COLOR_RED;
-                        break;
-                    case Brush.COMMENTS:
-                        Color = COLOR_WHITE;
-                        break;
-                    }
-                    System.out.print(Color + sb.substring(r.getStart(), r.getEnd()) + COLOR_NORMAL);
-                    last = r.getEnd();
+                case Brush.PREPROCESSOR:
+                    Color = COLOR_YELLOW;
+                    break;
+                case Brush.KEYWORD:
+                    Color = COLOR_CYAN;
+                    break;
+                case Brush.STRING:
+                case Brush.VALUE:
+                    Color = COLOR_PURPLE;
+                    break;
+                case Brush.COLOR1:
+                    Color = COLOR_YELLOW;
+                    break;
+                case Brush.VARIABLE:
+                    Color = COLOR_RED;
+                    break;
+                case Brush.COMMENTS:
+                    Color = COLOR_WHITE;
+                    break;
                 }
+                //System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
+                last = end;
             }
         }
         

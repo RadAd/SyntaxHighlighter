@@ -2,3 +2,5 @@ bin/
 classes/
 examples/CliSyntaxHighlighter/libs/SyntaxHighlighter.jar
 examples/SyntaxHighlighterView/libs/SyntaxHighlighter.jar
+examples/CliSyntaxHighlighter/libs/guava-18.0.jar
+examples/SyntaxHighlighterView/libs/guava-18.0.jar

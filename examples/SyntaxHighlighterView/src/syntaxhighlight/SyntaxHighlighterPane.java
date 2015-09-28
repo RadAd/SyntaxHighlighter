@@ -54,7 +54,7 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
 import syntaxhighlight.theme.Theme;
-import syntaxhighlighter.MatchResult;
+import com.google.common.collect.Range;
 
 /**
  * The text pane for displaying the script text.
@@ -94,7 +94,7 @@ public class SyntaxHighlighterPane extends JTextPane {
   /**
    * The style list.
    */
-  protected Map<String, List<MatchResult>> styleList;
+  protected Map<String, List<Range<Integer>>> styleList;
   /**
    * Record the mouse cursor is currently pointing at which line of the 
    * document. -1 means not any line.
@@ -333,21 +333,21 @@ public class SyntaxHighlighterPane extends JTextPane {
     }
   } 
 
-  public void setStyle(List<MatchResult> styleList) {
+  public void setStyle(Map<Range<Integer>, String> styleList) {
     if (styleList == null) {
       throw new NullPointerException("argumenst 'styleList' cannot be null");
     }
 
-    this.styleList = new HashMap<String, List<MatchResult>>();
-
-    for (MatchResult parseResult : styleList) {
-      String styleKeysString = parseResult.getStyleKey();
-      List<MatchResult> _styleList = this.styleList.get(styleKeysString);
+    this.styleList = new HashMap<String, List<Range<Integer>>>();
+    
+    for (Map.Entry<Range<Integer>, String> parseResult : styleList.entrySet()) {
+      String styleKeysString = parseResult.getValue();
+      List<Range<Integer>> _styleList = this.styleList.get(styleKeysString);
       if (_styleList == null) {
-        _styleList = new ArrayList<MatchResult>();
+        _styleList = new ArrayList<Range<Integer>>();
         this.styleList.put(styleKeysString, _styleList);
       }
-      _styleList.add(parseResult);
+      _styleList.add(parseResult.getKey());
     }
 
     applyStyle();
@@ -368,11 +368,13 @@ public class SyntaxHighlighterPane extends JTextPane {
 
     // apply style according to the style list
     for (String key : styleList.keySet()) {
-      List<MatchResult> posList = styleList.get(key);
+      List<Range<Integer>> posList = styleList.get(key);
 
       SimpleAttributeSet attributeSet = theme.getStyle(key).getAttributeSet();
-      for (MatchResult pos : posList) {
-        document.setCharacterAttributes(pos.getStart(), pos.getEnd() - pos.getStart(), attributeSet, true);
+      for (Range<Integer> pos : posList) {
+        int start = pos.lowerEndpoint();
+        int end = pos.upperEndpoint();
+        document.setCharacterAttributes(start, end - start, attributeSet, true);
       }
     }
 

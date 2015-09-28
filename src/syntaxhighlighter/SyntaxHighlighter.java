@@ -28,13 +28,17 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.google.common.collect.Range;
+import com.google.common.collect.RangeMap;
+import com.google.common.collect.TreeRangeMap;
+
 import syntaxhighlighter.brush.Brush;
 import syntaxhighlighter.brush.RegExpRule;
 import syntaxhighlighter.brush.*;
 
 // TODO
 // Do a special look up for <style type=*"> to get the mime type
-// Replace Map<Integer, List<MatchResult>> with RangeSet<Integer, String>
 
 /**
  * The parser of the syntax highlighter.
@@ -118,55 +122,27 @@ public final class SyntaxHighlighter {
     this.brush = brush;
   }
   
-  private static void addMatch(Map<Integer, List<MatchResult>> matches, MatchResult match) {
-    List<MatchResult> matchList = matches.get(match.getStart());
-    if (matchList == null) {
-      matchList = new ArrayList<MatchResult>();
-      matches.put(match.getStart(), matchList);
-    }
-    matchList.add(match);
+  private static void addMatch(RangeMap<Integer, String> matches, int start, int end, String styleKey) {
+    if (styleKey == null) throw new NullPointerException("argument 'styleKey' cannot be null");
+    Range<Integer> r = Range.closedOpen(start, end);
+    // TODO Dont put if there is already something there
+    if (matches.subRangeMap(r).asMapOfRanges().isEmpty())
+        matches.put(r, styleKey);
   }
 
-  private static void removeMatches(Map<Integer, List<MatchResult>> matches, int start, int end) {
-    for (int allstart : matches.keySet()) {
-      List<MatchResult> offsetMatches = matches.get(allstart);
-
-      ListIterator<MatchResult> iterator = offsetMatches.listIterator();
-      while (iterator.hasNext()) {
-        MatchResult match = iterator.next();
-
-        // the start and end position in the document for this matched result
-        int _start = match.getStart();
-        int _end = match.getEnd();
-
-        if (_start >= end || _end <= start) {
-          // out of the range
-          continue;
-        }
-        if (_start >= start && _end <= end) {
-          // fit or within range
-          iterator.remove();
-        } else if (_end <= end) {
-          // overlap with the start
-          // remove the style within the range and remain those without the range
-          iterator.set(new MatchResult(_start, start, match.getStyleKey()));
-        } else if (_start >= start) {
-          // overlap with the end
-          // remove the style within the range and remain those without the range
-          iterator.set(new MatchResult(end, _end, match.getStyleKey()));
-        }
-      }
-    }
+  private static void removeMatches(RangeMap<Integer, String> matches, int start, int end) {
+    Range<Integer> r = Range.closedOpen(start, end);
+    matches.remove(r);
   }
-
-  public List<MatchResult> parse(CharSequence content) {
+  
+  public Map<Range<Integer>, String> parse(CharSequence content) {
     return parse(content, 0, content.length());
   }
   
-  public List<MatchResult> parse(CharSequence content, int allstart, int allend) {
+  public Map<Range<Integer>, String> parse(CharSequence content, int allstart, int allend) {
     if (content == null) throw new NullPointerException("argument 'content' cannot be null");
     
-    Map<Integer, List<MatchResult>> matches = new TreeMap<Integer, List<MatchResult>>();
+    RangeMap<Integer, String> matches = TreeRangeMap.create();
     
     parse1(matches, brush, content, allstart, allend);
     
@@ -183,36 +159,28 @@ public final class SyntaxHighlighter {
             // the left tag of HTML-Script
             int start = matcher.start(1) + allstart;
             int end = matcher.end(1) + allstart;
-            addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
+            addMatch(matches, start, end, Brush.SCRIPT);
             
             //System.out.println("HTML Found: " + htmlScriptBrush.getName() + " " + content.subSequence(start, end));
 
             // the content of HTML-Script, parse it using the HTML-Script brush
             start = matcher.start(2) + allstart;
             end = matcher.end(2) + allstart;
-            removeMatches(matches, start, end - start);
+            removeMatches(matches, start, end);
             parse1(matches, htmlScriptBrush, content, start, end);
 
             // the right tag of HTML-Script
             start = matcher.start(3) + allstart;
             end = matcher.end(3) + allstart;
-            addMatch(matches, new MatchResult(start, end, Brush.SCRIPT));
+            addMatch(matches, start, end, Brush.SCRIPT);
           }
         }
     }
     
-    List<MatchResult> returnList = new ArrayList<MatchResult>();
-
-    for (List<MatchResult> resultList : matches.values()) {
-      for (MatchResult result : resultList) {
-        returnList.add(result);
-      }
-    }
-    
-    return returnList;
+    return matches.asMapOfRanges();
   }
 
-  private static void parse1(Map<Integer, List<MatchResult>> matches, Brush brush, CharSequence content, int allstart, int allend) {
+  private static void parse1(RangeMap<Integer, String> matches, Brush brush, CharSequence content, int allstart, int allend) {
     // parse the RegExpRule in the brush first
     List<RegExpRule> regExpRuleList = brush.getRegExpRuleList();
     for (RegExpRule regExpRule : regExpRuleList) {
@@ -220,7 +188,7 @@ public final class SyntaxHighlighter {
     }
   }
 
-  private static void parse2(Map<Integer, List<MatchResult>> matches, RegExpRule regExpRule, CharSequence content, int allstart, int allend) {
+  private static void parse2(RangeMap<Integer, String> matches, RegExpRule regExpRule, CharSequence content, int allstart, int allend) {
     List<Object> groupOperations = regExpRule.getGroupOperations();
 
     Pattern regExpPattern = regExpRule.getPattern();
@@ -241,7 +209,7 @@ public final class SyntaxHighlighter {
 
         if (operation instanceof String) {
           // add the style to the match
-          addMatch(matches, new MatchResult(start, end, (String) operation));
+          addMatch(matches, start, end, (String) operation);
         } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
           parse2(matches, (RegExpRule) operation, content, start, end);
