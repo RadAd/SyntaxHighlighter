@@ -48,19 +48,20 @@ public class BrushCss extends Brush {
             + "table-layout text-align top text-decoration text-indent text-shadow text-transform unicode-bidi unicode-range units-per-em "
             + "vertical-align visibility voice-family volume white-space widows width widths word-spacing x-height z-index";
     String values = "above absolute all always aqua armenian attr aural auto avoid baseline behind below bidi-override black blink block blue bold bolder "
-            + "both bottom braille capitalize caption center center-left center-right circle close-quote code collapse compact condensed "
+            + "both bottom braille capitalize caption center center-left center-right circle close-quote collapse compact condensed "
             + "continuous counter counters crop cross crosshair cursive dashed decimal decimal-leading-zero default digits disc dotted double "
             + "embed embossed e-resize expanded extra-condensed extra-expanded fantasy far-left far-right fast faster fixed format fuchsia "
             + "gray green groove handheld hebrew help hidden hide high higher icon inline-table inline inset inside invert italic "
             + "justify landscape large larger left-side left leftwards level lighter lime line-through list-item local loud lower-alpha "
             + "lowercase lower-greek lower-latin lower-roman lower low ltr marker maroon medium message-box middle mix move narrower "
             + "navy ne-resize no-close-quote none no-open-quote no-repeat normal nowrap n-resize nw-resize oblique olive once open-quote outset "
-            + "outside overline pointer portrait pre print projection purple red relative repeat repeat-x repeat-y rgb ridge right right-side "
+            + "outside overline pointer portrait print projection purple red relative repeat repeat-x repeat-y rgb ridge right right-side "
             + "rightwards rtl run-in screen scroll semi-condensed semi-expanded separate se-resize show silent silver slower slow "
             + "small small-caps small-caption smaller soft solid speech spell-out square s-resize static status-bar sub super sw-resize "
             + "table-caption table-cell table-column table-column-group table-footer-group table-header-group table-row table-row-group teal "
             + "text-bottom text-top thick thin top transparent tty tv ultra-condensed ultra-expanded underline upper-alpha uppercase upper-latin "
             + "upper-roman url visible wait white wider w-resize x-fast x-high x-large x-loud x-low x-slow x-small x-soft xx-large xx-small yellow";
+    String htmltags = "body a code div h1 h2 h3 h4 h5 h6 img li ol p pre span table th td tr ul";
     String fonts = "[mM]onospace [tT]ahoma [vV]erdana [aA]rial [hH]elvetica [sS]ans-serif [sS]erif [cC]ourier mono sans serif";
 
     add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
@@ -71,7 +72,8 @@ public class BrushCss extends Brush {
     add(new RegExpRule("!important", COLOR3)); // !important
     add(new RegExpRule(getKeywordsCSS(keywords), Pattern.MULTILINE, KEYWORD));
     add(new RegExpRule(getValuesCSS(values), VALUE));
-    add(new RegExpRule(getKeywords(fonts), COLOR1));
+    add(new RegExpRule(getKeywords(htmltags), COLOR1));
+    add(new RegExpRule(getKeywords(fonts), COLOR2));
 
     setHTMLScriptRegExp(HTMLScriptRegExp.createScriptRegExp("style", "text/css"));
   }
