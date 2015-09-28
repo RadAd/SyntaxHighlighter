@@ -42,8 +42,8 @@ public class BrushJScript extends Brush {
     add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
     add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
     // it's a standard not to use multi-line string
-    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
-    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING, true));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING, true));
     add(new RegExpRule("\\s*#.*", Pattern.MULTILINE, PREPROCESSOR)); // preprocessor tags like #region and #endregion
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
