@@ -35,6 +35,7 @@ public class BrushXml extends Brush {
     super(html ? "HTML" : "XML");
     
     add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.*?)\\]\\](\\&gt;|>)", Pattern.DOTALL, PREPROCESSOR)); // <![ ... [ ... ]]>
+    add(new RegExpRule("(\\&lt;|<)\\![\\w\\s]*?(.*?)(\\&gt;|>)", Pattern.DOTALL, PREPROCESSOR)); // <! ... >
     add(new RegExpRule("(\\&lt;|<)\\!--(.*?)--(\\&gt;|>)", Pattern.DOTALL, COMMENTS)); // <!-- ... -->
 
     // regular expression for highlighting the variable assignment
