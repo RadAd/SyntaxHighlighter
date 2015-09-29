@@ -74,6 +74,7 @@ public final class SyntaxHighlighter {
         register(BrushAppleScript.exts, new BrushAppleScript());
         register(BrushAS3.exts, new BrushAS3());
         register(BrushBash.exts, new BrushBash());
+        register(BrushBatch.exts, new BrushBatch());
         register(BrushColdFusion.exts, new BrushColdFusion());
         register(BrushCpp.exts, new BrushCpp());
         register(BrushCSharp.exts, new BrushCSharp());
