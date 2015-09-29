@@ -82,6 +82,7 @@ public final class SyntaxHighlighter {
         register(BrushDiff.exts, new BrushDiff());
         register(BrushErlang.exts, new BrushErlang());
         register(BrushGroovy.exts, new BrushGroovy());
+        register(BrushIni.exts, new BrushIni());
         register(BrushJava.exts, new BrushJava());
         register(BrushJavaFX.exts, new BrushJavaFX());
         register(BrushJScript.exts, new BrushJScript());
