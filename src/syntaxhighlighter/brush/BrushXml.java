@@ -34,8 +34,6 @@ public class BrushXml extends Brush {
   public BrushXml(boolean html) {
     super(html ? "HTML" : "XML");
     
-    setIsHtml(html);
-    
     add(new RegExpRule("(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.*?)\\]\\](\\&gt;|>)", Pattern.DOTALL, PREPROCESSOR)); // <![ ... [ ... ]]>
     add(new RegExpRule("(\\&lt;|<)\\!--(.*?)--(\\&gt;|>)", Pattern.DOTALL, COMMENTS)); // <!-- ... -->
 
@@ -48,6 +46,13 @@ public class BrushXml extends Brush {
     RegExpRule _regExpRule = new RegExpRule("(?:&lt;|<)[\\?\\/]?\\s*([:\\w-\\.]+)(.*?)\\s*[\\/\\?]?(?:&gt;|>)", Pattern.DOTALL, null);
     _regExpRule.addGroupOperation(KEYWORD);
     _regExpRule.addGroupOperation(valueRegExpRule);
+    add(_regExpRule);
+  }
+  
+  public void addHtmlScript(Brush other)
+  {
+    RegExpRule _regExpRule = new RegExpRule(other.getHTMLScriptPattern(), null, true);
+    _regExpRule.addGroupOperation(other);
     add(_regExpRule);
   }
 }

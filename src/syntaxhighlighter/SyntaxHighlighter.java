@@ -45,15 +45,15 @@ import syntaxhighlighter.brush.*;
 public final class SyntaxHighlighter {
 
     private static final Brush plainBrush = new BrushPlain();
+    private static final BrushXml htmlBrush = new BrushXml(true);
     private static final Map<String, Brush> brushes = new HashMap<String, Brush>();
-    private static final List<Brush> htmlBrushes = new ArrayList<Brush>();
     
     private static void register(String[] exts, Brush brush) {
         for (String ext : exts) {
             brushes.put(ext, brush);
         }
-        if (brush.getHTMLScriptRegExp() != null) {
-            htmlBrushes.add(brush);
+        if (brush.getHTMLScriptPattern() != null) {
+            htmlBrush.addHtmlScript(brush);
         }
     }
     
@@ -94,11 +94,11 @@ public final class SyntaxHighlighter {
         register(BrushSql.exts, new BrushSql());
         register(BrushVb.exts, new BrushVb());
         register(BrushXml.exts, new BrushXml(false));
-        register(BrushXml.extshtml, new BrushXml(true));
+        
+        register(BrushXml.extshtml, htmlBrush);
     }
 
   private Brush brush;
-  private List<Brush> htmlScriptBrushList;
 
   public SyntaxHighlighter() {
     this(plainBrush);
@@ -107,13 +107,8 @@ public final class SyntaxHighlighter {
   public SyntaxHighlighter(Brush brush) {
     if (brush == null) throw new NullPointerException("argument 'brush' cannot be null");
     this.brush = brush;
-    this.htmlScriptBrushList = htmlBrushes;
   }
 
-  public void setHTMLScriptBrushList(List<Brush> htmlScriptBrushList) {
-    this.htmlScriptBrushList = htmlScriptBrushList;
-  }
-  
   public Brush getBrush() {
     return brush;
   }
@@ -153,25 +148,7 @@ public final class SyntaxHighlighter {
     if (content == null) throw new NullPointerException("argument 'content' cannot be null");
     
     RangeMap<Integer, String> matches = TreeRangeMap.create();
-    
     parse1(matches, brush, content, allstart, allend);
-    
-    // parse the HTML-Script brushes later
-    if (brush.isHtml() && htmlScriptBrushList != null) {
-        for (Brush htmlScriptBrush : htmlScriptBrushList) {
-          Pattern _pattern = htmlScriptBrush.getHTMLScriptRegExp().getpattern();
-
-          Matcher matcher = _pattern.matcher(content.subSequence(allstart, allend));
-          while (matcher.find()) {
-            // the content of HTML-Script, parse it using the HTML-Script brush
-            int start = matcher.start(1) + allstart;
-            int end = matcher.end(1) + allstart;
-            removeMatches(matches, start, end);
-            parse1(matches, htmlScriptBrush, content, start, end);
-          }
-        }
-    }
-    
     return matches.asMapOfRanges();
   }
 
@@ -208,6 +185,9 @@ public final class SyntaxHighlighter {
         } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
           parse2(matches, (RegExpRule) operation, content, start, end);
+        } else if (operation instanceof Brush) {
+          // parse the result using the <code>operation</code> RegExpRule
+          parse1(matches, (Brush) operation, content, start, end);
         }
       }
     }

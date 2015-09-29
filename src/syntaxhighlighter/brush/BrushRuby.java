@@ -51,6 +51,6 @@ public class BrushRuby extends Brush {
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
     add(new RegExpRule(getKeywords(builtins), Pattern.MULTILINE, COLOR1)); // builtins
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

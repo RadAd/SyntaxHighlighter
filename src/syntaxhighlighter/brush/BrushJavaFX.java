@@ -54,6 +54,6 @@ public class BrushJavaFX extends Brush {
     add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, VARIABLE));
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

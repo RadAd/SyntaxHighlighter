@@ -75,7 +75,7 @@ public class BrushCss extends Brush {
     add(new RegExpRule(getKeywords(htmltags), COLOR1));
     add(new RegExpRule(getKeywords(fonts), COLOR2));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.createScriptRegExp("style", "text/css"));
+    setHTMLScriptPattern(RegExpRule.createScriptPattern("style", "text/css"));
   }
 
   protected static String getKeywordsCSS(String str) {

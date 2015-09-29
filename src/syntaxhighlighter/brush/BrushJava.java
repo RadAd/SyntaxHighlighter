@@ -51,6 +51,6 @@ public class BrushJava extends Brush {
     //add(new RegExpRule("\\@interface\\b", COLOR2)); // @interface keyword
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
-    setHTMLScriptRegExp(new HTMLScriptRegExp("(?:&lt;|<)%[@!=]?", "%(?:&gt;|>)"));
+    setHTMLScriptPattern(Pattern.compile("(?:&lt;|<)%[@!=]?(.*?)%(?:&gt;|>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL));
   }
 }

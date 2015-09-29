@@ -66,6 +66,6 @@ public class BrushPerl extends Brush {
     add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

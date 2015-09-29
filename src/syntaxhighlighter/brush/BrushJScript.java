@@ -47,6 +47,6 @@ public class BrushJScript extends Brush {
     add(new RegExpRule("\\s*#.*", Pattern.MULTILINE, PREPROCESSOR)); // preprocessor tags like #region and #endregion
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.createScriptRegExp("script", "(?:text/)?javascript"));
+    setHTMLScriptPattern(RegExpRule.createScriptPattern("script", "(?:text/)?javascript"));
   }
 }

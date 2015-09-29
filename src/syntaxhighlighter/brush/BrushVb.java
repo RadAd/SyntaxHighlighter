@@ -53,6 +53,6 @@ public class BrushVb extends Brush {
     add(new RegExpRule("^\\s*#.*$", Pattern.MULTILINE, PREPROCESSOR)); // preprocessor tags like #region and #endregion
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD)); // vb keyword
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

@@ -37,6 +37,12 @@ public final class RegExpRule {
   protected static final Pattern singleQuotedString = Pattern.compile("'([^\\\\'\\n]|\\\\.)*'");
   protected static final Pattern multiLineDoubleQuotedString = Pattern.compile("\"([^\\\\\"]|\\\\.)*\"", Pattern.DOTALL);
   protected static final Pattern multiLineSingleQuotedString = Pattern.compile("'([^\\\\']|\\\\.)*'", Pattern.DOTALL);
+  protected static final Pattern phpScriptTags = Pattern.compile("(?:&lt;|<)\\?(?:=|php)(.*?)\\?(?:&gt;|>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+  protected static final Pattern aspScriptTags = Pattern.compile("(?:&lt;|<)%=?(.*?)%(?:&gt;|>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+
+  static Pattern createScriptPattern(String tag, String type) {
+    return Pattern.compile("(?:&lt;|<)\\s*" + tag + ".*?type=\"" + type + "\".*?(?:&gt;|>)(.*?)(?:&lt;|<)\\/\\s*" + tag + "\\s*(?:&gt;|>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+  }
 
   private final Pattern pattern;
   private final List<Object> groupOperations;
@@ -84,6 +90,9 @@ public final class RegExpRule {
   }
   void addGroupOperation(RegExpRule subRule) {
     this.groupOperations.add(subRule);
+  }
+  void addGroupOperation(Brush brush) {
+    this.groupOperations.add(brush);
   }
 
   public boolean getOverride() {

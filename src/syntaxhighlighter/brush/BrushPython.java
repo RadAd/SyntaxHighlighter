@@ -59,6 +59,6 @@ public class BrushPython extends Brush {
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
     add(new RegExpRule(getKeywords(special), Pattern.MULTILINE, COLOR1));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

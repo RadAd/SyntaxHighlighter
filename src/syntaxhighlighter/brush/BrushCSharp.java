@@ -52,6 +52,6 @@ public class BrushCSharp extends Brush {
     add(new RegExpRule("\\bpartial(?=\\s+(?:class|interface|struct)\\b)", KEYWORD)); // contextual keyword: 'partial'
     add(new RegExpRule("\\byield(?=\\s+(?:return|break)\\b)", KEYWORD)); // contextual keyword: 'yield'
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

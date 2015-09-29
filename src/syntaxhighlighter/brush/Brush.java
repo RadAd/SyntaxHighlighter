@@ -21,6 +21,7 @@
 package syntaxhighlighter.brush;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 // TODO
 // @Annotation for Java
@@ -55,8 +56,7 @@ public class Brush {
 
   private final String name;
   private final List<RegExpRule> regExpRuleList = new java.util.ArrayList<RegExpRule>();
-  private HTMLScriptRegExp htmlScriptRegExp = null;
-  private boolean isHtml = false;
+  private Pattern htmlScriptPattern = null;
 
   protected Brush(String name) {
     if (name == null)  throw new NullPointerException("argument 'name' cannot be null");
@@ -67,16 +67,6 @@ public class Brush {
     return name;
   }
   
-  public boolean isHtml()
-  {
-    return this.isHtml;
-  }
-  
-  protected void setIsHtml(boolean isHtml)
-  {
-    this.isHtml = isHtml;
-  }
-
   public List<RegExpRule> getRegExpRuleList() {
     return java.util.Collections.unmodifiableList(regExpRuleList);
   }
@@ -86,12 +76,12 @@ public class Brush {
     this.regExpRuleList.add(rule);
   }
 
-  public HTMLScriptRegExp getHTMLScriptRegExp() {
-    return htmlScriptRegExp;
+  public Pattern getHTMLScriptPattern() {
+    return htmlScriptPattern;
   }
 
-  protected void setHTMLScriptRegExp(HTMLScriptRegExp htmlScriptRegExp) {
-    this.htmlScriptRegExp = htmlScriptRegExp;
+  protected void setHTMLScriptPattern(Pattern htmlScriptPattern) {
+    this.htmlScriptPattern = htmlScriptPattern;
   }
 
   /**
@@ -104,7 +94,7 @@ public class Brush {
     if (str == null)  throw new NullPointerException("argument 'str' cannot be null");
     return "\\b(?:" + str.replaceAll("^\\s+|\\s+$", "").replaceAll("\\s+", "|") + ")\\b";
   }
-
+  
   /**
    * {@inheritDoc}
    */
@@ -124,8 +114,8 @@ public class Brush {
       sb.append(rule.toString());
     }
     sb.append("\n");
-    sb.append("HTML Script RegExp: ");
-    sb.append(htmlScriptRegExp);
+    sb.append("HTML Script Pattern: ");
+    sb.append(htmlScriptPattern);
 
     return sb.toString();
   }

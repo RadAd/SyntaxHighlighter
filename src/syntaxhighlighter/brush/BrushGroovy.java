@@ -64,6 +64,6 @@ public class BrushGroovy extends Brush {
     add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE, CONSTANTS));
     add(new RegExpRule(getKeywords(methods), Pattern.MULTILINE, FUNCTIONS));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.aspScriptTags);
+    setHTMLScriptPattern(RegExpRule.aspScriptTags);
   }
 }

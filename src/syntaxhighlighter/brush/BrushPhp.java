@@ -83,6 +83,6 @@ public class BrushPhp extends Brush {
     add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, CONSTANTS));
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
 
-    setHTMLScriptRegExp(HTMLScriptRegExp.phpScriptTags);
+    setHTMLScriptPattern(RegExpRule.phpScriptTags);
   }
 }
