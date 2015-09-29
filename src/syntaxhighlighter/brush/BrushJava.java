@@ -33,6 +33,7 @@ public class BrushJava extends Brush {
   public BrushJava() {
     super("Java");
     
+    String datatypes = "Boolean Byte Character Class Double Enum Float Integer Long Number String";
     String keywords = "abstract assert boolean break byte case catch char class const "
             + "continue default do double else enum extends "
             + "false final finally float for goto if implements import "
@@ -42,15 +43,17 @@ public class BrushJava extends Brush {
             + "transient try void volatile while";
 
     add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
-    add(new RegExpRule("\\/\\*([^\\*][\\s\\S]*?)?\\*\\/", Pattern.MULTILINE, COMMENTS)); // multiline comments
     add(new RegExpRule("\\/\\*(?!\\*\\/)\\*[\\s\\S]*?\\*\\/", Pattern.MULTILINE, PREPROCESSOR)); // documentation comments
-    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING, true));
-    add(new RegExpRule(RegExpRule.singleQuotedString, STRING, true));
+    add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS)); // multiline comments
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
     add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
     //add(new RegExpRule("(?!\\@interface\\b)\\@[\\$\\w]+\\b", COLOR1)); // annotation @anno
     //add(new RegExpRule("\\@interface\\b", COLOR2)); // @interface keyword
+    add(new RegExpRule("\\@\\w+", PREPROCESSOR)); // annotation
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, COLOR1));
 
-    setHTMLScriptPattern(Pattern.compile("(?:&lt;|<)%[@!=]?(.*?)%(?:&gt;|>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL));
+    setHTMLScriptPattern("(?:&lt;|<)%[@!=]?(.*?)%(?:&gt;|>)", Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
   }
 }

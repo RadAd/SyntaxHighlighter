@@ -51,7 +51,7 @@ public class BrushXml extends Brush {
   
   public void addHtmlScript(Brush other)
   {
-    RegExpRule _regExpRule = new RegExpRule(other.getHTMLScriptPattern(), null, true);
+    RegExpRule _regExpRule = new RegExpRule(other.getHTMLScriptPattern(), null);
     _regExpRule.addGroupOperation(other);
     add(_regExpRule);
   }

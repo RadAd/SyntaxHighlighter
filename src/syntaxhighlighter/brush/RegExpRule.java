@@ -46,35 +46,21 @@ public final class RegExpRule {
 
   private final Pattern pattern;
   private final List<Object> groupOperations;
-  private final boolean override;
 
   RegExpRule(String regExp, String styleKey) {
-    this(regExp, 0, styleKey, false);
-  }
-
-  RegExpRule(String regExp, String styleKey, boolean override) {
-    this(regExp, 0, styleKey, override);
+    this(regExp, 0, styleKey);
   }
 
   RegExpRule(String regExp, int regFlags, String styleKey) {
-    this(Pattern.compile(regExp, regFlags), styleKey, false);
-  }
-
-  RegExpRule(String regExp, int regFlags, String styleKey, boolean override) {
-    this(Pattern.compile(regExp, regFlags), styleKey, override);
+    this(Pattern.compile(regExp, regFlags), styleKey);
   }
 
   RegExpRule(Pattern pattern, String styleKey) {
-    this(pattern, styleKey, false);
-  }
-  
-  RegExpRule(Pattern pattern, String styleKey, boolean override) {
     if (pattern == null) throw new NullPointerException("argument 'pattern' cannot be null");
 
     this.pattern = pattern;
     this.groupOperations = new java.util.ArrayList<Object>();
     addGroupOperation(styleKey);
-    this.override = override;
   }
 
   public Pattern getPattern() {
@@ -93,10 +79,6 @@ public final class RegExpRule {
   }
   void addGroupOperation(Brush brush) {
     this.groupOperations.add(brush);
-  }
-
-  public boolean getOverride() {
-    return override;
   }
 
   @Override

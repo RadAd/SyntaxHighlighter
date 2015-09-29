@@ -76,8 +76,8 @@ public class BrushPhp extends Brush {
 
     add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
     add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
-    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING, true));
-    add(new RegExpRule(RegExpRule.singleQuotedString, STRING, true));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
     add(new RegExpRule("\\$\\w+", VARIABLE)); // variables
     add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
     add(new RegExpRule(getKeywords(constants), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, CONSTANTS));

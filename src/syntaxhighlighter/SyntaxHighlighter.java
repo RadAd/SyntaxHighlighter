@@ -41,6 +41,7 @@ import syntaxhighlighter.brush.*;
  * The parser of the syntax highlighter.
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
+ * @author Adam Gates <adam.gates84+github@gmail.com>
  */
 public final class SyntaxHighlighter {
 
@@ -118,19 +119,18 @@ public final class SyntaxHighlighter {
     this.brush = brush;
   }
   
-  private static void addMatch(RangeMap<Integer, String> matches, int start, int end, String styleKey, boolean override) {
+  private static void addMatch(RangeMap<Integer, String> matches, int start, int end, String styleKey) {
     if (styleKey == null) throw new NullPointerException("argument 'styleKey' cannot be null");
-    Range<Integer> r = Range.closedOpen(start, end);
-    // TODO Dont put if there is already something there
     Map.Entry<Range<Integer>, String> e = matches.getEntry(start);
-    //if (override || matches.subRangeMap(r).asMapOfRanges().isEmpty())
-    if (override || e == null)
+    if (e == null || start < e.getKey().lowerEndpoint())
     {
         if (e != null)
             matches.remove(e.getKey());
-        e = matches.getEntry(end);
+        e = matches.getEntry(end - 1);
         if (e != null)
             matches.remove(e.getKey());
+            
+        Range<Integer> r = Range.closedOpen(start, end);
         matches.put(r, styleKey);
     }
   }
@@ -181,12 +181,13 @@ public final class SyntaxHighlighter {
 
         if (operation instanceof String) {
           // add the style to the match
-          addMatch(matches, start, end, (String) operation, regExpRule.getOverride());
+          addMatch(matches, start, end, (String) operation);
         } else if (operation instanceof RegExpRule) {
           // parse the result using the <code>operation</code> RegExpRule
           parse2(matches, (RegExpRule) operation, content, start, end);
         } else if (operation instanceof Brush) {
           // parse the result using the <code>operation</code> RegExpRule
+          removeMatches(matches, start, end);
           parse1(matches, (Brush) operation, content, start, end);
         }
       }

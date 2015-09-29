@@ -84,6 +84,10 @@ public class Brush {
     this.htmlScriptPattern = htmlScriptPattern;
   }
 
+  protected void setHTMLScriptPattern(String regExp, int regFlags) {
+    this.htmlScriptPattern = Pattern.compile(regExp, regFlags);
+  }
+
   /**
    * Similar function in JavaScript SyntaxHighlighter for making string of 
    * keywords separated by space into regular expression.

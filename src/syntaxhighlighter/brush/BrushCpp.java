@@ -88,8 +88,8 @@ public class BrushCpp extends Brush {
 
     add(new RegExpRule(RegExpRule.singleLineCComments, COMMENTS));
     add(new RegExpRule(RegExpRule.multiLineCComments, COMMENTS));
-    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING, true));
-    add(new RegExpRule(RegExpRule.singleQuotedString, STRING, true));
+    add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
+    add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
     add(new RegExpRule("\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+|0b[\\d]+)\\b", Pattern.CASE_INSENSITIVE, VALUE)); // numbers
     add(new RegExpRule("^ *#.*", Pattern.MULTILINE, PREPROCESSOR));
     add(new RegExpRule(getKeywords(datatypes), Pattern.MULTILINE, COLOR1));

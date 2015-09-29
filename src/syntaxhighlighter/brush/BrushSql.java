@@ -58,7 +58,7 @@ public class BrushSql extends Brush {
     add(new RegExpRule("--(.*)$", Pattern.MULTILINE, COMMENTS)); // one line and multiline comments
     add(new RegExpRule(RegExpRule.multiLineDoubleQuotedString, STRING));
     add(new RegExpRule(RegExpRule.multiLineSingleQuotedString, STRING));
-    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, COLOR2));
+    add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
     add(new RegExpRule(getKeywords(operators), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, COLOR1));
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, KEYWORD));
   }
