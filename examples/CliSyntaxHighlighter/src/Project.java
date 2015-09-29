@@ -114,6 +114,7 @@ class Project
                     case Brush.COLOR2:       Color = COLOR_GRAY;      break;
                     case Brush.VARIABLE:     Color = COLOR_RED;       break;
                     case Brush.COMMENTS:     Color = COLOR_WHITE;     break;
+                    case Brush.FUNCTIONS:    Color = COLOR_BLUE;      break;
                     }
                     System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
                     last = end;
