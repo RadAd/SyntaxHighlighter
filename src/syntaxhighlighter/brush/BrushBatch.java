@@ -37,18 +37,20 @@ public class BrushBatch extends Brush {
           "echo endlocal erase exit for ftype goto graftabl if md mkdir " +
           "mklink move path pause popd prompt pushd rd rem ren rename " +
           "rmdir set setlocal shift start time title type ver verify vol";
+    String devices = "AUX COM(\\d)? CON NUL LPT(\\d)? PRN";
 
     add(new RegExpRule("^\\s*rem\\s.*$", Pattern.MULTILINE, PREPROCESSOR));
     add(new RegExpRule(RegExpRule.doubleQuotedString, STRING));
     add(new RegExpRule(RegExpRule.singleQuotedString, STRING));
     add(new RegExpRule(":[^\\s]*", COLOR1));  // labels
-    add(new RegExpRule("%~\\w*\\d", VARIABLE));
+    add(new RegExpRule("%(~\\w*)?\\d", VARIABLE));
     add(new RegExpRule("%%\\w", VARIABLE));
     add(new RegExpRule("%\\w*(:.*)?%", VARIABLE));
     add(new RegExpRule("!\\w*(:.*)?!", VARIABLE));
-    add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(keywords), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, KEYWORD));
+    add(new RegExpRule(getKeywords(devices), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE, CONSTANTS));
 
-    RegExpRule _regExpRule = new RegExpRule("(?:[^\\^])(&|>|<|2>&1|\\|)", Pattern.MULTILINE, null);
+    RegExpRule _regExpRule = new RegExpRule("(?:[^\\^])(&|>|<|2>|2>&1|\\|)", Pattern.MULTILINE, null);
     _regExpRule.addGroupOperation(COLOR2);
     add(_regExpRule);
   }

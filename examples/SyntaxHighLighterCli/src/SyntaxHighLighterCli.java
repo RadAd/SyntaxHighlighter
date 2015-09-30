@@ -107,6 +107,7 @@ class SyntaxHighLighterCli
                 {
                 case Brush.PREPROCESSOR: Color = COLOR_YELLOW;    break;
                 case Brush.KEYWORD:      Color = COLOR_CYAN;      break;
+                case Brush.CONSTANTS:    Color = COLOR_CYAN;      break;
                 case Brush.STRING:
                 case Brush.VALUE:        Color = COLOR_PURPLE;    break;
                 case Brush.COLOR1:       Color = COLOR_BLUE;      break;
