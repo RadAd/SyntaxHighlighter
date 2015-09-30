@@ -1,0 +1,11 @@
+<project name="SyntaxHighLighterCli" basedir="." default="build">
+    <property environment="env"/>
+
+    <property name="project.displayname"  value="SyntaxHighLighterCli"/>
+    <property name="project.mainclass"    value="radsoft.syntaxhighlighter.app.SyntaxHighLighterCli"/>
+    <property name="project.version"      value="1.0"/>
+    <property name="project.dep"          value="..\.."/>
+    
+    <import file="${env.RAD_BUILD_HOME}\radjava.xml"/>
+    
+</project>

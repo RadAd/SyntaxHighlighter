@@ -18,7 +18,7 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlighter;
+package radsoft.syntaxhighlighter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +33,9 @@ import com.google.common.collect.Range;
 import com.google.common.collect.RangeMap;
 import com.google.common.collect.TreeRangeMap;
 
-import syntaxhighlighter.brush.Brush;
-import syntaxhighlighter.brush.RegExpRule;
-import syntaxhighlighter.brush.*;
+import radsoft.syntaxhighlighter.brush.Brush;
+import radsoft.syntaxhighlighter.brush.RegExpRule;
+import radsoft.syntaxhighlighter.brush.*;
 
 /**
  * The parser of the syntax highlighter.

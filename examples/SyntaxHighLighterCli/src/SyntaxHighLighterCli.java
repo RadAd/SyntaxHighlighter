@@ -1,16 +1,16 @@
-package test;
+package radsoft.syntaxhighlighter.app;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
-import syntaxhighlighter.brush.Brush;
-import syntaxhighlighter.SyntaxHighlighter;
 import java.util.Map;
 import java.util.Set;
 import com.google.common.collect.Range;
+import radsoft.syntaxhighlighter.brush.Brush;
+import radsoft.syntaxhighlighter.SyntaxHighlighter;
 
 import org.mozilla.universalchardet.UniversalDetector;
 
-class Project
+class SyntaxHighLighterCli
 {
     static final char ESCAPE = (char) 27;
     static final String COLOR_NORMAL      = ESCAPE + "[0m";
@@ -41,7 +41,7 @@ class Project
     }
     
     static void showAbout() {
-        System.out.println("CliSyntaxHighlighter");
+        System.out.println("SyntaxHighLighterCli");
         System.out.println();
         System.out.println("Output to stdout syntax highlighting using ANSI escape sequences.");
         System.out.println();
@@ -63,7 +63,7 @@ class Project
         
         for (Map.Entry<String, Set<String>> brushEntry : b.entrySet())
         {
-            System.out.print("\t" + brushEntry.getKey() +"\t");
+            System.out.print("\t" + brushEntry.getKey() +"\t - ");
             boolean first = true;
             for (String s : brushEntry.getValue())
             {
@@ -94,44 +94,29 @@ class Project
         {
             SyntaxHighlighter sh = new SyntaxHighlighter(scheme);
             Map<Range<Integer>, String> rs = sh.parse(sb);
-            if (true)
+
+            for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
             {
-                for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
+                int start = r.getKey().lowerEndpoint();
+                int end = r.getKey().upperEndpoint();
+
+                if (start > last)
+                    System.out.print(sb.substring(last, start));
+                String Color = COLOR_NORMAL;
+                switch (r.getValue())
                 {
-                    int start = r.getKey().lowerEndpoint();
-                    int end = r.getKey().upperEndpoint();
-
-                    if (start > last)
-                        System.out.print(sb.substring(last, start));
-                    String Color = COLOR_NORMAL;
-                    switch (r.getValue())
-                    {
-                    case Brush.PREPROCESSOR: Color = COLOR_YELLOW;    break;
-                    case Brush.KEYWORD:      Color = COLOR_CYAN;      break;
-                    case Brush.STRING:
-                    case Brush.VALUE:        Color = COLOR_PURPLE;    break;
-                    case Brush.COLOR1:       Color = COLOR_BLUE;      break;
-                    case Brush.COLOR2:       Color = COLOR_GRAY;      break;
-                    case Brush.VARIABLE:     Color = COLOR_RED;       break;
-                    case Brush.COMMENTS:     Color = COLOR_WHITE;     break;
-                    case Brush.FUNCTIONS:    Color = COLOR_BLUE;      break;
-                    }
-                    System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
-                    last = end;
+                case Brush.PREPROCESSOR: Color = COLOR_YELLOW;    break;
+                case Brush.KEYWORD:      Color = COLOR_CYAN;      break;
+                case Brush.STRING:
+                case Brush.VALUE:        Color = COLOR_PURPLE;    break;
+                case Brush.COLOR1:       Color = COLOR_BLUE;      break;
+                case Brush.COLOR2:       Color = COLOR_GRAY;      break;
+                case Brush.VARIABLE:     Color = COLOR_RED;       break;
+                case Brush.COMMENTS:     Color = COLOR_WHITE;     break;
+                case Brush.FUNCTIONS:    Color = COLOR_BLUE;      break;
                 }
-            }
-            else
-            {
-                for (Map.Entry<Range<Integer>, String> r : rs.entrySet())
-                {
-                    int start = r.getKey().lowerEndpoint();
-                    int end = r.getKey().upperEndpoint();
-
-                    System.out.println(r.getValue() + " " + start + ":" + end + " " + sb.substring(start, end));
-
-                    last = end;
-                }
-                last = sb.length();
+                System.out.print(Color + sb.substring(start, end) + COLOR_NORMAL);
+                last = end;
             }
         }
         

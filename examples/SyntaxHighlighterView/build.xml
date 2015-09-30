@@ -2,7 +2,7 @@
     <property environment="env"/>
 
     <property name="project.displayname"  value="SyntaxHighlighterView"/>
-    <property name="project.mainclass"    value="syntaxhighlight.example.Example"/>
+    <property name="project.mainclass"    value="radsoft.syntaxhighlighter.app.ViewExample"/>
     <property name="project.version"      value="1.0"/>
     <property name="project.dep"          value="..\.."/>
     

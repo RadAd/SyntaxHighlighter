@@ -18,7 +18,7 @@
 // LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-package syntaxhighlight;
+package radsoft.syntaxhighlighter.view;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -53,7 +53,7 @@ import javax.swing.text.StyledEditorKit;
 import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 
-import syntaxhighlight.theme.Theme;
+import radsoft.syntaxhighlighter.view.theme.Theme;
 import com.google.common.collect.Range;
 
 /**

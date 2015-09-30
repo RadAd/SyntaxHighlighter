@@ -7,7 +7,7 @@
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-package syntaxhighlight.example;
+package radsoft.syntaxhighlighter.app;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -18,10 +18,10 @@ import java.io.InputStream;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 
-import syntaxhighlight.SyntaxHighlighterView;
-import syntaxhighlight.theme.ThemeRDark;
-import syntaxhighlighter.brush.Brush;
-import syntaxhighlighter.SyntaxHighlighter;
+import radsoft.syntaxhighlighter.view.SyntaxHighlighterView;
+import radsoft.syntaxhighlighter.view.theme.ThemeRDark;
+import radsoft.syntaxhighlighter.brush.Brush;
+import radsoft.syntaxhighlighter.SyntaxHighlighter;
 
 /**
  * Usage example. This will just cover some of the functions. To know other 
@@ -29,7 +29,7 @@ import syntaxhighlighter.SyntaxHighlighter;
  * 
  * @author Chan Wai Shing <cws1989@gmail.com>
  */
-public class Example {
+public class ViewExample {
 
   public static String readFile(InputStream in) throws IOException {
     ByteArrayOutputStream bout = new ByteArrayOutputStream();
@@ -51,7 +51,7 @@ public class Example {
   static InputStream open(String filename) throws FileNotFoundException
   {
     if (filename.startsWith("res:"))
-        return Example.class.getResourceAsStream(filename.substring(4));
+        return ViewExample.class.getResourceAsStream(filename.substring(4));
     else
         return new FileInputStream(filename);
   }
