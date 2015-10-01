@@ -21,6 +21,8 @@ class SyntaxHighLighterTest
         if (s.length == 0)
         {
             test("test.cpp");
+            test("test.xml");
+            test("test.html");
         }
         else
             showFile(s[0], System.out);

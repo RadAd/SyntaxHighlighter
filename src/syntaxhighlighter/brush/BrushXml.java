@@ -39,7 +39,7 @@ public class BrushXml extends Brush {
     add(new RegExpRule("(\\&lt;|<)\\!--(.*?)--(\\&gt;|>)", Pattern.DOTALL, COMMENTS)); // <!-- ... -->
 
     // regular expression for highlighting the variable assignment
-    RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)\\s*=\\s*(\".*\"|'.*')", Pattern.COMMENTS, null);
+    RegExpRule valueRegExpRule = new RegExpRule("([\\w:\\-\\.]+)\\s*=\\s*(\"[^\\\\\"\\n]*\"|'[^\\\\\'\\n]*')", null);
     valueRegExpRule.addGroupOperation(VARIABLE);
     valueRegExpRule.addGroupOperation(STRING);
 
