@@ -69,7 +69,7 @@ public class ViewExample {
     SyntaxHighlighterView highlighter = new SyntaxHighlighterView(new ThemeRDark());
     //highlighter.setFirstLine(10);
     //highlighter.setHighlightedLineList(Arrays.asList(13, 27, 28, 38, 42, 43, 53));
-    Brush brush = SyntaxHighlighter.getBrush(ext);
+    Brush brush = SyntaxHighlighter.getBrushByExtension(ext);
     highlighter.setContent(readFile(open(filename)), brush);
 
     long end = System.currentTimeMillis();

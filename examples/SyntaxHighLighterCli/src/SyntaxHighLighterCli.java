@@ -82,7 +82,7 @@ class SyntaxHighLighterCli
         final String sb = loadFile(filename);
         int p = filename.lastIndexOf('.');
         String ext = filename.substring(p + 1);
-        final Brush scheme = SyntaxHighlighter.getBrush(ext);
+        final Brush scheme = SyntaxHighlighter.getBrushByExtension(ext);
 
         //System.out.println("Scheme: " + (scheme != null ? scheme.name : "Unknown"));
         

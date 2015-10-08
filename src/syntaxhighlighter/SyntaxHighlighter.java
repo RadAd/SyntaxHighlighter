@@ -58,10 +58,23 @@ public final class SyntaxHighlighter {
         }
     }
     
-    public static Brush getBrush(String ext) {
+    public static Brush getBrushByExtension(String ext) {
         Brush brush = brushes.get(ext);
         if (brush == null) {
             brush = plainBrush;
+        }
+        return brush;
+    }
+    
+    public static Brush getBrushByName(String name) {
+        Brush brush = plainBrush;
+        if (name != null) {
+            for (Brush cbrush : brushes.values()) {
+                if (cbrush.getName().equals(name)) {
+                    brush = cbrush;
+                    break;
+                }
+            }
         }
         return brush;
     }

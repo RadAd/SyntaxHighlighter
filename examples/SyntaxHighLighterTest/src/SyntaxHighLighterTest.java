@@ -77,7 +77,7 @@ class SyntaxHighLighterTest
     {
         int p = filename.lastIndexOf('.');
         String ext = filename.substring(p + 1);
-        return SyntaxHighlighter.getBrush(ext);
+        return SyntaxHighlighter.getBrushByExtension(ext);
     }
     
     static String loadFile(String filename)
