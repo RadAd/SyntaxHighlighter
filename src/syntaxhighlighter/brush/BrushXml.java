@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class BrushXml extends Brush {
 
     public final static String[] exts = { "xml", "xslt" };
-    public final static String[] extshtml = { "htm", "html", "xhtml" };
+    public final static String[] extshtml = { "htm", "html", "xhtml", "hta" };
 
   public BrushXml(boolean html) {
     super(html ? "HTML" : "XML");

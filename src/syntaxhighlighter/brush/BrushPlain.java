@@ -27,6 +27,6 @@ package radsoft.syntaxhighlighter.brush;
 public class BrushPlain extends Brush {
 
   public BrushPlain() {
-    super("Plain");
+    super("None");
   }
 }
