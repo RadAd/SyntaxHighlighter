@@ -54,7 +54,7 @@ public class BrushPython extends Brush {
     add(new RegExpRule("\"(?!\")(?:\\.|\\\\\\\"|[^\\\"\"\\n])*\"", Pattern.MULTILINE, STRING));
     add(new RegExpRule("'(?!')(?:\\.|(\\\\\\')|[^\\''\\n])*'", Pattern.MULTILINE, STRING));
     add(new RegExpRule("\\+|\\-|\\*|\\/|\\%|=|==", Pattern.MULTILINE, KEYWORD));
-    add(new RegExpRule("\\b\\d+\\.?\\w*", "value"));
+    add(new RegExpRule("\\b\\d+\\.?\\w*", VALUE));
     add(new RegExpRule(getKeywords(functions), Pattern.MULTILINE | Pattern.CASE_INSENSITIVE, FUNCTIONS));
     add(new RegExpRule(getKeywords(keywords), Pattern.MULTILINE, KEYWORD));
     add(new RegExpRule(getKeywords(special), Pattern.MULTILINE, COLOR1));

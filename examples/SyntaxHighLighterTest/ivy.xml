@@ -1,0 +1,11 @@
+<ivy-module version="2.0">
+    <info organisation="RadSoft" module="SyntaxHighlighterTest"/>
+    
+    <configurations defaultconfmapping="default">
+        <conf name="default"/>
+    </configurations>
+
+    <dependencies>
+        <dependency org="com.googlecode.juniversalchardet" name="juniversalchardet" rev="1.0.3"/>
+    </dependencies>
+</ivy-module>
